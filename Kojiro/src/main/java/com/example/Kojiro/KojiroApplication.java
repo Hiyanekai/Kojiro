@@ -9,5 +9,4 @@ public class KojiroApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KojiroApplication.class, args);
 	}
-
 }
