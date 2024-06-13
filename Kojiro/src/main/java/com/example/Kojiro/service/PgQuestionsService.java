@@ -3,13 +3,13 @@ package com.example.Kojiro.service;
 import com.example.Kojiro.ProductNotFoundException;
 import com.example.Kojiro.dao.PgQuestionsDao;
 import com.example.Kojiro.entity.Questions;
-import com.example.Kojiro.entity.Test_question;
+import com.example.Kojiro.entity.TestQuestion;
 
 import java.util.List;
 
 public class PgQuestionsService implements QuestionsService{
     @Override
-    public List<Test_question> findTest(){
+    public List<TestQuestion> findTest(){
         var queationdao = new PgQuestionsDao();
         var p = queationdao.findTest();
         System.out.println(p);

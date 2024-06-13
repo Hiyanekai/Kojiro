@@ -22,9 +22,9 @@ public class TestController {
     private HttpSession session;
 
     @GetMapping("/test")
-    public String test(@ModelAttribute("result") List<Test_results> results, Model model){
+    public String test(@ModelAttribute("result") List<TestResults> results, Model model){
         var service = new PgQuestionsService();//サービスクラスのオブジェクト作成
-        List<Test_question> testData = service.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
+        List<TestQuestion> testData = service.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
         model.addAttribute("testData",testData);
         //int times = 1;
         //var resultDB = service.findTestResult();
@@ -37,7 +37,7 @@ public class TestController {
         return "index";
     }
     @PostMapping("/test")
-    public String testResult(@ModelAttribute("result") List<Test_results> results, Model model){
+    public String testResult(@ModelAttribute("result") List<TestResults> results, Model model){
         var data = session.getAttribute("user");//セッションにあるuserタグのデータを取得
         Users sessionUser = (Users) session.getAttribute("user");//user型の変数にデータを格納
 
@@ -45,7 +45,7 @@ public class TestController {
         int score = 0;//合計得点計算用の変数
         List<Questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
 
-        for(Test_results test_results : results) {//回答用ループ
+        for(TestResults test_results : results) {//回答用ループ
             Questions question = service.findQuestion(test_results.q_id());//問題IDからテスト問題を取得
             if (question.answer() == test_results.user_select()){//答えを比較して採点
                 score += question.score();//回答と同じの場合のみ点数を加算
