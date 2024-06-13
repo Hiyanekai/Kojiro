@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: inline-block;
+  vertical-align: top;
+}
+
+fieldset.label-60 label {
+  width: 60px;
+}
+
+fieldset.label-130 label {
+  width: 130px;
+}
+
+fieldset div {
+  margin: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+
+body {
+  font-family: Miryo;
+  width: 90%;
+  margin: auto;
+}
+
+
+.custom-btn {
+  border: none;
+  border-radius: 5px;
+  background-color: #004a94;
+  padding: auto;
+  line-height: 2;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  margin: 10px;
+  width: 128px;
+}
+
+.custom-btn:hover {
+  background-color:#417ebb;
+}
+
+.custom-btn img {
+  width: 20px;
+  vertical-align: middle;
+  margin: 0 5px 5px 0;
+}
+
+
+/** ログイン画面 **/
+.login-form {
+  width: 400px;
+  /* height: 450px; */
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.base-input {
+  width: 250px;
+  height: 15px;
+  padding:8px 10px;
+  border-radius:10px;
+}
+
+.login-body {
+  background-color: rgb(240, 240, 240);
+}
+
+.login-logo {
+  width: 180px;
+  height: 70px;
+  margin-top: 10px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+.flex {
+	display: flex;
+	justify-content: center;
+}
+.link:hover{
+  color: blue;
+}
+
+/** 登録画面 **/
+/* .insert {
+  width: 70%;
+  margin: auto;
+}
+
+.base-text {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	background-image: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: 13px;
+	padding: 0.4em 0.8em;
+	width: 50%;
+  margin: 4px;
+}
+
+.base-text:focus {
+	border: 1px solid rgba(0, 0, 0, 0.32);
+	box-shadow: none;
+	outline: none;
+}
+
+textarea {
+  resize: none;
+  width: 300px;
+  height: 100px;
+} */
+
+/** 確認モーダル用 **/
+/* #modal {
+  width: 300px;
+  border: solid 1px;
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #fff;
+}
+
+#modal.is-show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+.modal-message::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(../images/注意.png);
+  background-size: contain;
+  vertical-align: middle;
+  margin: 10px;
+}
+
+#fadeLayer {
+  position:fixed;
+  top:0px;
+  left:0px;
+
+  width:100%;
+  height:100%;
+
+  background-color:#000000;
+  opacity:0.5;
+  visibility:hidden;
+  z-index:1;
+}
+
+footer {
+  height: 100px;
+}
+
+h1 a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.order {
+  margin-right: 16px;
+} */
+
+/* 編集画面 */
+/* .update {
+  width: 80%;
+  margin: auto;
+}
+
+.update .form-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.update .form-body form {
+  width: 600px;
+}
+
+.update .product-img {
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  width: 450;
+}
+
+.order select {
+  width: 100%;
+}
+.btn-area {
+  width: 40%;
+  margin-right: auto;
+}
+
+.btn-area .btn {
+  display: inline-block;
+} */

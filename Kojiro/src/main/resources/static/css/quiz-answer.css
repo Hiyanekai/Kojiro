@@ -1,0 +1,94 @@
+.q-header{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+.genre-name{
+    margin: 25px;
+}
+.q-num{
+    margin: 25px;
+}
+
+.question, .answer{
+    width: 600px;
+    /* width: fit-content; */
+    margin: auto;
+    margin-bottom: 30px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    /* border: solid 5px #555555;
+    border-radius: 10px;
+    padding: 10px; */
+}
+.question{
+    background-color: lightgray;
+}
+.q-text{
+    font-weight: bold;
+}
+.q-img{
+    margin: 5px;
+    text-align: center;
+}
+img{
+    object-fit: cover; 
+    width: 128px; 
+    height: 128px;
+}
+
+/* 解答欄 */
+.user-select{
+    width: fit-content;
+    margin: auto;
+}
+.btn{
+    width: 100px;
+    height: 50px;
+
+    margin: 20px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+}
+#circle{
+    /* background-color: red; */
+    background-color: lightgray;
+}
+#cross{
+    background-color: blue;
+}
+#link-btn:hover, #next:hover, #flag-del-btn:hover{
+    background-color: lightgray;
+}
+
+/* ジャンル選択 */
+.change-page{
+    text-align: center;
+}
+#link-btn{
+    background-color: orange;
+
+    width: 200px;
+}
+#next{
+    background-color: skyblue;
+
+    width: 200px;
+}
+
+/* q&a-flag.html */
+.flag-del{
+    text-align: center;
+}
+#flag-del-btn{
+    background-color: green;
+    width: 200px;
+}

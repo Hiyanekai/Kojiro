@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+    <title>一問一答（ジャンル選択）</title>
+    <link href="css/quiz-select.css" rel="stylesheet">
+</head>
+<body class="">
+    <div class="tab">
+        <h1 style="text-align: center;">ジャンル選択</h1>
+        <h4 style="text-align: center;">下記のジャンルを選択すると、一問一答が10問出題されます</h4>
+        <ul class="tab__menu">
+            <li class="tab__menu-item is-active" data-tab="01">
+                <h2>第一段階</h2>
+            </li>
+            <li class="tab__menu-item" data-tab="02">
+                <h2>第二段階</h2>
+            </li>
+            <li class="tab__menu-item" data-tab="03">
+                <h2>ランダム</h2>
+            </li>
+        </ul>
+        <div class="tab__panel">
+            <div class="tab__panel-box tab__panel-box001 is-show" data-panel="01">
+                <table>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/1}">
+                                <p>運転者の心得</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/2}">
+                                <p>信号に従うこと</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/3}">
+                                <p>標識・標示等</p>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/4}">
+                                <p>車の通過について</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/6}">
+                                <p>交差点と踏切</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/5}">
+                                <p>緊急自動車について</p>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/7}">
+                                <p>安全な速度と車間距離</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/8}">
+                                <p>歩行者の保護等</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/9}">
+                                <p>安全と警音器</p>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/10}">
+                                <p>進路変更等</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/11}">
+                                <p>追い越し</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/12}">
+                                <p>行き違い</p>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/13}">
+                                <p>AT車の運転</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/quiz/14}">
+                                <p>各制度について</p>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tab__panel-box tab__panel-box002" data-panel="02">
+                <ul class="tab__panel-text">
+                    <li class="genre">
+                        <h3>応急救護</h3>
+                    </li>
+                    <li class="genre">
+                        <h3>死角と運転</h3>
+                    </li>
+                    <li class="genre">
+                        <h3>能力や性格と運転・安全な運転計画</h3>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab__panel-box tab__panel-box003" data-panel="03">
+                <table>
+                    <tr>
+                        <td>
+                            <a th:href="@{/quiz/99}">
+                                <p>すべてのジャンル</p>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./js/quiz-select.js"></script>
+</body>
+</html>

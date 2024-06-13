@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+    <title>一問一答（答え）</title>
+    <link href="../../css/quiz-answer.css" rel="stylesheet">
+</head>
+<body>
+    <div class="q-header">
+        <div class="genre-name">
+            <h3>ジャンル：[[${gId}]]</h3>
+        </div>
+        <div class="q-num">
+            <h3>[[${qNum}]]/10問</h3>
+        </div>
+    </div>
+    <div class="answer">
+        <h1>あなたの解答　[[${ans}]]</h1>
+        <h1>正解　✖</h1>
+        <p class="q-text">速度の遅い車が運行する車線です｡必ず登坂車線を通行する必要はありません｡</p>
+        <div class="q-img">
+            <img src="../../images/glossary.png">
+        </div>
+    </div>
+    <!-- <div class="user-select">
+        <form method="post" action="#">
+            <input type="submit" value="〇" name="〇" class="btn" id="circle">
+            <input type="submit" value="✖" name="✖" class="btn" id="cross">
+        </form>
+    </div> -->
+    <div class="question">
+        <h1>問題</h1>
+        <p class="q-text">登坂車線のある高速自動車国道では､大型貨物自動車は必ず登坂車線を通行しなければならない｡</p>
+        <div class="q-img">
+            <img src="../../images/glossary.png">
+        </div>
+    </div>
+    <div class="change-page">
+        <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
+        <button th:onclick="|location.href='/quiz/__${gId}__'|" class="btn" id="next">次の問題へ</button>
+    </div>
+    <script th:inline="javascript">
+        const nextBtn = document.getElementById("next");
+        const qNum = /*[[${qNum}]]*/"qNum";
+        console.log(qNum);
+        if(qNum==10) nextBtn.style.display = 'none';
+    </script>
+</body>
+</html>
