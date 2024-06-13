@@ -1,7 +1,7 @@
 package com.example.Kojiro.dao;
 
 import com.example.Kojiro.entity.Questions;
-import com.example.Kojiro.entity.Test_question;
+import com.example.Kojiro.entity.TestQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,9 +13,9 @@ public class PgQuestionsDao implements QuestionsDao{
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Override
-    public List<Test_question> findTest() {
+    public List<TestQuestion> findTest() {
         return jdbcTemplate.query("SELECT * FROM questions WHERE score = 1 ORDER BY RAND() LIMIT 10",
-                new DataClassRowMapper<>(Test_question.class));
+                new DataClassRowMapper<>(TestQuestion.class));
     }
 
     @Override
