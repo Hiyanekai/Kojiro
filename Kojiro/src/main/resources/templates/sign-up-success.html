@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
 <link href="css/commons.css" rel="stylesheet">
 </head>
 <body class="login-body">
+<!--<form action="/index" method="get"  th:object="${signupsuccess}">-->
   <div class="header">
-    <h1 class="site_logo">免許学科試験対策システム</h1>
+<!--    <h1 class="site_logo">免許学科試験対策システム</h1>-->
   </div>
 
   <div class="login-form">
@@ -16,12 +17,14 @@
     <ul class="flex">
         <li><img src="./images/カエル.png" style="object-fit: cover; width: 110px; height: 120px;"></li>
         <li>
-            <button id="login-btn" class="custom-btn" type="button" onclick="location.href='./index.html'">
+            <button id="login-btn" class="custom-btn" type="button" onclick="location.href='./index'">
             ログイン画面へ
             </button>
         </li>
         <li><img src="./images/ウサギ.png" style="object-fit: cover; width: 110px; height: 120px;"></li>
       </ul>
   </div>
+<!--</form>-->
+
 </body>
 </html>
