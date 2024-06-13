@@ -9,11 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TestController {
@@ -37,22 +39,32 @@ public class TestController {
         return "index";
     }
     @PostMapping("/test")
-    public String testResult(@ModelAttribute("result") List<TestResults> results, Model model){
+    public String testResult(@ModelAttribute("result") List<TestResults> results, @RequestParam Map<String, String> formData,                      Model model){
         var data = session.getAttribute("user");//セッションにあるuserタグのデータを取得
         Users sessionUser = (Users) session.getAttribute("user");//user型の変数にデータを格納
+
+        List<String> choices = new ArrayList<>();
+        formData.forEach((key, value) -> {
+            if (key.startsWith("choice")) {
+                choices.add(value);
+            }
+        });
 
         var service = new PgQuestionsService();//サービスクラスのオブジェクト作成
         int score = 0;//合計得点計算用の変数
         List<Questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
+        List<Integer> ans = new ArrayList<>();
 
         for(TestResults test_results : results) {//回答用ループ
             Questions question = service.findQuestion(test_results.q_id());//問題IDからテスト問題を取得
             if (question.answer() == test_results.user_select()){//答えを比較して採点
                 score += question.score();//回答と同じの場合のみ点数を加算
+                ans.add(0);//正解は0
             }
             else {//回答が間違えていた場合
                 Misses misses = new Misses(0,test_results.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 //service.insertMisses(misses);//missesクラスに問題を追加
+                ans.add(1);//正解は1
             }
             if (test_results.flag() == 1){//問題にフラグが立てられていた場合
                 Flags flags = new Flags(0,test_results.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
@@ -72,6 +84,7 @@ public class TestController {
 
         model.addAttribute("testData",testData);
         model.addAttribute("testScore",testScore);
-        return "test";
+        model.addAttribute("ans",ans);
+        return "result";
     }
 }
