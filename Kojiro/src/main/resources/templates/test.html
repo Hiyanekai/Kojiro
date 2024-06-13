@@ -5,28 +5,38 @@
     <title>第[[${times}]]回模擬試験</title>
     <link href="../css/quiz.css" rel="stylesheet">
 </head>
+<!--th:fieldの問題IDを何回目のテストかをを作成しておく-->
 <body>
-    <div th:each="testData,loopCnt : ${testData}">
-        <div class="q-header">
-            <div class="genre-name">
-                <h3>ジャンル：[[${testData.genre}]]</h3>
+    <form action="test" method="post" th:object="${result}">
+        <div th:each="testData,loopCnt : ${testData}">
+            <div class="q-header">
+                <div class="genre-name">
+                    <h3>ジャンル：[[${testData.genre}]]</h3>
+                </div>
+                <div class="q-num">
+                    <h3>[[${loopCnt.count}]]/10問</h3>
+                </div>
             </div>
-            <div class="q-num">
-                <h3>[[${loopCnt}]]/10問</h3>
+            <div class="question">
+                <h1>問題</h1>
+                <p class="q-text">[[${testData.sentence}]]</p>
+                <div class="q-img" >
+                    <img th:src="'../images/' + ${testData.sentence}">
+                </div>
+            </div>
+            <div class="answer">
+                <label>
+                    <input type="radio" th:value="1" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
+                    <span>〇</span>
+                </label>
+                <label>
+                    <input type="radio" th:value="0" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
+                    <span>X</span>
+                </label>
             </div>
         </div>
-        <div class="question">
-            <h1>問題</h1>
-            <p class="q-text">登坂車線のある高速自動車国道では､大型貨物自動車は必ず登坂車線を通行しなければならない｡</p>
-            <div class="q-img">
-                <img src="../images/glossary.png">
-            </div>
-        </div>
-        <div class="answer">
-            <input type="button" value="〇" name="〇" class="btn" id="circle" th:onclick="|location.href='./__${gId}__/〇'|">
-            <input type="button" value="×" name="×" class="btn" id="cross" th:onclick="|location.href='./__${gId}__/×'|">
-        </div>
-    </div>
+    </form>
+    <button type="submit" class="btn" id="circle"></button>
 <!-- <div class="change-page">
     <button onclick="location.href='./select-quiz.html'" class="btn" id="link-btn">ジャンル選択へ</button>
 </div> -->
