@@ -1,11 +1,12 @@
 package com.example.Kojiro.service;
 
-import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.questions;
+import com.example.Kojiro.entity.testquestion;
 
 import java.util.List;
 
 public interface QuestionsService {
-    List<Questions> findTest();
+    List<testquestion> findTest();
 
-    Questions findQuestion(int id);
+    questions findQuestion(int id);
 }

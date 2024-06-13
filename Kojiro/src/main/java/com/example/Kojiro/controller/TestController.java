@@ -24,7 +24,7 @@ public class TestController {
     @GetMapping("/test")
     public String test(@ModelAttribute("result") List<test_results> results,Model model){
         var service = new PgQuestionsService();//サービスクラスのオブジェクト作成
-        List<Questions> testData = service.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
+        List<testquestion> testData = service.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
         model.addAttribute("testData",testData);
         //int times = 1;
         //var resultDB = service.findTestResult();
@@ -43,10 +43,10 @@ public class TestController {
 
         var service = new PgQuestionsService();//サービスクラスのオブジェクト作成
         int score = 0;//合計得点計算用の変数
-        List<Questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
+        List<questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
 
         for(test_results test_results : results) {//回答用ループ
-            Questions question = service.findQuestion(test_results.q_id());//問題IDからテスト問題を取得
+            questions question = service.findQuestion(test_results.q_id());//問題IDからテスト問題を取得
             if (question.answer() == test_results.user_select()){//答えを比較して採点
                 score += question.score();//回答と同じの場合のみ点数を加算
             }
@@ -62,7 +62,7 @@ public class TestController {
         }
 
 
-        Calendar cl = Calendar.getInstance();////////////////////////////////////////////////
+        Calendar cl = Calendar.getInstance();/////////////////////////////////////////////////
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");////今日の日付を取得
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
