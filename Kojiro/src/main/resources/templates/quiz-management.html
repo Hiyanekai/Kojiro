@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>問題管理</title>
-    <link href="management.css" rel="stylesheet">
+    <link href="/css/management.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -63,8 +63,8 @@
             <td th:text="${q_management.sentence}"></td>
             <td th:text="${q_management.answer}"></td>
             <td th:text="${q_management.explain}"></td>
-            <td th:text="${q_management.genre_name}"></td>
-            <td><a class="detail_btn">詳細</a></td>
+            <td th:text="${q_management.genre}"></td>
+            <td><a class="detail_btn" th:href="@{/quiz-detail/{id}(id=${q_management.id})}">詳細</a></td>
         </tr>
         </tbody>
     </table>

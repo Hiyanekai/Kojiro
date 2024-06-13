@@ -1,9 +1,8 @@
 package com.example.Kojiro.service;
 
 import com.example.Kojiro.dao.QManagementDao;
+import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
-import com.example.Kojiro.entity.questions;
-import com.example.Kojiro.entity.testquestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,13 @@ public class PgQManagementService implements QManagementService{
     @Autowired
     private QManagementDao qManagementDao;
     @Override
-    public List<testquestion> findAll() {
+    public List<TestQuestion> findAll() {
         return qManagementDao.findAll();
     }
     @Override
-    public List<testquestion> findBySentence(String sentence) {return qManagementDao.findBySentence(sentence);}
+    public List<TestQuestion> findBySentence(String sentence) {return qManagementDao.findBySentence(sentence);}
+    @Override
+    public TestQuestion findById(int id) {
+        return qManagementDao.findById(id);
+    }
 }

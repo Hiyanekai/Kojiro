@@ -1,8 +1,7 @@
 package com.example.Kojiro.dao;
 
+import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
-import com.example.Kojiro.entity.questions;
-import com.example.Kojiro.entity.testquestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -18,15 +17,23 @@ public class PgQManagementDao implements QManagementDao{
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public List<testquestion> findAll() {
-        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain FROM questions INNER JOIN genres ON questions.genre_id = genres.id ORDER BY questions.id",
-                new DataClassRowMapper<>(testquestion.class));
+    public List<TestQuestion> findAll() {
+        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score FROM questions INNER JOIN genres ON questions.genre_id = genres.id ORDER BY questions.id",
+                new DataClassRowMapper<>(TestQuestion.class));
     }
 
     @Override
-    public List<testquestion> findBySentence(String sentence) {
+    public List<TestQuestion> findBySentence(String sentence) {
         var param = new MapSqlParameterSource();
         param.addValue("keyword","%"+sentence+"%");
-        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explainFROM questions INNER JOIN genres ON questions.genre_id = genres.id WHERE questions.sentence like :keyword ORDER BY questions.id", param, new DataClassRowMapper<>(testquestion.class));
+        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score  FROM questions INNER JOIN genres ON questions.genre_id = genres.id WHERE questions.sentence like :keyword ORDER BY questions.id", param, new DataClassRowMapper<>(TestQuestion.class));
+    }
+
+    @Override
+    public TestQuestion findById(int id) {
+        var param = new MapSqlParameterSource();
+        param.addValue("id", id);
+        var list = jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score FROM questions INNER JOIN genres ON questions.genre_id = genres.id WHERE questions.id = :id ORDER BY questions.id", param, new DataClassRowMapper<>(TestQuestion.class));
+        return list.isEmpty() ? null : list.get(0);
     }
 }
