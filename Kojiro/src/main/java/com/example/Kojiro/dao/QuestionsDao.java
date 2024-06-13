@@ -1,12 +1,12 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.entity.questions;
-import com.example.Kojiro.entity.testquestion;
+import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.Test_question;
 
 import java.util.List;
 
 public interface QuestionsDao {
-    List<testquestion> findTest();
+    List<Test_question> findTest();
 
-    questions findQuestion(int id);
+    Questions findQuestion(int id);
 }
