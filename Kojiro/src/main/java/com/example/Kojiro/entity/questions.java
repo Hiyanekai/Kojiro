@@ -1,4 +1,4 @@
 package com.example.Kojiro.entity;
 
-public record questions (){
+public record questions(int id, int genre_id, String sentence, int answer, String explain, String file, int score) {
 }
