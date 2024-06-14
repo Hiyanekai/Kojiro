@@ -8,7 +8,7 @@
 <body>
     <div class="q-header">
         <div class="genre-name">
-            <h3>ジャンル：[[${gId}]]</h3>
+            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
             <h3>[[${qNum}]]/10問</h3>
@@ -16,10 +16,10 @@
     </div>
     <div class="answer">
         <h1>あなたの解答　[[${ans}]]</h1>
-        <h1>正解　✖</h1>
-        <p class="q-text">速度の遅い車が運行する車線です｡必ず登坂車線を通行する必要はありません｡</p>
+        <h1>正解　[[${correct}]]</h1>
+        <p class="q-text">[[${questions.get(qNum-1).explain}]]</p>
         <div class="q-img">
-            <img src="../../images/glossary.png">
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
     </div>
     <!-- <div class="user-select">
@@ -30,9 +30,9 @@
     </div> -->
     <div class="question">
         <h1>問題</h1>
-        <p class="q-text">登坂車線のある高速自動車国道では､大型貨物自動車は必ず登坂車線を通行しなければならない｡</p>
+        <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
         <div class="q-img">
-            <img src="../../images/glossary.png">
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
     </div>
     <div class="change-page">
