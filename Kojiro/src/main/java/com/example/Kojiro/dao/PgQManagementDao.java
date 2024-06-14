@@ -49,4 +49,23 @@ public class PgQManagementDao implements QManagementDao{
         param.addValue("score", question.score());
         return jdbcTemplate.update("UPDATE questions SET genre_id = :genre, sentence = :sentence, answer = :answer, explain = :explain, file = :file, score = :score WHERE id = :id", param);
     }
+
+    @Override
+    public int delete(int id) {
+        var param = new MapSqlParameterSource();
+        param.addValue("id", id);
+        return jdbcTemplate.update("DELETE FROM questions WHERE id = :id", param);
+    }
+
+    @Override
+    public int insert(TestQuestion question) {
+        var param = new MapSqlParameterSource();
+        param.addValue("genre",Integer.parseInt(question.genre()));
+        param.addValue("sentence", question.sentence());
+        param.addValue("answer", question.answer());
+        param.addValue("explain", question.explain());
+        param.addValue("file", question.file());
+        param.addValue("score", question.score());
+        return jdbcTemplate.update("INSERT INTO questions(genre_id,sentence,answer,explain,file,score) VALUES(:genre, :sentence, :answer, :explain, :file, :score)", param);
+    }
 }

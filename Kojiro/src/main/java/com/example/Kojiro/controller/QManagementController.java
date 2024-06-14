@@ -3,6 +3,7 @@ package com.example.Kojiro.controller;
 //QManagementController = QuestionManagementController(問題管理) 長くてすみません
 
 import com.example.Kojiro.entity.TestQuestion;
+import com.example.Kojiro.entity.question;
 import com.example.Kojiro.form.QuizManagement;
 import com.example.Kojiro.service.QManagementService;
 import jakarta.servlet.http.HttpSession;
@@ -67,6 +68,36 @@ public class QManagementController {
                 model.addAttribute("q_management", qManagementService.findById(id));
                 System.out.println("重複しましたよ");
                 return "quiz-update";
+            }
+        }
+    }
+
+    @GetMapping("/quiz-delete/{id}")
+    public String delete1(@PathVariable("id") int id){
+        var result3 = qManagementService.delete(id);
+        return "redirect:/quiz-management";
+    }
+
+    @GetMapping("/quiz-add")
+    public String index(@ModelAttribute("add") QuizManagement add) {
+        return "quiz-add";
+    }
+    @PostMapping("/quiz-add")
+    public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
+        System.out.println(add);
+        if(bindingResult.hasErrors()) {
+            System.out.println("バリデーション");
+            return "quiz-add";
+        }else {
+            System.out.println("バリデーションなし");
+            var conProduct = new TestQuestion(0,add.getGenre(),add.getSentence(),add.getAnswer(),add.getExplain(),add.getFile(),add.getScore());
+            try{
+                var result1 = qManagementService.insert(conProduct);
+                System.out.println(conProduct);
+                return "redirect:/quiz-management";
+            }catch (RuntimeException e){
+                System.out.println("重複しましたよ");
+                return "quiz-add";
             }
         }
     }

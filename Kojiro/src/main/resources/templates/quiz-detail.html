@@ -20,7 +20,7 @@
 <div class="update">
   <div class="form-body">
     <div class="img_block">
-      <img th:src="${q_management.file}" class="product-img">画像<br>
+      <img src="/images/ウサギ.png" class="product-img"><br>
     </div>
     <form action="delete" method="post">
       <fieldset class="label-130 product_block">
@@ -49,7 +49,7 @@
       <div>
         <div class="btns">
           <!-- openModal -->
-          <input type="button" onclick="location.href='./ProblemManagement.html'" value="削除" class="sakujo-btn">
+          <input type="button" id="delete-btn" th:onclick="|location.href='/quiz-delete/__${id}__'|" value="削除" class="sakujo-btn">
           <input type="button" th:onclick="|location.href='/quiz-update/__${id}__'|" value="更新" class="kousin-btn">
           <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
         </div>
