@@ -3,7 +3,7 @@ package com.example.Kojiro.controller;
 import com.example.Kojiro.CheckLoginForm;
 import com.example.Kojiro.LoginForm;
 import com.example.Kojiro.entity.SignUp;
-import com.example.Kojiro.entity.users;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.service.LoginService;
 import com.example.Kojiro.service.PgLoginService;
 import jakarta.servlet.http.HttpSession;
