@@ -21,7 +21,7 @@ public class QManagementController {
     @Autowired
     private HttpSession session;
     @GetMapping("/quiz-management")
-    public String userList(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
+    public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
 //        if (session.getAttribute("user")==null){
 //            return "redirect:/login-test";
 //        }
@@ -35,7 +35,7 @@ public class QManagementController {
     }
 
     @GetMapping("quiz-detail/{id}")
-    public String userList(@PathVariable("id") int id, Model model) {
+    public String detail(@PathVariable("id") int id, Model model) {
         System.out.println(id);
         System.out.println(qManagementService.findById(id));
         // ロジックをServiceに任せる
@@ -43,30 +43,30 @@ public class QManagementController {
         return "quiz-detail";
     }
 
-    @GetMapping("update/{id}")
+    @GetMapping("quiz-update/{id}")
     public String update1(@PathVariable("id") int id, Model model) {
         System.out.println(id);
         System.out.println(qManagementService.findById(id));
         // ロジックをServiceに任せる
         model.addAttribute("q_management", qManagementService.findById(id));
-        return "update";
+        return "quiz-update";
     }
 
-    @PostMapping("update/{id}")
+    @PostMapping("quiz-update/{id}")
     public String update2(@PathVariable("id") int id, @Validated @ModelAttribute("q_management") QuizManagement update, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
-            return "update";
+            return "quiz-update";
         }else {
             System.out.println(update);
             var conProduct1 = new TestQuestion(id,update.getGenre(),update.getSentence(),update.getAnswer(),update.getExplain(),update.getFile(),update.getScore());
             try{
-                var result2 = TestQuestion.update(conProduct1);
+                var result2 = qManagementService.update(conProduct1);
                 System.out.println(conProduct1);
-                return "redirect:/success";
+                return "redirect:/quiz-management";
             }catch (RuntimeException e){
                 model.addAttribute("q_management", qManagementService.findById(id));
                 System.out.println("重複しましたよ");
-                return "update";
+                return "quiz-update";
             }
         }
     }

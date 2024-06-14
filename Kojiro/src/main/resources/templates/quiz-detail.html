@@ -50,7 +50,7 @@
         <div class="btns">
           <!-- openModal -->
           <input type="button" onclick="location.href='./ProblemManagement.html'" value="削除" class="sakujo-btn">
-          <input type="button" onclick="location.href='./ProblemUpdate.html'" value="更新" class="kousin-btn">
+          <input type="button" th:onclick="|location.href='/quiz-update/__${id}__'|" value="更新" class="kousin-btn">
           <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
         </div>
         <!-- <div id="modal">

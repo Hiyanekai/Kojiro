@@ -8,9 +8,6 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class QuizManagement {
 
-    @NotEmpty(message = "ジャンルは必須入力です")
-    private String genre;
-
     @NotEmpty(message = "問題は必須入力です")
     private String sentence;
 
@@ -19,6 +16,9 @@ public class QuizManagement {
 
     @NotEmpty(message = "解説は必須入力です")
     private String explain;
+
+    @NotEmpty(message = "ジャンルは必須入力です")
+    private String genre;
 
     private String file;
 

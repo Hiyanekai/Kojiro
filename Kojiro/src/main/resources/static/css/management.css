@@ -339,6 +339,12 @@ textarea {
   height: 100px;
 }
 
+input[name="textarea"]{
+    resize: none;
+    width: 300px;
+    height: 100px;
+}
+
 /** 確認モーダル用 **/
 #modal {
   width: 300px;
