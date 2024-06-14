@@ -18,19 +18,19 @@
     <form action="/sign-up" method="post"  th:object="${signUp}">
       <fieldset>
         <div class="cp_iptxt">
-          <!-- <div><label for="loginId">ユーザー名</label></div> -->
+           <div><label for="userId">ユーザー名</label></div>
           <input class="base-input" type="text" name="userId" id="userId" placeholder="ユーザー名" th:field="*{userId}">
           <div class="error" th:each="error : ${#fields.errors('userId')}"> [[ ${error} ]]</div>
         </div>
 
         <div>
-            <!-- <div><label for="pass">パスワード</label></div> -->
+             <div><label for="password">パスワード</label></div>
           <input class="base-input" type="password" name="password" id="password" placeholder="パスワード" th:field="*{password}">
           <div class="error" th:each="error : ${#fields.errors('password')}"> [[ ${error} ]]</div>
         </div>
 
         <div>
-            <!-- <div><label for="pass">パスワード</label></div> -->
+             <div><label for="password">パスワード(確認)</label></div>
           <input class="base-input" type="password" name="password" id="password1" placeholder="パスワード(確認)">
           <div class="error" th:each="error : ${#fields.errors('password')}"> [[ ${error} ]]</div>
         </div>
