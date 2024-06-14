@@ -1,4 +1,13 @@
 package com.example.Kojiro.entity;
 
-public record TestInput(int q_id,int user_select,int flag) {
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class TestInput{
+        int q_id;
+        int user_select;
+        int flag;
+        List<TestInput> inputList;
 }
