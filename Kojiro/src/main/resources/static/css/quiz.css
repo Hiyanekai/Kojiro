@@ -81,3 +81,11 @@ img{
 
     font-size: 20px;
 }
+
+/* 図 */
+img{
+
+    object-fit: cover;
+    width: 400px;
+    height: 200px;
+}

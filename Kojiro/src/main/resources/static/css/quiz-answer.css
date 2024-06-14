@@ -92,3 +92,11 @@ img{
     background-color: green;
     width: 200px;
 }
+
+/* 図 */
+img{
+
+    object-fit: cover;
+    width: 400px;
+    height: 200px;
+}
