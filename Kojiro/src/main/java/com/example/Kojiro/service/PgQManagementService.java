@@ -23,4 +23,8 @@ public class PgQManagementService implements QManagementService{
     public TestQuestion findById(int id) {
         return qManagementDao.findById(id);
     }
+    @Override
+    public int update(TestQuestion question){
+        return qManagementDao.update(question);
+    }
 }

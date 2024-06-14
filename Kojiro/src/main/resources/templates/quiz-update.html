@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>問題管理更新</title>
+    <link href="Management.css" rel="stylesheet">
+</head>
+<body>
+<div class="insert">
+    <h1>問題管理更新</h1>
+    <div class="discription">
+        <p>
+            （<span class="required"></span>は必須です）
+        </p>
+    </div>
+    <div class="form-body">
+        <form>
+            <fieldset class="label-130">
+                <div>
+                    <label class="required">問題名:</label>
+                    <textarea name="description"  class="base-text">
+一般道路で追い越しをする時、一時的であれば、法定速度を超えても良い
+                    </textarea>
+                </div>
+                <div>
+                    <label class="required">解答:</label>
+                    <select name="anser">
+                        <option value="anser1">〇</option>
+                        <option value="anser2">×</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="required">解説:</label>
+                    <textarea name="description"  class="base-text">
+追い越しをするときも、法定速度を超えてはいけません。
+                    </textarea>
+                </div>
+                <div>
+                    <label  class="required">単元:</label>
+                    <select name="subject">
+                        <option value="サンプル1">サンプル1</option>
+                        <option value="サンプル2">サンプル2</option>
+                        <option value="サンプル3">サンプル3</option>
+                    </select>
+                </div>
+                <div>
+                    <label>画像:</label>
+                    <input type="file" name="file">
+                </div>
+                <div>
+                    <label class="required">点数:</label>
+                    <select name="points">
+                        <option value="points1">1点</option>
+                        <option value="points2">2点</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="btns">
+                <input type="button" onclick="location.href='./ProblemManagement.html'" value="更新" class="kousin-btn">
+                <input type="button" onclick="location.href='./ProblemDetail.html'" value="戻る" class="cancel-btn">
+            </div>
+            <!-- <div id="modal">
+                 <p class="modal-message">登録しますか？</p>
+                 <div class="btns">
+                     <button type="submit" id="register-btn" class="basic-btn">登録</button>
+                     <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+                 </div>
+             </div>-->
+        </form>
+    </div>
+</div>
+</body>
+</html>

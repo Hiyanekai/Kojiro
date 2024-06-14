@@ -36,4 +36,17 @@ public class PgQManagementDao implements QManagementDao{
         var list = jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score FROM questions INNER JOIN genres ON questions.genre_id = genres.id WHERE questions.id = :id ORDER BY questions.id", param, new DataClassRowMapper<>(TestQuestion.class));
         return list.isEmpty() ? null : list.get(0);
     }
+
+    @Override
+    public int update(TestQuestion question){
+        var param = new MapSqlParameterSource();
+        param.addValue("id",question.id());
+        param.addValue("genre",Integer.parseInt(question.genre()));
+        param.addValue("sentence", question.sentence());
+        param.addValue("answer", question.answer());
+        param.addValue("explain", question.explain());
+        param.addValue("file", question.file());
+        param.addValue("score", question.score());
+        return jdbcTemplate.update("UPDATE questions SET genre_id = :genre, sentence = :sentence, answer = :answer, explain = :explain, file = :file, score = :score WHERE id = :id", param);
+    }
 }

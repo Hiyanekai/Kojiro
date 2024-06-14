@@ -11,4 +11,5 @@ public interface QManagementDao {
     List<TestQuestion> findAll();
     List<TestQuestion> findBySentence(String sentence);
     TestQuestion findById(int id);
+    int update(TestQuestion question);
 }

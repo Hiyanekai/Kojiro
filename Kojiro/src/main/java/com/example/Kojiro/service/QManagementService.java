@@ -11,4 +11,5 @@ public  interface QManagementService{
     public List<TestQuestion> findAll();
     public List<TestQuestion> findBySentence(String sentence);
     public TestQuestion findById(int id);
+    public int update(TestQuestion question);
 }
