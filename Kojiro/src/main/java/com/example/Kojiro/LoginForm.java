@@ -12,4 +12,5 @@ public class LoginForm {
     @NotEmpty(message = "PASSは必須です")
     @Length(max = 50)
     public String password;
+
 }

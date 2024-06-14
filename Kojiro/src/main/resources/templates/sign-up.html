@@ -31,7 +31,7 @@
 
         <div>
              <div><label for="password">パスワード(確認)</label></div>
-          <input class="base-input" type="password" name="password" id="password1" placeholder="パスワード(確認)">
+          <input class="base-input" type="password" name="repassword" id="repassword" placeholder="パスワード(確認)">
           <div class="error" th:each="error : ${#fields.errors('password')}"> [[ ${error} ]]</div>
         </div>
       </fieldset>
