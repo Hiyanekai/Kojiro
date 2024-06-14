@@ -1,25 +1,24 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.LoginForm;
 import com.example.Kojiro.entity.SignUp;
-import com.example.Kojiro.entity.users;
+import com.example.Kojiro.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
 @Repository
 public  class PgLoginDao implements LoginDao{
     @Autowired
     public NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public users findbylogin(String userId, String password) {
+    public Users findbylogin(String userId, String password) {
         var param = new MapSqlParameterSource();
         param.addValue("user_id", userId);
         param.addValue("password", password);
-        var list = jdbcTemplate.query("SELECT * FROM users WHERE user_id = :user_id AND password =:password", param, new DataClassRowMapper<>(users.class));
+        var list = jdbcTemplate.query("SELECT * FROM users WHERE user_id = :user_id AND password =:password", param, new DataClassRowMapper<>(Users.class));
         return list.isEmpty() ? null : list.get(0);
     }
 
