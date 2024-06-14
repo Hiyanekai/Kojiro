@@ -14,7 +14,8 @@ public class PgQuestionsDao implements QuestionsDao{
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Override
     public List<TestQuestion> findTest() {
-        return jdbcTemplate.query("SELECT * FROM questions WHERE score = 1 ORDER BY RAND() LIMIT 10",
+        return jdbcTemplate.query("SELECT q.id,g.genre_name,q.sentence,q.answer,q.explain,q.file,q.score FROM questions AS q " +
+                                       "JOIN genres AS g ON question.genre_id = genres.id WHERE score = 1 ORDER BY RAND() LIMIT 10",
                 new DataClassRowMapper<>(TestQuestion.class));
     }
 

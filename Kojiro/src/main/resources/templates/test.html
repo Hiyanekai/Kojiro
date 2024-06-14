@@ -5,10 +5,11 @@
     <title>第[[${times}]]回模擬試験</title>
     <link href="../css/quiz.css" rel="stylesheet">
 </head>
-<!--th:fieldの問題IDを何回目のテストかをを作成しておく-->
+<!--th:fieldの問題IDを何回目のテストかを作成しておく-->
 <body>
     <form action="test" method="post" th:object="${result}">
         <div th:each="testData,loopCnt : ${testData}">
+            <input type="hidden" name="q_id" th:field="${q_id}">
             <div class="q-header">
                 <div class="genre-name">
                     <h3>ジャンル：[[${testData.genre}]]</h3>
@@ -34,6 +35,7 @@
                     <span>X</span>
                 </label>
             </div>
+            <input type="hidden" name="flag" th:field="${flag}">
         </div>
     </form>
     <button type="submit" class="btn" id="circle"></button>
