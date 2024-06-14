@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
@@ -7,34 +7,34 @@
 </head>
 <body class="login-body">
   <div class="header">
-    <h1 class="site_logo">免許学科試験対策システム</h1>
+<!--    <h1 class="site_logo">免許学科試験対策システム</h1>-->
   </div>
 
   <div class="login-form">
     <img src="./images/logo3.png" class="login-logo" style="object-fit: cover; width: 400px; height: 90px;">
-    <p class="error">エラーメッセージ</p>
+    <p class="error">[[ ${error} ]]</p>
 
-    <form action="login" method="post">
+    <form action="/index" method="post"  th:object="${login}">
       <fieldset>
         <div class="cp_iptxt">
           <!-- <div><label for="loginId">ユーザー名</label></div> -->
-          <input class="base-input" type="text" name="loginId" id="loginId" placeholder="ユーザー名">
-          <div class="error">エラーメッセージ</div>
+          <input class="base-input" type="text" name="userId" id="userId" placeholder="ユーザー名"  th:field="*{userId}">
+          <div class="error" th:each="error : ${#fields.errors('userId')}"> [[ ${error} ]]</div>
         </div>
 
         <div>
             <!-- <div><label for="pass">パスワード</label></div> -->
-          <input class="base-input" type="password" name="pass" id="pass" placeholder="パスワード">
-          <div class="error">エラーメッセージ</div>
+          <input class="base-input" type="password" name="password" id="password" placeholder="パスワード" th:field="*{password}">
+          <div class="error" th:each="error : ${#fields.errors('password')}"> [[ ${error} ]]</div>
         </div>
       </fieldset>
       <ul class="flex">
         <li><img src="./images/カエル.png" style="object-fit: cover; width: 110px; height: 120px;"></li>
         <li>
-            <button id="login-btn" class="custom-btn" type="button" onclick="location.href='./menu.html'">
+            <button id="login-btn" class="custom-btn" type="submit" >
             ログイン
             </button>
-            <p><a class="link" href="./sign-up.html" style="color: black;">新規登録はこちら</a></p>
+            <p><a class="link" href="/sign-up" style="color: black;">新規登録はこちら</a></p>
         </li>
         <li><img src="./images/ウサギ.png" style="object-fit: cover; width: 110px; height: 120px;"></li>
       </ul>
