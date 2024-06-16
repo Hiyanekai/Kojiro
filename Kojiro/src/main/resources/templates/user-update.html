@@ -19,17 +19,23 @@
 
 <div class="update">
   <div class="form-body">
-    <form action="#" th:action="@{/user-update}" th:object="${update}" method="post">
+    <form action="#" th:action="@{/update}" th:object="${update}" method="post">
       <input type="hidden" th:field="*{id}" value="${update.id}" />
       <fieldset class="label-130 product_block">
-        <p class="error">エラーメッセージ</p>
+        <p class="error" th:text="${errorMsg}"></p>
         <div>
           <label>ユーザーID</label>
           <input type="text" th:field="*{user_id}" value="${update.user_id}" class="base-text">
+          <span class="error"  th:each="error: ${#fields.errors('user_id')}">
+            [[ ${error} ]]
+          </span>
         </div>
         <div>
           <label>パスワード</label>
           <input type="text" th:field="*{password}" value="${update.password}" class="base-text">
+          <span class="error"  th:each="error: ${#fields.errors('password')}">
+            [[ ${error} ]]
+          </span>
         </div>
 
       </fieldset>
