@@ -1,19 +1,38 @@
 package com.example.Kojiro.service;
 
-import com.example.Kojiro.dao.PgTermManagementDao;
+import com.example.Kojiro.dao.TermManagementDao;
+import com.example.Kojiro.entity.TermAddition;
 import com.example.Kojiro.entity.TermManagement;
-import com.example.Kojiro.entity.UserManagement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.DataClassRowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class PgTermManagementService implements TermManagementService {
+public class PgTermManagementService implements TermManagementService{
+
     @Autowired
-    private PgTermManagementDao PgTermManagementDao;
+    private TermManagementDao termManagementDao;
 
     @Override
-    public TermManagement findById(int id) {
-        var detail =PgTermManagementDao.findById(id);
-        return detail;
+    public List<TermManagement> findAll() {
+        return termManagementDao.findAll();
+    }
+
+    @Override
+    public List<TermManagement> findByTerm(String key){
+        return termManagementDao.findByTerm(key);
+    }
+
+    @Override
+    public int termAddition(TermAddition user) {
+        return termManagementDao.termAddition(user);
+    }
+    @Override
+    public TermAddition findtermAddition(String term_name){
+        return termManagementDao.findtermAddition(term_name);
     }
 }

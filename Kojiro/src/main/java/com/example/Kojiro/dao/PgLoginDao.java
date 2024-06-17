@@ -1,6 +1,5 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.LoginForm;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
 @Repository
 public  class PgLoginDao implements LoginDao{
     @Autowired
