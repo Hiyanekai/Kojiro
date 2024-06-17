@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:Kojiro/src/main/java/com/example/Kojiro/form/LoginForm.java
 package com.example.Kojiro.form;
-========
-package com.example.Kojiro.entity;
->>>>>>>> eb7a8e6ae8c8b3861aee91aedc7abdbb7cb698fd:Kojiro/src/main/java/com/example/Kojiro/entity/LoginForm.java
+
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
