@@ -37,6 +37,7 @@
                 <div>
                     <label class="required">問題名</label>
                     <input type="text" name="description"  class="base-text" th:field="${add.sentence}">
+                    <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
                 </div>
                 <div>
                     <label class="required">解答</label>
@@ -48,6 +49,7 @@
                 <div>
                     <label class="required">解説:</label>
                     <input type="text" name="description"  class="base-text" th:field="${add.explain}">
+                    <span class="error" th:each="error: ${#fields.errors('explain')}">[[ ${error} ]]</span>
                 </div>
                 <div>
                     <label>画像:</label>
@@ -63,7 +65,7 @@
             </fieldset>
             <div class="btns">
                 <button type="submit" class="basic-btn">追加</button>
-                <input type="button" onclick="location.href='./ProblemManagement.html'" value="戻る" class="cancel-btn">
+                <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
             </div>
             <!-- <div id="modal">
                  <p class="modal-message">登録しますか？</p>
