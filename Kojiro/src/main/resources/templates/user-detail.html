@@ -22,10 +22,9 @@
 
 <div class="update">
   <div class="form-body">
-     <form method="get" action="#" th:object="${detail}">
+     <form method="post" action="#" th:action="@{/user-detail}" th:object="${detail}">
        <input type="hidden" th:field="*{id}" value="${detail.id}" />
       <fieldset class="label-130 product_block">
-        <p class="error">エラーメッセージ</p>
         <!-- <div>
           <label>ユーザーID</label>
           <input type="text" name="productId" value="10001" readonly class="base-text">
@@ -49,7 +48,7 @@
         <div id="modal">
           <p class="modal-message">削除しますか？</p>
           <div class="btns">
-            <button type="button" id="delete-btn" class="basic-btn">削除</button>
+            <button type="submit" id="delete" class="basic-btn">削除</button>
             <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
           </div>
       </div>
