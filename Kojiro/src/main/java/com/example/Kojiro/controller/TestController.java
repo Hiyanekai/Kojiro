@@ -81,11 +81,11 @@ public class TestController {
         for(TestInput test_input : test) {//回答用ループ
             Questions question = pgQuestionsService.findQuestion(test_input.q_id());//問題IDからテスト問題を取得
             if (question.answer() == test_input.user_select()){//答えを比較して採点
-                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),1,1,0));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
-                score += question.score();//回答と同じの場合のみ点数を加算
+                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),1,1,1,0));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+                score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
             }
             else {//回答が間違えていた場合
-                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),1,0,0));//回答ページ送信用リストに追加
+                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),1,1,0,0));//回答ページ送信用リストに追加
 //                Misses misses = new Misses(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 //service.insertMisses(misses);//missesクラスに問題を追加
             }
