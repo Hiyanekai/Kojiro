@@ -4,44 +4,90 @@
     <meta charset="UTF-8">
 <!--    <title>第[[${times}]]回模擬試験</title>-->
     <title>第1回模擬試験</title>
-    <link href="../css/quiz.css" rel="stylesheet">
+    <link href="../css/test.css" rel="stylesheet">
 </head>
 <!--th:fieldの問題IDを何回目のテストかを作成しておく-->
 <body>
-    <form action="result" method="post" th:object="${result}">
-        <div th:each="testData,loopCnt : ${testData}">
-            <input type="hidden" name="q_id" th:field="${q_id}" th:value="${testData.id}">
-            <div class="q-header">
-                <div class="genre-name">
-                    <h3>ジャンル：[[${testData.genre}]]</h3>
-                </div>
-                <div class="q-num">
-                    <h3>[[${loopCnt.count}]]/10問</h3>
+    <form action="result" method="post" onSubmit="return check()">
+        <div class="inline">
+            <div>
+                <div th:each="testData,loopCnt : ${testData}">
+                    <input type="hidden" th:name="'question_id' + ${loopCnt.count}" th:value="${testData.id}">
+<!--                    <div class="q-header">-->
+<!--                        <div class="genre-name" th:id="'question' + ${loopCnt.count}">-->
+<!--                            <h3>ジャンル：[[${testData.genre}]]</h3>-->
+<!--                        </div>-->
+<!--                        <div class="q-num">-->
+<!--                            <h3>[[${loopCnt.count}]]/10問</h3>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="question" th:id="'question' + ${loopCnt.count}">
+                        <span class="q_No">問題[[${loopCnt.count}]]</span>
+<!--                        <span class="genre">ジャンル：[[${testData.genre}]]</span>-->
+                        <p class="q-text">[[${testData.sentence}]]</p>
+                        <div class="q-img" >
+                            <img th:src="'../images/' + ${testData.file}" th:if="${testData.file} != null">
+                        </div>
+                    </div>
+<!--                    <div class="answer">-->
+<!--                        <label>-->
+<!--                            <input type="radio" th:value="0" th:name="'choice' + ${loopCnt.count}">-->
+<!--                            <span>〇</span>-->
+<!--                        </label>-->
+<!--                        <label>-->
+<!--                            <input type="radio" th:value="1" th:name="'choice' + ${loopCnt.count}">-->
+<!--                            <span>X</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+                    <div class="radio-div">
+                    <group class="inline-radio">
+                        <div><input type="radio" th:value="0" th:name="'choice' + ${loopCnt.count}" th:onchange="|radio_func('__${loopCnt.count}__')|"><label>〇</label></div>
+                        <div><input type="radio" th:value="1" th:name="'choice' + ${loopCnt.count}" th:onchange="|radio_func('__${loopCnt.count}__')|"><label>X</label></div>
+                    </group>
+                    </div>
+                    <div><input type="radio" class="default_set" th:value="-1" th:name="'choice' + ${loopCnt.count}" checked><label></label></div>
                 </div>
             </div>
-            <div class="question">
-                <h1>問題</h1>
-                <p class="q-text">[[${testData.sentence}]]</p>
-                <div class="q-img" >
-                    <img th:src="'../images/' + ${testData.sentence}">
+
+            <div class="MuiBox-root css-rlbyz">
+                <div class="MuiStack-root css-18zsr3k">
+                    <h2>第1回模擬試験</h2>
+                    <div id="timer"></div>
+<!--                    <button class= tabindex="0" type="submit">回答を送信する-->
+<!--                        <span class="MuiTouchRipple-root css-w0pj6f"></span>-->
+<!--                    </button>-->
+                    <button class="btn btn-flat" type="submit" id="submit">
+                        <span class="MuiTouchRipple-root css-w0pj6f">回答を送信する</span>
+                    </button>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="MuiBox-root css-2imjyh">
+                        <div th:each="testData,Cnt : ${testData}">
+                            <div class="MuiBox-root css-1y62lli" th:id="${Cnt.count}" >
+                                <a class="MuiTypography-root MuiTypography-body1 css-9l3uo3" style="cursor: pointer; text-decoration: none;" th:href="'#question' + ${Cnt.count}">[[${Cnt.count}]]</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="answer">
-                <label>
-                    <input type="radio" th:value="1" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
-                    <span>〇</span>
-                </label>
-                <label>
-                    <input type="radio" th:value="0" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
-                    <span>X</span>
-                </label>
-            </div>
-            <input type="hidden" name="flag" th:field="${flag}" value="0">
+        </div>
+        <br>
+        <div class="btn-bottom">
+            <button class="btn btn-flat" type="submit">
+                <span class="MuiTouchRipple-root css-w0pj6f">回答を送信する</span>
+            </button>
         </div>
     </form>
-    <button type="submit" class="btn" id="circle"></button>
-<!-- <div class="change-page">
-    <button onclick="location.href='./select-quiz.html'" class="btn" id="link-btn">ジャンル選択へ</button>
-</div> -->
+    <br><br>
+    <footer class="footer">
+        <ul class="md-flex">
+            <li><a href="#">About</a></li>
+            <li><a href="#">サイトマップ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+        <p class="copyright">© 2023 Example Inc. All Rights Reserved.</p>
+    </footer>
+    <script src="./js/test.js"></script>
 </body>
 </html>
