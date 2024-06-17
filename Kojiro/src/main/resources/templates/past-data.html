@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/past-data.css">
+  <title>過去テストの結果画面</title>
+<body>
+<h1>過去のテスト結果</h1>
+
+<table class="design01">
+  <tr>
+    <th>受験日</th>
+    <th>点数</th>
+    <th>合否</th>
+    <th>詳細</th>
+  </tr>
+  <tbody>
+  <tr th:each="data : ${dataList}">
+    <td th:text="${data.test_date.split(' ')[0]}"></td>
+    <td th:text="${data.score}"></td>
+    <td th:text="${data.score>=90}? '合格':'不合格'"></td>
+    <td><a class="detail_btn" href="./detail.html">詳細</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</head>
+</html>

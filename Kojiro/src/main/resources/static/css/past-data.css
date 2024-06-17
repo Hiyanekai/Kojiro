@@ -1,0 +1,36 @@
+.design01 {
+    width: 80%;
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+   }
+   .design01 th {
+    padding: 10px;
+    background: #e9faf9;
+    border: solid 1px #778ca3;
+   }
+   .design01 td {
+    padding: 10px;
+    border: solid 1px #778ca3;
+   }
+   h1 {
+    background: #e7e7e7;/*背景色*/
+    padding: 0.5em;/*文字まわり（上下左右）の余白*/
+    border-left: solid 5px #97ddd0;/*左線*/
+    border-bottom: solid 3px #d7d7d7;
+    width: 17%;
+    height: 100%;
+  }
+
+  .detail_btn {
+    background-color:#a0ffea;
+    display: block;       /* リンクをブロックレベル化して表示 */
+    padding: 5px 10px 5px 10px;
+    border-radius:30px;
+  }
+
+  .detail_btn:hover {
+    background-color:#c0fff0;
+  }
