@@ -93,3 +93,24 @@ img{
     object-fit: cover;
     height: 200px;
 }
+
+/* 正解・不正解標示 */
+.ans{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    width: 400px;
+    height: 400px;
+
+    text-align: center;
+    /*content: "〇";
+    color: #ffb3b3;
+    opacity: 0.7;*/
+    font-size: 200px;
+    font-align: bold;
+}
+#ans-text{
+    text-align: center;
+}
