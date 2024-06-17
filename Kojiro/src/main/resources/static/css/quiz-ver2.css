@@ -36,11 +36,6 @@
     margin: 5px;
     text-align: center;
 }
-img{
-    object-fit: cover; 
-    width: 128px; 
-    height: 128px;
-}
 
 /* 解答欄 */
 .answer{
@@ -80,4 +75,9 @@ img{
     width: 200px;
 
     font-size: 20px;
+}
+/* 図 */
+img{
+    object-fit: cover;
+    height: 200px;
 }

@@ -3,23 +3,25 @@
 <head>
 <meta charset="UTF-8">
     <title>一問一答（答え）</title>
-    <link href="../../css/quiz-answer.css" rel="stylesheet">
+    <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
 </head>
 <body>
     <div class="q-header">
         <div class="genre-name">
-            <h3>ジャンル：[[${gId}]]</h3>
+            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
             <h3>[[${qNum}]]/10問</h3>
         </div>
     </div>
+    <div id="answer"></div>
     <div class="answer">
+        <h1 id="ans-text"></h1>
         <h1>あなたの解答　[[${ans}]]</h1>
-        <h1>正解　✖</h1>
-        <p class="q-text">速度の遅い車が運行する車線です｡必ず登坂車線を通行する必要はありません｡</p>
+        <h1>正解　[[${correct}]]</h1>
+        <p class="q-text">[[${questions.get(qNum-1).explain}]]</p>
         <div class="q-img">
-            <img src="../../images/glossary.png">
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
     </div>
     <!-- <div class="user-select">
@@ -30,20 +32,46 @@
     </div> -->
     <div class="question">
         <h1>問題</h1>
-        <p class="q-text">登坂車線のある高速自動車国道では､大型貨物自動車は必ず登坂車線を通行しなければならない｡</p>
+        <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
         <div class="q-img">
-            <img src="../../images/glossary.png">
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
     </div>
     <div class="change-page">
         <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
-        <button th:onclick="|location.href='/quiz/__${gId}__'|" class="btn" id="next">次の問題へ</button>
+        <button th:onclick="|location.href='/quiz/__${gId}__/next'|" class="btn" id="next">次の問題へ</button>
     </div>
     <script th:inline="javascript">
         const nextBtn = document.getElementById("next");
         const qNum = /*[[${qNum}]]*/"qNum";
-        console.log(qNum);
+
+        const ans = /*[[${ans}]]*/"ans";
+        const correct = /*[[${correct}]]*/"correct";
+
+        var answer = document.getElementById("answer");
+        var ansText = document.getElementById("ans-text");
+
         if(qNum==10) nextBtn.style.display = 'none';
+
+        if(ans == correct){
+            answer.innerHTML = "〇";
+            answer.style.color = "#ffb3b3";
+            answer.classList.add("ans");
+            setTimeout(function(){
+                answer.style.display = 'none';
+            }, 1000);
+            ansText.innerHTML = "正解";
+            ansText.style.color = "red";
+        }else{
+            answer.innerHTML = "✖";
+            answer.style.color = "#b3c7ff";
+            answer.classList.add("ans");
+            setTimeout(function(){
+                answer.style.display = 'none';
+            }, 1000);
+            ansText.innerHTML = "不正解";
+            ansText.style.color = "blue";
+        }
     </script>
 </body>
 </html>
