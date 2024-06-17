@@ -3,6 +3,7 @@ package com.example.Kojiro.controller;
 //QManagementController = QuestionManagementController(問題管理) 長くてすみません
 
 import com.example.Kojiro.entity.TestQuestion;
+import com.example.Kojiro.entity.question;
 import com.example.Kojiro.form.QuizManagement;
 import com.example.Kojiro.service.QManagementService;
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class QManagementController {
 
+    private String[] successMesList={"","追加に成功","更新に成功","削除に成功"};
+
+    private int successIndex=0;
     @Autowired
     QManagementService qManagementService;
     @Autowired
@@ -27,6 +31,7 @@ public class QManagementController {
 //        }
         if (keyword.isEmpty()){
             model.addAttribute("management", qManagementService.findAll());
+            model.addAttribute("success",successMesList[successIndex]);
         }else {
             System.out.println(qManagementService.findBySentence(keyword));
             model.addAttribute("management", qManagementService.findBySentence(keyword));
@@ -62,11 +67,44 @@ public class QManagementController {
             try{
                 var result2 = qManagementService.update(conProduct1);
                 System.out.println(conProduct1);
+                successIndex=2;
                 return "redirect:/quiz-management";
             }catch (RuntimeException e){
                 model.addAttribute("q_management", qManagementService.findById(id));
                 System.out.println("重複しましたよ");
                 return "quiz-update";
+            }
+        }
+    }
+
+    @GetMapping("/quiz-delete/{id}")
+    public String delete1(@PathVariable("id") int id){
+        var result3 = qManagementService.delete(id);
+        successIndex=3;
+        return "redirect:/quiz-management";
+    }
+
+    @GetMapping("/quiz-add")
+    public String index(@ModelAttribute("add") QuizManagement add) {
+        return "quiz-add";
+    }
+    @PostMapping("/quiz-add")
+    public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
+        System.out.println(add);
+        if(bindingResult.hasErrors()) {
+            System.out.println("バリデーション");
+            return "quiz-add";
+        }else {
+            System.out.println("バリデーションなし");
+            var conProduct = new TestQuestion(0,add.getGenre(),add.getSentence(),add.getAnswer(),add.getExplain(),add.getFile(),add.getScore());
+            try{
+                var result1 = qManagementService.insert(conProduct);
+                System.out.println(conProduct);
+                successIndex=1;
+                return "redirect:/quiz-management";
+            }catch (RuntimeException e){
+                System.out.println("重複しましたよ");
+                return "quiz-add";
             }
         }
     }

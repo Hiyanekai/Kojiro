@@ -1,7 +1,7 @@
 package com.example.Kojiro.controller;
 
-import com.example.Kojiro.form.CheckLoginForm;
-import com.example.Kojiro.form.LoginForm;
+import com.example.Kojiro.entity.CheckLoginForm;
+import com.example.Kojiro.entity.LoginForm;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.service.PgLoginService;
 import jakarta.servlet.http.HttpSession;
@@ -74,5 +74,11 @@ public class LoginController {
     @GetMapping("/sign-up-success")
     public String succese(@ModelAttribute("signupsuccess") LoginForm loginForm){
         return "sign-up-success";
+    }
+
+    @GetMapping("/logout.html")
+    public String logout1(){
+        session.invalidate();
+        return "logout.html";
     }
 }

@@ -27,4 +27,12 @@ public class PgQManagementService implements QManagementService{
     public int update(TestQuestion question){
         return qManagementDao.update(question);
     }
+    @Override
+    public int delete(int id){
+        return qManagementDao.delete(id);
+    }
+    @Override
+    public int insert(TestQuestion question) {
+        return qManagementDao.insert(question);
+    }
 }

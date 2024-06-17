@@ -3,7 +3,6 @@ package com.example.Kojiro.service;
 import com.example.Kojiro.dao.LoginDao;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.entity.Users;
-import com.example.Kojiro.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

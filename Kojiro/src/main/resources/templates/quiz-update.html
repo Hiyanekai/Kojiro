@@ -7,14 +7,10 @@
 </head>
 <body>
 <div class="insert">
+    <th:block th:insert="/common/header"></th:block>
     <h1>問題管理更新</h1>
-    <div class="discription">
-        <p>
-            （<span class="required"></span>は必須です）
-        </p>
-    </div>
     <div class="form-body">
-        <form action="" th:object="${q_management}">
+        <form action="" method="post" th:object="${q_management}">
             <fieldset class="label-130">
 <!--                <div>-->
 <!--                    <label class="required">問題名:</label>-->
@@ -72,22 +68,24 @@
                 </div>
                 <div>
                     <label class="required">問題名</label>
-                    <input type="textarea" name="description"  class="base-text" th:field="${q_management.sentence}">
+                    <input type="text" name="description"  class="base-text" th:field="${q_management.sentence}">
+                    <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
                 </div>
                 <div>
                     <label class="required">解答</label>
                     <select name="anser" th:field="${q_management.answer}">
-                        <option value="1">〇</option>
-                        <option value="2">×</option>
+                        <option value="0">〇</option>
+                        <option value="1">×</option>
                     </select>
                 </div>
                 <div>
                     <label class="required">解説:</label>
-                    <input type="textarea" name="description"  class="base-text" th:field="${q_management.explain}">
+                    <input type="text" name="description"  class="base-text" th:field="${q_management.explain}">
+                    <span class="error" th:each="error: ${#fields.errors('explain')}">[[ ${error} ]]</span>
                 </div>
                 <div>
                     <label>画像:</label>
-                    <input type="file" name="file">
+                    <input type="file" name="file" th:field="${q_management.file}">
                 </div>
                 <div>
                     <label class="required">点数:</label>
@@ -100,7 +98,7 @@
             <div class="btns">
 <!--                <input type="button" onclick="location.href='/quiz-management'" value="更新" class="kousin-btn">-->
                 <input type="submit" value="更新" class="kousin-btn">
-                <input type="button" onclick="location.href='./ProblemDetail.html'" value="戻る" class="cancel-btn">
+                <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
             </div>
             <!-- <div id="modal">
             <p class="modal-message">登録しますか？</p>

@@ -9,25 +9,34 @@
 <body>
 <div id="app">
     <div class="header">
+    <th:block th:insert="/common/header"></th:block>
+        </div>
         <h1 class="site_logo">問題管理</h1>
-        <div class="user">
-            <p class="user_name">ヘッダー</p>
+<!--        <div class="user">-->
+<!--        <header>-->
+<!--            <a href="/menu">-->
+<!--                <img src="/images/logo2.png" alt="ヘッダー" width="350" height="200">-->
+<!--            </a>-->
+<!--            <a href="/logout">-->
+<!--                <img src="/images/logo2.png" alt="ヘッダー" width="150" height="100">-->
+<!--            </a>-->
+<!--        </header>-->
             <!-- <form class="logout_form" action="logout.html" method="get"> -->
             <!-- <button class="custom-btn" type="submit">
               ログアウト</button> -->
-            </form>
-        </div>
-    </div>
+<!--            </form>-->
+<!--        </div>-->
+<!--    div</>-->
     <hr>
     <div class="btn-area">
         <!-- <div class="btn"><a class="basic-btn regist" href="insert.html">新規登録</a></div> -->
-        <div class="btn"><a class="basic-btn regist" href="ProblemAddition.html">問題の追加</a></div>
+        <div class="btn"><a class="basic-btn regist" href="quiz-add">問題の追加</a></div>
     </div>
     <!-- <div class="btn-area">
       <div class="btn"><a class="basic-btn regist" href="insert.html">新規登録</a></div>
       <div class="btn"><a class="basic-btn regist" href="category.html">用語の追加</a></div>
     </div> -->
-    <p>○○に成功</p>
+    <p>[[ ${success} ]]</p>
     <form method="get" action="#" class="search-form">
         <!-- <div class="order">
           <select name="order" class="base-text">
