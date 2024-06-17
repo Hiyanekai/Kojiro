@@ -1,6 +1,7 @@
 package com.example.Kojiro.service;
 
 import com.example.Kojiro.dao.TermManagementDao;
+import com.example.Kojiro.entity.TermAddition;
 import com.example.Kojiro.entity.TermManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
@@ -26,5 +27,12 @@ public class PgTermManagementService implements TermManagementService{
         return termManagementDao.findByTerm(key);
     }
 
-
+    @Override
+    public int termAddition(TermAddition user) {
+        return termManagementDao.termAddition(user);
+    }
+    @Override
+    public TermAddition findtermAddition(String term_name){
+        return termManagementDao.findtermAddition(term_name);
+    }
 }
