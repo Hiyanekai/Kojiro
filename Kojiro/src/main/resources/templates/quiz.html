@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
     <title>一問一答（問題）</title>
-    <link href="../css/quiz.css" rel="stylesheet">
+    <link th:href="@{/css/quiz-ver2.css}" rel="stylesheet">
 </head>
 <body>
     <div class="q-header">
         <div class="genre-name">
-            <h3>ジャンル：第[[${genres.get(questions.get(qNum-1).genre_id-1).step}]]段階　[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
+            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
             <h3>[[${qNum}]]/10問</h3>
