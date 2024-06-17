@@ -1,8 +1,9 @@
 package com.example.Kojiro.controller;
 
+import com.example.Kojiro.CheckLoginForm;
 import com.example.Kojiro.LoginForm;
 import com.example.Kojiro.entity.SignUp;
-import com.example.Kojiro.entity.users;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.service.LoginService;
 import com.example.Kojiro.service.PgLoginService;
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +41,7 @@ public class LoginController {
         var result = pgLoginService.findbylogin(loginForm.getUserId(), loginForm.getPassword());
         session.setAttribute("users", result);
         if (bindingResult.hasErrors()) {
+            System.out.println("nnn");
             return "index";
         }else if (result != null) {
             return "redirect:/menu";
@@ -55,14 +57,18 @@ public class LoginController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp2(@Validated @ModelAttribute("signUp")LoginForm loginForm, BindingResult bindingResult, Model model){
-        var findByloginId = pgLoginService.findByloginId(loginForm.getUserId());
+    public String signUp2(@Validated @ModelAttribute("signUp") CheckLoginForm checkLoginForm, BindingResult bindingResult, Model model){
+        var findByloginId = pgLoginService.findByloginId(checkLoginForm.getUserId());
         if (bindingResult.hasErrors()){
             return "sign-up";
-        }else if (findByloginId==null) {
-            pgLoginService.signUp(new SignUp(loginForm.getUserId(), loginForm.getPassword(), 2,timestamp));
+        }else if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
+            model.addAttribute("error", "パスワードとパスワード(確認)が不一致です。");
+            return "sign-up";
+        }if (findByloginId==null) {
+            pgLoginService.signUp(new SignUp(checkLoginForm.getUserId(), checkLoginForm.getPassword(), 2, timestamp));
             return "sign-up-success";
-        }else {
+
+        } else {
             model.addAttribute("error", "IDまたはパスワードが不正です");
             return "sign-up";
         }
