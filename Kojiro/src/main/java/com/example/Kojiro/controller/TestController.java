@@ -75,7 +75,7 @@ public class TestController {
 
         int score = 0;//合計得点計算用の変数
         List<Questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
-        List<Integer> ans = new ArrayList<>();
+        List<Misses> miss = new ArrayList<>();
         List<TestResults> results = new ArrayList<>();
 
         for(TestInput test_input : test) {//回答用ループ
@@ -86,7 +86,8 @@ public class TestController {
             }
             else {//回答が間違えていた場合
                 results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),1,1,0,0));//回答ページ送信用リストに追加
-//                Misses misses = new Misses(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+                Misses misses = new Misses(0,test_input.q_id(),"testuser");//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+                miss.add(misses);
                 //service.insertMisses(misses);//missesクラスに問題を追加
             }
             if (test_input.flag() == 1){//問題にフラグが立てられていた場合
@@ -109,10 +110,11 @@ public class TestController {
         System.out.println(testScore);
         //testData.forEach(System.out::println);
         results.forEach(System.out::println);
+        System.out.println();
+        miss.forEach(System.out::println);
 
 //        model.addAttribute("testData",results); //回答ページ送信用リストをaddAttribute
 //        model.addAttribute("testScore",testScore);　//採点結果表示用の変数addAttribute
-//        model.addAttribute("ans",ans);
         return "menu";
     }
 }
