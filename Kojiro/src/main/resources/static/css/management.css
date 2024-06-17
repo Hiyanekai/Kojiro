@@ -112,6 +112,14 @@ a {
 .header {
   display: flex;
   justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
 }
 
 .user {
@@ -196,12 +204,12 @@ hr {
     line-height: 2;
     padding: 5px 10px 5px 10px;
     cursor: pointer;
-    color: white;
+    color: 000000;
     margin: 10px;
   }
 
   .delete-btn:hover {
-    background-color:#00CC00;
+    background-color:##0099FF;
   }
 
 

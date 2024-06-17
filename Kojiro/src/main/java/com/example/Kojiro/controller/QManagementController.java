@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class QManagementController {
 
+    private String[] successMesList={"","追加に成功","更新に成功","削除に成功"};
+
+    private int successIndex=0;
     @Autowired
     QManagementService qManagementService;
     @Autowired
@@ -28,6 +31,7 @@ public class QManagementController {
 //        }
         if (keyword.isEmpty()){
             model.addAttribute("management", qManagementService.findAll());
+            model.addAttribute("success",successMesList[successIndex]);
         }else {
             System.out.println(qManagementService.findBySentence(keyword));
             model.addAttribute("management", qManagementService.findBySentence(keyword));
@@ -63,6 +67,7 @@ public class QManagementController {
             try{
                 var result2 = qManagementService.update(conProduct1);
                 System.out.println(conProduct1);
+                successIndex=2;
                 return "redirect:/quiz-management";
             }catch (RuntimeException e){
                 model.addAttribute("q_management", qManagementService.findById(id));
@@ -75,6 +80,7 @@ public class QManagementController {
     @GetMapping("/quiz-delete/{id}")
     public String delete1(@PathVariable("id") int id){
         var result3 = qManagementService.delete(id);
+        successIndex=3;
         return "redirect:/quiz-management";
     }
 
@@ -94,6 +100,7 @@ public class QManagementController {
             try{
                 var result1 = qManagementService.insert(conProduct);
                 System.out.println(conProduct);
+                successIndex=1;
                 return "redirect:/quiz-management";
             }catch (RuntimeException e){
                 System.out.println("重複しましたよ");
