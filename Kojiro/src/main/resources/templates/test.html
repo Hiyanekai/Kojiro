@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第[[${times}]]回模擬試験</title>
+    <link href="../css/quiz.css" rel="stylesheet">
+</head>
+<!--th:fieldの問題IDを何回目のテストかをを作成しておく-->
+<body>
+    <form action="test" method="post" th:object="${result}">
+        <div th:each="testData,loopCnt : ${testData}">
+            <div class="q-header">
+                <div class="genre-name">
+                    <h3>ジャンル：[[${testData.genre}]]</h3>
+                </div>
+                <div class="q-num">
+                    <h3>[[${loopCnt.count}]]/10問</h3>
+                </div>
+            </div>
+            <div class="question">
+                <h1>問題</h1>
+                <p class="q-text">[[${testData.sentence}]]</p>
+                <div class="q-img" >
+                    <img th:src="'../images/' + ${testData.sentence}">
+                </div>
+            </div>
+            <div class="answer">
+                <label>
+                    <input type="radio" th:value="1" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
+                    <span>〇</span>
+                </label>
+                <label>
+                    <input type="radio" th:value="0" th:field="${user_select}" th:name="'choice' + ${loopCnt.count}">
+                    <span>X</span>
+                </label>
+            </div>
+        </div>
+    </form>
+    <button type="submit" class="btn" id="circle"></button>
+<!-- <div class="change-page">
+    <button onclick="location.href='./select-quiz.html'" class="btn" id="link-btn">ジャンル選択へ</button>
+</div> -->
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>問題管理</title>
+    <link href="/css/management.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <h1 class="site_logo">問題管理</h1>
+        <div class="user">
+            <p class="user_name">ヘッダー</p>
+            <!-- <form class="logout_form" action="logout.html" method="get"> -->
+            <!-- <button class="custom-btn" type="submit">
+              ログアウト</button> -->
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="btn-area">
+        <!-- <div class="btn"><a class="basic-btn regist" href="insert.html">新規登録</a></div> -->
+        <div class="btn"><a class="basic-btn regist" href="ProblemAddition.html">問題の追加</a></div>
+    </div>
+    <!-- <div class="btn-area">
+      <div class="btn"><a class="basic-btn regist" href="insert.html">新規登録</a></div>
+      <div class="btn"><a class="basic-btn regist" href="category.html">用語の追加</a></div>
+    </div> -->
+    <p>○○に成功</p>
+    <form method="get" action="#" class="search-form">
+        <!-- <div class="order">
+          <select name="order" class="base-text">
+            <option>並び替え</option>
+            <option>商品ID：昇順</option>
+            <option>商品ID：降順</option>
+            <option>カテゴリ：昇順</option>
+            <option>カテゴリ：降順</option>
+            <option>単価：安い順</option>
+            <option>単価：高い順</option>
+          </select>
+        </div> -->
+        <div class="search-container">
+            <input type="text" name="keyword" size="25" placeholder="キーワード検索">
+            <input type="submit" value="&#xf002">
+        </div>
+    </form>
+    <table>
+        <!-- <div class="caption"><p>検索結果：10件</p></div> -->
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>問題</th>
+            <th>解答</th>
+            <th>解説</th>
+            <th>単元</th>
+            <th>詳細</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="q_management : ${management}">
+            <td th:text="${q_management.id}"></td>
+            <td th:text="${q_management.sentence}"></td>
+            <td th:text="${q_management.answer}"></td>
+            <td th:text="${q_management.explain}"></td>
+            <td th:text="${q_management.genre}"></td>
+            <td><a class="detail_btn" th:href="@{/quiz-detail/{id}(id=${q_management.id})}">詳細</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer></footer>
+</body>
+</html>
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>商品ID</th>-->
+<!--        <th>商品名</th>-->
+<!--        <th>単価</th>-->
+<!--        <th>カテゴリ</th>-->
+<!--        <th>詳細</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="p : ${List}">-->
+<!--        <td th:text="${p.product_id}"></td>-->
+<!--        <td th:text="${p.name}"></td>-->
+<!--        <td th:text="${p.price}"></td>-->
+<!--        <td th:text="${p.categories}"></td>-->
+<!--        <td><a class="detail_btn" th:href="@{/detail/{id}(id=${p.id})}">詳細</a></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->

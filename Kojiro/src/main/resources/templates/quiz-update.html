@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>問題管理更新</title>
+    <link href="/css/management.css" rel="stylesheet">
+</head>
+<body>
+<div class="insert">
+    <h1>問題管理更新</h1>
+    <div class="discription">
+        <p>
+            （<span class="required"></span>は必須です）
+        </p>
+    </div>
+    <div class="form-body">
+        <form action="" th:object="${q_management}">
+            <fieldset class="label-130">
+<!--                <div>-->
+<!--                    <label class="required">問題名:</label>-->
+<!--                    <textarea name="description"  class="base-text">-->
+<!--                    </textarea>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label class="required">解答:</label>-->
+<!--                    <select name="anser">-->
+<!--                        <option value="anser1">〇</option>-->
+<!--                        <option value="anser2">×</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label class="required">解説:</label>-->
+<!--                    <textarea name="description"  class="base-text">-->
+<!--                    </textarea>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label  class="required">単元:</label>-->
+<!--                    <select name="subject">-->
+<!--                        <option value="サンプル1">サンプル1</option>-->
+<!--                        <option value="サンプル2">サンプル2</option>-->
+<!--                        <option value="サンプル3">サンプル3</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label>画像:</label>-->
+<!--                    <input type="file" name="file">-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label class="required">点数:</label>-->
+<!--                    <select name="points">-->
+<!--                        <option value="points1">1点</option>-->
+<!--                        <option value="points2">2点</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+                <div>
+                    <label class="required">単元:</label> <select name="subject" th:field="${q_management.genre}">
+                    <option value="1">運転者の心得</option>
+                    <option value="2">信号に従うこと</option>
+                    <option value="3">標識・標示などに従うこと</option>
+                    <option value="4">車が通行するところ、してはいけないところ</option>
+                    <option value="5">緊急自動車などの優先</option>
+                    <option value="6">交差点などの通行、踏切</option>
+                    <option value="7">安全な速度と車間距離</option>
+                    <option value="8">歩行者の保護など</option>
+                    <option value="9">安全の確認と合図、警音器の使用</option>
+                    <option value="10">進路変更など</option>
+                    <option value="11">追い越し</option>
+                    <option value="12">行き違い</option>
+                    <option value="13">運転免許制度、交通反則通告制度</option>
+                    <option value="14">オートマチック車などの運転</option>
+                </select>
+                </div>
+                <div>
+                    <label class="required">問題名</label>
+                    <input type="textarea" name="description"  class="base-text" th:field="${q_management.sentence}">
+                </div>
+                <div>
+                    <label class="required">解答</label>
+                    <select name="anser" th:field="${q_management.answer}">
+                        <option value="1">〇</option>
+                        <option value="2">×</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="required">解説:</label>
+                    <input type="textarea" name="description"  class="base-text" th:field="${q_management.explain}">
+                </div>
+                <div>
+                    <label>画像:</label>
+                    <input type="file" name="file">
+                </div>
+                <div>
+                    <label class="required">点数:</label>
+                    <select name="points" th:field="${q_management.score}">
+                        <option value="1">1点</option>
+                        <option value="2">2点</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="btns">
+<!--                <input type="button" onclick="location.href='/quiz-management'" value="更新" class="kousin-btn">-->
+                <input type="submit" value="更新" class="kousin-btn">
+                <input type="button" onclick="location.href='./ProblemDetail.html'" value="戻る" class="cancel-btn">
+            </div>
+            <!-- <div id="modal">
+            <p class="modal-message">登録しますか？</p>
+            <div class="btns">
+                <button type="submit" id="register-btn" class="basic-btn">登録</button>
+                <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+            </div>
+            </div>-->
+        </form>
+    </div>
+</div>
+</body>
+</html>
