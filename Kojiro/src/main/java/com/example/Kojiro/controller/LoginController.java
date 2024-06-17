@@ -75,4 +75,10 @@ public class LoginController {
     public String succese(@ModelAttribute("signupsuccess") LoginForm loginForm){
         return "sign-up-success";
     }
+
+    @GetMapping("/logout.html")
+    public String logout1(){
+        session.invalidate();
+        return "logout.html";
+    }
 }
