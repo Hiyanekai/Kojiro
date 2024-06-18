@@ -2,7 +2,7 @@ package com.example.Kojiro.entity;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record TermManagement(
+public record TermManagementDetail(
         Integer id,
         Integer genre_id,
         @NotBlank(message = "用語名は必須")
@@ -11,4 +11,5 @@ public record TermManagement(
         String explain,
         String file
 ) {
+//public record TermManagement (int id,String term_name,String explain,String file){
 }

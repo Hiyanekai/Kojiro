@@ -1,9 +1,13 @@
 package com.example.Kojiro.controller;
 
-import com.example.Kojiro.entity.TermManagement;
+import com.example.Kojiro.entity.TermManagementDetail;
 import com.example.Kojiro.entity.TermManagementNotFile;
 import com.example.Kojiro.form.TermUpdateForm;
-import com.example.Kojiro.service.TermManagementService;
+import com.example.Kojiro.service.TermManagementDetailService;
+import com.example.Kojiro.entity.TermAddition;
+import com.example.Kojiro.entity.TermForm;
+import com.example.Kojiro.service.PgTermManagementDetailService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +23,18 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 @Controller
-public class TermManagementController {
+public class TermManagementDetailController {
     @Autowired
-    TermManagementService TermManagementService;
+    TermManagementDetailService TermManagementService;
 
     @GetMapping("/term-detail/{id}")
-    public String termDetail(@PathVariable int id, Model model){
-        TermManagement detail = TermManagementService.findById(id);
+    public String termDetail(@PathVariable int id, Model model) {
+        TermManagementDetail detail = TermManagementService.findById(id);
         var genres = TermManagementService.findByGenres(detail.genre_id());
         model.addAttribute("genres", genres);
         model.addAttribute("detail", detail);
         // データベースにファイルパスがない場合、画像を表示しない
-        if(detail.file()!=null && !detail.file().isEmpty()) {
+        if (detail.file() != null && !detail.file().isEmpty()) {
             File img = new File("./Kojiro/src/main/resources/static/images/" + detail.file());
             System.out.println(img.toPath());
             try {
@@ -43,14 +47,16 @@ public class TermManagementController {
         }
         return "term-detail";
     }
+
     @PostMapping("/term-detail")
-    public String termDelete(@ModelAttribute("detail") TermManagement delete) {
+    public String termDelete(@ModelAttribute("detail") TermManagementDetail delete) {
         TermManagementService.delete(delete.id());
         return "term-success";
     }
+
     @GetMapping("/term-update/{id}")
-    public String termUpdate(@PathVariable int id, @ModelAttribute("update")  TermManagement termManagement, Model model){
-        TermManagement update = TermManagementService.findById(id);
+    public String termUpdate(@PathVariable int id, @ModelAttribute("update") TermManagementDetail termManagement, Model model) {
+        TermManagementDetail update = TermManagementService.findById(id);
         model.addAttribute("update", update);
         model.addAttribute("genresList", TermManagementService.findAll());
         return "term-update";
@@ -75,22 +81,22 @@ public class TermManagementController {
 //    }
 
     @PostMapping("/term-update/{id}")
-    public String termChange(@PathVariable int id, @Validated @ModelAttribute("update") TermUpdateForm changes, BindingResult bindingResult, Model model){
+    public String termChange(@PathVariable int id, @Validated @ModelAttribute("update") TermUpdateForm changes, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("genresList", TermManagementService.findAll());
             return "/term-update";
         }
-        TermManagement update = TermManagementService.findByTermId(changes.getTerm_name());
+        TermManagementDetail update = TermManagementService.findByTermId(changes.getTerm_name());
         if (update != null && !(update.id().equals(changes.getId()))) {
             model.addAttribute("errorMsg", "用語名が重複");
             model.addAttribute("genresList", TermManagementService.findAll());
             return "/term-update";
         }
-        if (changes.getFile().getOriginalFilename().equals("")){
+        if (changes.getFile().getOriginalFilename().equals("")) {
             TermManagementService.updates(new TermManagementNotFile(changes.getId(), changes.getGenre_id(), changes.getTerm_name(), changes.getExplain()));
-        }else {
-            TermManagementService.update(new TermManagement(changes.getId(), changes.getGenre_id(), changes.getTerm_name(), changes.getExplain(), changes.getFile().getOriginalFilename()));
+        } else {
+            TermManagementService.update(new TermManagementDetail(changes.getId(), changes.getGenre_id(), changes.getTerm_name(), changes.getExplain(), changes.getFile().getOriginalFilename()));
         }
         insertImgFile(changes.getFile());
 
@@ -98,7 +104,7 @@ public class TermManagementController {
 
     }
 
-//        @RequestMapping(value="/term-update",method=RequestMethod.POST, params = "term-update")
+    //        @RequestMapping(value="/term-update",method=RequestMethod.POST, params = "term-update")
 //        public void insertFile(@RequestParam(value = "file", defaultValue = "") MultipartFile file) {
 //            final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
 //
@@ -112,7 +118,7 @@ public class TermManagementController {
 //                e.printStackTrace();
 //            }
 //        }
-    public  void insertImgFile(MultipartFile file){
+    public void insertImgFile(MultipartFile file) {
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {
@@ -146,4 +152,51 @@ public class TermManagementController {
 //        return "redirect:/term-detail/2";
 //    }
 
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
+
+//    @Controller
+//    public class TermManagementController {
+//        @Autowired
+//        private HttpSession session;
+//        @Autowired
+//        private PgTermManagementDetailService pgTermManagementService;
+//
+////    @GetMapping("/terms")
+//////    public String TermManagement(@ModelAttribute("termslist") Model model ) {
+////        return "termmanagement";
+////    }
+//
+//        @GetMapping("/terms")
+//        public String TermManagement2(@RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
+//            if (keyword.isEmpty()) {
+//                model.addAttribute("termslist", pgTermManagementService.findAll());
+//            } else {
+//                model.addAttribute("termslist", pgTermManagementService.findByTerm(keyword));
+//            }
+//            return "termmanagement";
+//        }
+//
+//        @GetMapping("/termAddition")
+//        public String TermAddition(Model model, @ModelAttribute("termaddition") TermForm termForm) {
+//            return "termAddition";
+//        }
+//
+//        @PostMapping("/termAddition")
+//        public String TermAddition2(@Validated @ModelAttribute("termaddition") TermForm termForm, BindingResult bindingResult, Model model) {
+//            var result2 = pgTermManagementService.findtermAddition(termForm.getTerm_name());
+//            if (bindingResult.hasErrors()) {
+//                return "termAddition";
+//            } else if (result2 == null) {
+//                pgTermManagementService.termAddition(new TermAddition(termForm.getTerm_name(), termForm.getExplain(), termForm.getFile()));
+//                return "redirect:/terms";
+//            } else {
+//
+//                model.addAttribute("errorsyori", "商品コードが重複しています");
+//                return "termAddition";
+//            }
+//        }
+//    }
 }
