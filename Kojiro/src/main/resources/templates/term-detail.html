@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用語管理詳細</title>
+    <link th:href="@{/css/user-management.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <h1 class="site_logo">用語管理詳細</h1>
+    <div class="user">
+        <p class="user_name">ヘッダー</p>
+        <!-- <form class="logout_form" action="logout.html" method="get"> -->
+        <!-- <button class="custom-btn" type="submit">
+      ログアウト</button> -->
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<div class="update">
+    <div class="form-body">
+        <div class="img_block">
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
+        </div>
+        <form method="post" action="#" th:action="@{/user-detail}" th:object="${detail}">
+            <input type="hidden" th:field="*{id}" value="${detail.id}" />
+            <fieldset class="label-130 product_block">
+                <div>
+                    <label>ID</label>
+                    <input type="text"  th:field="*{id}" value="${detail.id}" readonly class="base-text">
+                </div>
+                <div>
+                    <label>用語</label>
+                    <input type="text" th:field="*{term_name}" value="${detail.name}" readonly class="base-text">
+                </div>
+                <div>
+                    <label>解説</label>
+                    <textarea name="explain" readonly class="base-text" style="background-color: rgb(209, 209, 209);">
+[[ ${detail.explain} ]]
+            </textarea>
+                </div>
+                <div>
+                    <label>単元</label>
+                    <input type="text"  th:value="${genres.genre_name}" readonly class="base-text">
+                </div>
+
+            </fieldset>
+            <div>
+                <div class="btns">
+                    <!-- openModal -->
+                    <input type="button" onclick="openModal()" value="削除" class="delete-btn">
+                    <input type="button" th:onclick="|location.href='/term-update/${detail.id}'|" value="更新" class="kousin-btn">
+                    <input type="button" onclick="location.href='./TermManagement.html'" value="戻る" class="cancel-btn">
+                </div>
+                 <div id="modal">
+                  <p class="modal-message">削除しますか？</p>
+                  <div class="btns">
+                    <button type="submit" id="delete-btn" class="basic-btn">削除</button>
+                    <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+                  </div>
+            </div>
+            </div>
+    </form>
+</div>
+</div>
+<div id="fadeLayer"></div>
+ <script src="/js/users-management.js"></script>
+<script>
+  'use strict'
+  document.getElementById('delete-btn').addEventListener('click', () => {
+    location.href = './menu.html'
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザー更新</title>
+  <link th:href="@{/css/user-management.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+  <h1 class="site_logo">ユーザー管理更新</h1>
+  <div class="user">
+    <p class="user_name">ヘッダー</p>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<div class="update">
+  <div class="form-body">
+    <form action="#" th:action="@{/user-update}" th:object="${update}" method="post">
+      <input type="hidden" th:field="*{id}" value="${update.id}" />
+      <fieldset class="label-130 product_block">
+        <p class="error" th:text="${errorMsg}"></p>
+        <div>
+          <label>ユーザーID</label>
+          <input type="text" th:field="*{user_id}" value="${update.user_id}" class="base-text">
+          <span class="error"  th:each="error: ${#fields.errors('user_id')}">
+            [[ ${error} ]]
+          </span>
+        </div>
+        <div>
+          <label>パスワード</label>
+          <input type="text" th:field="*{password}" value="${update.password}" class="base-text">
+          <span class="error"  th:each="error: ${#fields.errors('password')}">
+            [[ ${error} ]]
+          </span>
+        </div>
+
+      </fieldset>
+      <div>
+        <div class="btns">
+          <input type="button" onclick="openModal()" value="更新" class="kousin-btn">
+          <input type="button" th:onclick="|location.href='/user-detail/${update.id}'|" value="戻る" class="cancel-btn">
+        </div>
+         <div id="modal">
+          <p class="modal-message">更新しますか？</p>
+          <div class="btns">
+            <button type="submit" id="register-btn" class="basic-btn">更新</button>
+            <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+          </div>
+      </div>
+      </div>
+  </form>
+</div>
+</div>
+<div id="fadeLayer"></div>
+ <script src="/js/users-management.js"></script>
+<script>
+  'use strict'
+  document.getElementById('delete-btn').addEventListener('click', () => {
+    location.href = './menu.html'
+  })
+</script>
+</body>
+</html>
