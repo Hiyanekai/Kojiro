@@ -31,7 +31,8 @@ public class TestController {
         model.addAttribute("testData",testData);
 
         List<TestQuestion> testDataP2 = pgQuestionsService.findTestP2();
-        //model.addAttribute("testData",testDataP2);
+        testDataP2.forEach(System.out::println);
+        model.addAttribute("testDataP2",testDataP2);
 
         //テスト回数を判定
         int times = 1;
@@ -61,6 +62,8 @@ public class TestController {
             }
         });
 
+        q_list.forEach(System.out::println);
+
         //Mapでユーザーの回答を取得
         List<Integer> choices = new ArrayList<>();
         formData.forEach((key, value) -> {
@@ -76,27 +79,42 @@ public class TestController {
                 flagsQ.add(Integer.parseInt(value));
             }
         });
+
+        //Mapで問題IDを取得(2点問題)
+        List<Integer> q_list_P2 = new ArrayList<>();
+        formData.forEach((key, value) -> {
+            if (key.startsWith("P2question_id")) {
+                q_list_P2.add(Integer.parseInt(value));
+            }
+        });
+
+        //Mapでユーザーの回答を取得(2点問題)
+        List<Integer> flagsQ_P2 = new ArrayList<>();
+        formData.forEach((key, value) -> {
+            if (key.startsWith("P2flag")) {
+                flagsQ_P2.add(Integer.parseInt(value));
+            }
+        });
+
 //
           List<String> p2 = new ArrayList<>();
-//        formData.forEach((key, value) -> {
-//            if (key.startsWith("choiceP2")) {
-//                P2.add(value);
-//            }
-//        });
-        List<Integer> userSelectP2 = new ArrayList<>();
+        formData.forEach((key, value) -> {
+            if (key.startsWith("P2choice")) {
+                p2.add(value);
+            }
+        });
+        List<String> userSelectP2 = new ArrayList<>();
         int fu = 0;
-        StringBuilder selectData = new StringBuilder();
+        String selectData = "";
         for (String p : p2){
-            selectData.append(p);
+            selectData += p;
             fu+= 1;
             if (fu == 3){
                 fu = 0;
-                userSelectP2.add(Integer.parseInt(String.valueOf(selectData)));
-                selectData = new StringBuilder();
+                userSelectP2.add(selectData);
+                selectData = "";
             }
         }
-
-
 
 
         //テストの入力結果をリストにまとめて格納
@@ -104,6 +122,13 @@ public class TestController {
         for (int i = 0; i<q_list.size(); i++){
             test.add(new TestInput(q_list.get(i), choices.get(i),0 ));
         }
+
+        List<TestInput> testP2 = new ArrayList<>();
+        for (int i = 0; i<q_list_P2.size(); i++){
+            testP2.add(new TestInput(q_list_P2.get(i), Integer.parseInt(userSelectP2.get(i)),0 ));
+        }
+
+        testP2.forEach(System.out::println);
 
 
         int score = 0;//合計得点計算用の変数
@@ -137,6 +162,33 @@ public class TestController {
 //            }
             testData.add(question);//回答表示用のリストに採点した問題を格納
         }
+
+//        for(TestInput test_input : testP2) {//回答用ループ
+//            int flag = 0;
+//            Questions question = pgQuestionsService.findQuestion(test_input.q_id());//問題IDからテスト問題を取得 テーブル違うからDao追加
+//            for (int q : flagsQ){
+//                if (q == test_input.q_id()){
+//                    flag = 1;
+////                  Flags flags = new Flags(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+////                  service.insertFlags(flags);//flagクラスに問題を追加
+//                }
+//            }
+//            if (question.answer() == test_input.user_select()){//答えを比較して採点
+//                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,1,1,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+//                score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
+//            }
+//            else {//回答が間違えていた場合
+//                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,1,0,flag));//回答ページ送信用リストに追加
+//                Misses misses = new Misses(0,test_input.q_id(),"testuser");//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+//                miss.add(misses);
+//                //service.insertMisses(misses);//missesクラスに問題を追加
+//            }
+////            if (test_input.flag() == 1){//問題にフラグが立てられていた場合
+////                Flags flags = new Flags(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+////                service.insertFlags(flags);//flagクラスに問題を追加
+////            }
+//            testData.add(question);//回答表示用のリストに採点した問題を格納
+//        }
 
 
         Calendar cl = Calendar.getInstance();/////////////////////////////////////////////////

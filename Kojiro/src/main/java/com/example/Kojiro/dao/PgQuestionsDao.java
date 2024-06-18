@@ -24,7 +24,7 @@ public class PgQuestionsDao implements QuestionsDao{
 
     @Override
     public List<TestQuestion> findTestP2() {
-        return jdbcTemplate.query("SELECT q.id,g.genre_name AS genre,q.sentence,q.answer,q.explain,q.file,q.score FROM questions AS q " +
+        return jdbcTemplate.query("SELECT q.id,g.genre_name AS genre,q.sentence,q.answer,q.explain,q.file,q.score FROM questions_2points AS q " +
                         "JOIN genres AS g ON q.genre_id = g.id WHERE score = 2 ORDER BY random() LIMIT 5",
                 new DataClassRowMapper<>(TestQuestion.class));
     }
