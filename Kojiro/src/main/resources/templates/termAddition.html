@@ -16,7 +16,7 @@
     </div>
     <div class="form-body">
         <p class="error">[[${errorsyori}]]</p>
-        <form action="/termAddition" method="post" th:object="${termaddition}">
+        <form action="/termAddition" method="post" th:object="${termaddition}" enctype="multipart/form-data">
             <fieldset class="label-130">
                 <div>
                     <label class="required">用語名:</label>
@@ -42,7 +42,6 @@
 <!--                        <option value="サンプル3">サンプル3</option>-->
 <!--                    </select>-->
 <!--                </div>-->
-            </fieldset>
             <div class="btns">
                 <button type="submit"  class="basic-btn">追加</button>
                 <!-- "openModal()" -->
@@ -55,10 +54,12 @@
 <!--                     <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>-->
 <!--                 </div>-->
 <!--             </div>-->
-<!--            <div id="fadeLayer"></div>-->
-        </form>
-    </div>
-</div>
 
+        </div>
+            </fieldset>
+        </form>
+</div>
+</div>
+<div id="fadeLayer"></div>
 </body>
 </html>

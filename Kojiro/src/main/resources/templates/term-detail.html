@@ -25,7 +25,7 @@
         <div class="img_block">
             <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
-        <form method="post" action="#" th:action="@{/user-detail}" th:object="${detail}">
+        <form method="post" action="#" th:action="@{/term-detail}" th:object="${detail}">
             <input type="hidden" th:field="*{id}" value="${detail.id}" />
             <fieldset class="label-130 product_block">
                 <div>
@@ -53,7 +53,7 @@
                     <!-- openModal -->
                     <input type="button" onclick="openModal()" value="削除" class="delete-btn">
                     <input type="button" th:onclick="|location.href='/term-update/${detail.id}'|" value="更新" class="kousin-btn">
-                    <input type="button" onclick="location.href='./TermManagement.html'" value="戻る" class="cancel-btn">
+                    <input type="button" onclick="location.href='/term'" value="戻る" class="cancel-btn">
                 </div>
                  <div id="modal">
                   <p class="modal-message">削除しますか？</p>
