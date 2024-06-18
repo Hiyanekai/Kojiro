@@ -16,7 +16,15 @@
     </div>
     <div class="question">
         <h1>問題</h1>
-        <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+        <th:block th:if="${point2!=-1}">
+            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
+            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
+            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
+            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
+        </th:block>
+        <th:block th:if="${point2==-1}">
+            <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+        </th:block>
         <div class="q-img">
             <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>

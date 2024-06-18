@@ -42,6 +42,7 @@ public class QuizController {
     @GetMapping("/quiz/{gId}")
     public String quiz(@PathVariable("gId") int gId, Model model){
 //        model.addAttribute("gId", gId);
+//        System.out.println(pgQuestionsForQuizService.findById(345).sentence().split("\r")[0]);
         if(index == 0) {
             if(gId == 99){
                 quizzes = pgQuestionsForQuizService.findRandom();
@@ -52,9 +53,11 @@ public class QuizController {
             }
             else {
                 quizzes = pgQuestionsForQuizService.findByGenre(gId);
+//                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
         if(quizzes == null) return "redirect:../quiz-select";
+        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
         model.addAttribute("genres", genresService.findAll());
         model.addAttribute("qNum", index+1);
         model.addAttribute("questions", quizzes);

@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <label class="required">問題名</label>
-                    <input type="text" name="description"  class="base-text" th:field="${add.sentence}">
+                    <textarea name="description"  class="base-text" th:field="${add.sentence}"></textarea>
                     <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
                 </div>
                 <div>
@@ -50,7 +50,7 @@
                 </div>
                 <div>
                     <label class="required">解説:</label>
-                    <input type="text" name="description"  class="base-text" th:field="${add.explain}">
+                    <textarea name="description"  class="base-text" th:field="${add.explain}"></textarea>
                     <span class="error" th:each="error: ${#fields.errors('explain')}">[[ ${error} ]]</span>
                 </div>
                 <div>

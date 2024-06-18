@@ -19,4 +19,8 @@ public class PgQuestionsForQuizService {
     public List<Questions> findRandom(){
         return pgQuestionsForQuizDao.findRandom();
     }
+
+    public Questions findById(int id){
+        return pgQuestionsForQuizDao.findById(id);
+    }
 }
