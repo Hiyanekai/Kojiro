@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用語集追加</title>
+    <link href="css/termManagement.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="termaddition">
+    <h1>用語集管理</h1>
+    <div class="discription">
+        <p>
+            （<span class="required"></span>は必須です）
+        </p>
+    </div>
+    <div class="form-body">
+        <p class="error">[[${errorsyori}]]</p>
+        <form action="/termAddition" method="post" th:object="${termaddition}">
+            <fieldset class="label-130">
+                <div>
+                    <label class="required">用語名:</label>
+                    <input type="text" name="term_name" class="base-text"  placeholder="用語名"  th:field="*{term_name}">
+                    <span class="error" th:each="error : ${#fields.errors('term_name')}"> [[ ${error} ]]</span>
+
+                </div>
+                <div>
+                    <label class="required">画像:</label>
+                    <input type="file" name="file"  placeholder="画像を選択" th:field="*{file}">
+                    <span class="error"  th:each="error : ${#fields.errors('file')}"> [[ ${error} ]]</span>
+                </div>
+                <div>
+                    <label class="required">解説:</label>
+                    <textarea name="explain" class="base-text" placeholder="入力フォーム" th:field="*{explain}"></textarea>
+                    <span class="error"  th:each="error : ${#fields.errors('explain')}"> [[ ${error} ]]</span>
+                </div>
+<!--                <div>-->
+<!--                    <label  class="required">単元:</label>-->
+<!--                    <select name="subject">-->
+<!--                        <option value="サンプル1">サンプル1</option>-->
+<!--                        <option value="サンプル2">サンプル2</option>-->
+<!--                        <option value="サンプル3">サンプル3</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+            </fieldset>
+            <div class="btns">
+                <button type="submit"  class="basic-btn">追加</button>
+                <!-- "openModal()" -->
+                <input type="button" onclick="location.href='/terms'" value="戻る" class="cancel-btn">
+<!--            </div>-->
+<!--            <div id="modal">-->
+<!--                 <p class="modal-message">登録しますか？</p>-->
+<!--                 <div class="btns">-->
+<!--                     <button type="submit" id="register-btn" class="basic-btn">登録</button>-->
+<!--                     <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--            <div id="fadeLayer"></div>-->
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

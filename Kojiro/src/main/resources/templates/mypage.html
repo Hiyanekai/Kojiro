@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/mypage.css">
+</head>
+<body>
+<h1 class="user_Infomation">
+    ユーザー情報
+</h1>
+<div class="box">
+    <form method="get" th:each="user : ${user}">
+
+    <div class="lineup">
+        <h3 class="userid">
+            ユーザーID
+        </h3>
+        <input type="text" class="userid" th:value="${user.user_id}" >
+    </div>
+    <br>
+    <div class="lineup">
+        <h3 class="userdate">
+            登録日
+        </h3>
+        <input type="text" class="userdate" th:value="${userDate}" >
+    </div>
+    </form>
+</div>
+
+<p>
+    <button class="request">ユーザー情報修正依頼</button>
+</p>
+</body>
+</html>
