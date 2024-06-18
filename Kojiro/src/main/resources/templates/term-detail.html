@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>用語管理詳細</title>
-    <link th:href="@{/css/management.css}" rel="stylesheet">
+    <link th:href="@{/css/user-management.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -23,12 +23,11 @@
 <div class="update">
     <div class="form-body">
         <div class="img_block">
-            <img src="images/マッキー.png" class="product-img">画像<br>
+            <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
         <form method="post" action="#" th:action="@{/user-detail}" th:object="${detail}">
             <input type="hidden" th:field="*{id}" value="${detail.id}" />
             <fieldset class="label-130 product_block">
-                <p class="error">エラーメッセージ</p>
                 <div>
                     <label>ID</label>
                     <input type="text"  th:field="*{id}" value="${detail.id}" readonly class="base-text">
@@ -43,23 +42,23 @@
 [[ ${detail.explain} ]]
             </textarea>
                 </div>
-<!--                <div>-->
-<!--                    <label>単元</label>-->
-<!--                    <input type="text" name="categoryId" value="進路変更" readonly class="base-text">-->
-<!--                </div>-->
+                <div>
+                    <label>単元</label>
+                    <input type="text"  th:value="${genres.genre_name}" readonly class="base-text">
+                </div>
 
             </fieldset>
             <div>
                 <div class="btns">
                     <!-- openModal -->
-                    <input type="button" onclick="location.href='./TermManagement.html'" value="削除" class="delete-btn">
-                    <input type="button" onclick="location.href='./TermUpdate.html'" value="更新" class="kousin-btn">
+                    <input type="button" onclick="openModal()" value="削除" class="delete-btn">
+                    <input type="button" th:onclick="|location.href='/term-update/${detail.id}'|" value="更新" class="kousin-btn">
                     <input type="button" onclick="location.href='./TermManagement.html'" value="戻る" class="cancel-btn">
                 </div>
                  <div id="modal">
                   <p class="modal-message">削除しますか？</p>
                   <div class="btns">
-                    <button type="button" id="delete-btn" class="basic-btn">削除</button>
+                    <button type="submit" id="delete-btn" class="basic-btn">削除</button>
                     <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
                   </div>
             </div>
@@ -68,7 +67,7 @@
 </div>
 </div>
 <div id="fadeLayer"></div>
- <script src="/js/user-management.js"></script>
+ <script src="/js/users-management.js"></script>
 <script>
   'use strict'
   document.getElementById('delete-btn').addEventListener('click', () => {
