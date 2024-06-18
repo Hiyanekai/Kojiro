@@ -13,15 +13,11 @@ public interface TermManagementDetailDao {
 
     TermManagementDetail findById(int id);
     int delete(int id);
-    List<Genres> findAll();
-    Genres findByGenres(int id);
+//    List<Genres> findAll();
+//    Genres findByGenres(int id);
     int update (TermManagementDetail change);
     int updates (TermManagementNotFile changes);
     TermManagementDetail findByTermId(String term_name);
     TermManagementDetail findByFile(String file);
 
-//    List<TermManagementDetail> findAll();
-//    List<TermManagementDetail> findByTerm(String key);
-//    int termAddition(TermAddition user);
-//    TermAddition findtermAddition(String term_name);
 }

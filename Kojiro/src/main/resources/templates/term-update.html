@@ -38,14 +38,14 @@
             [[ ${error} ]]
                     </span>
                 </div>
-                <div>
-                    <label  class="required">単元:</label>
-                    <select name="genre_id" th:field="*{genre_id}" class="base-text">
-                        <option th:each="genres : ${genresList}"
-                                th:value="${genres.id}" th:text="${genres.genre_name}"  th:selected="${update.genre_id == genres.id}">
-                        </option>
-                    </select>
-                </div>
+<!--                <div>-->
+<!--                    <label  class="required">単元:</label>-->
+<!--                    <select name="genre_id" th:field="*{genre_id}" class="base-text">-->
+<!--                        <option th:each="genres : ${genresList}"-->
+<!--                                th:value="${genres.id}" th:text="${genres.genre_name}"  th:selected="${update.genre_id == genres.id}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
             </fieldset>
             <div class="btns">
                 <input type="button" onclick="openModal()" value="更新" class="kousin-btn">

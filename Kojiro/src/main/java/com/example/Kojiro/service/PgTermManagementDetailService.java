@@ -27,16 +27,16 @@ public class PgTermManagementDetailService implements TermManagementDetailServic
         return PgTermManagementDao.delete(id);
     }
 
-    @Override
-    public List<Genres> findAll() {
-        return PgTermManagementDao.findAll();
-    }
+//    @Override
+//    public List<Genres> findAll() {
+//        return PgTermManagementDao.findAll();
+//    }
 
-    @Override
-    public Genres findByGenres(int id) {
-        var genres = PgTermManagementDao.findByGenres(id);
-        return genres;
-    }
+//    @Override
+//    public Genres findByGenres(int id) {
+//        var genres = PgTermManagementDao.findByGenres(id);
+//        return genres;
+//    }
 
     @Override
     public int update(TermManagementDetail change) {
@@ -58,30 +58,5 @@ public class PgTermManagementDetailService implements TermManagementDetailServic
     public TermManagementDetail findByFile(String file) {
         var name = PgTermManagementDao.findByFile(file);
         return name;
-//        public class PgTermManagementService implements TermManagementDetailService {
-//
-//            @Autowired
-//            private TermManagementDetailDao termManagementDao;
-//
-//            @Override
-//            public List<TermManagementDetail> findAll() {
-//                return termManagementDao.findAll();
-//            }
-//
-//            @Override
-//            public List<TermManagementDetail> findByTerm(String key) {
-//                return termManagementDao.findByTerm(key);
-//            }
-//
-//            @Override
-//            public int termAddition(TermAddition user) {
-//                return termManagementDao.termAddition(user);
-//            }
-//
-//            @Override
-//            public TermAddition findtermAddition(String term_name) {
-//                return termManagementDao.findtermAddition(term_name);
-//            }
-//        }
     }
 }
