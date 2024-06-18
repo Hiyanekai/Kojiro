@@ -12,42 +12,6 @@
     <div class="form-body">
         <form action="" method="post" th:object="${q_management}">
             <fieldset class="label-130">
-<!--                <div>-->
-<!--                    <label class="required">問題名:</label>-->
-<!--                    <textarea name="description"  class="base-text">-->
-<!--                    </textarea>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label class="required">解答:</label>-->
-<!--                    <select name="anser">-->
-<!--                        <option value="anser1">〇</option>-->
-<!--                        <option value="anser2">×</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label class="required">解説:</label>-->
-<!--                    <textarea name="description"  class="base-text">-->
-<!--                    </textarea>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label  class="required">単元:</label>-->
-<!--                    <select name="subject">-->
-<!--                        <option value="サンプル1">サンプル1</option>-->
-<!--                        <option value="サンプル2">サンプル2</option>-->
-<!--                        <option value="サンプル3">サンプル3</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label>画像:</label>-->
-<!--                    <input type="file" name="file">-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label class="required">点数:</label>-->
-<!--                    <select name="points">-->
-<!--                        <option value="points1">1点</option>-->
-<!--                        <option value="points2">2点</option>-->
-<!--                    </select>-->
-<!--                </div>-->
                 <div>
                     <label class="required">単元:</label> <select name="subject" th:field="${q_management.genre}">
                     <option value="1">運転者の心得</option>
@@ -64,10 +28,25 @@
                     <option value="12">行き違い</option>
                     <option value="13">運転免許制度、交通反則通告制度</option>
                     <option value="14">オートマチック車などの運転</option>
+                    <option value="15">死角と運転</option>
+                    <option value="16">適性検査結果に基づく行動分析</option>
+                    <option value="17">人間の能力と運転</option>
+                    <option value="18">車に働く自然の力と運転</option>
+                    <option value="19">悪条件下での運転等</option>
+                    <option value="20">特徴的な事故と自己の悲惨さ</option>
+                    <option value="21">自動車の保守管理</option>
+                    <option value="22">駐車と停車</option>
+                    <option value="23">乗車と積載</option>
+                    <option value="24">けん引</option>
+                    <option value="25">交通事故の時</option>
+                    <option value="26">自動車の所有者などの心得と保険制度</option>
+                    <option value="27">経路の設計</option>
+                    <option value="28">高速道路での運転</option>
+                    <option value="29">二人乗り運手に関する知識</option>
                 </select>
                 </div>
                 <div>
-                    <label class="required">問題名</label>
+                    <label class="required">問題</label>
                     <input type="text" name="description"  class="base-text" th:field="${q_management.sentence}">
                     <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
                 </div>
@@ -96,17 +75,10 @@
                 </div>
             </fieldset>
             <div class="btns">
-<!--                <input type="button" onclick="location.href='/quiz-management'" value="更新" class="kousin-btn">-->
                 <input type="submit" value="更新" class="kousin-btn">
                 <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
             </div>
-            <!-- <div id="modal">
-            <p class="modal-message">登録しますか？</p>
-            <div class="btns">
-                <button type="submit" id="register-btn" class="basic-btn">登録</button>
-                <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
-            </div>
-            </div>-->
+
         </form>
     </div>
 </div>

@@ -199,7 +199,7 @@ hr {
     height: auto;
     border: none;
     border-radius: 5px;
-    background-color: #008000;
+    background-color: #66ff99;
     padding: auto;
     line-height: 2;
     padding: 5px 10px 5px 10px;
@@ -427,7 +427,7 @@ h1 a {
 }
 
 .update .form-body form {
-  width: 600px;
+  width: 1000px;
 }
 
 .update .product-img {
