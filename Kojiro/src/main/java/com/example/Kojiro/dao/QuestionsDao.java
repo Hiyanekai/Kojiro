@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface QuestionsDao {
     List<TestQuestion> findTest();
+    List<TestQuestion> findTestP2();
 
-    List<TestResults> findTestResult();
+    List<TestResults> findTestResult(int userId);
 
     Questions findQuestion(int id);
 }

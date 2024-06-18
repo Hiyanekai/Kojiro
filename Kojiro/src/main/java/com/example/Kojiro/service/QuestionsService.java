@@ -9,7 +9,9 @@ import java.util.List;
 public interface QuestionsService {
     List<TestQuestion> findTest();
 
-    List<TestResults> findTestResult();
+    List<TestQuestion> findTestP2();
+
+    List<TestResults> findTestResult(int userId);
 
     Questions findQuestion(int id);
 }

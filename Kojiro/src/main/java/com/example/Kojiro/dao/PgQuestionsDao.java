@@ -23,9 +23,17 @@ public class PgQuestionsDao implements QuestionsDao{
     }
 
     @Override
-    public List<TestResults> findTestResult() {
-        return jdbcTemplate.query("SELECT * from test_result",
-                new DataClassRowMapper<>(TestResults.class));
+    public List<TestQuestion> findTestP2() {
+        return jdbcTemplate.query("SELECT q.id,g.genre_name AS genre,q.sentence,q.answer,q.explain,q.file,q.score FROM questions AS q " +
+                        "JOIN genres AS g ON q.genre_id = g.id WHERE score = 2 ORDER BY random() LIMIT 5",
+                new DataClassRowMapper<>(TestQuestion.class));
+    }
+
+    @Override
+    public List<TestResults> findTestResult(int userId) {
+        var param = new MapSqlParameterSource();
+        param.addValue("user_id", userId);
+        return jdbcTemplate.query("SELECT * FROM test_results WHERE user_id = :user_id", param, new DataClassRowMapper<>(TestResults.class));
     }
 
     @Override

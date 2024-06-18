@@ -21,8 +21,13 @@ public class PgQuestionsService implements QuestionsService{
     }
 
     @Override
-    public List<TestResults> findTestResult(){
-        return iQuestionDao.findTestResult();
+    public List<TestQuestion> findTestP2(){
+        return iQuestionDao.findTestP2();
+    }
+
+    @Override
+    public List<TestResults> findTestResult(int userId){
+        return iQuestionDao.findTestResult(userId);
     }
 
     @Override
