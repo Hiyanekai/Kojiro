@@ -27,12 +27,12 @@ public class TermManagementController {
 //        return "termmanagement";
 //    }
 
-    @GetMapping("/terms")
+    @GetMapping("/term")
     public String TermManagement2(@RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
         if (keyword.isEmpty()) {
-            model.addAttribute("termslist", pgTermManagementService.findAll());
+            model.addAttribute("termlist", pgTermManagementService.findAll());
         } else {
-            model.addAttribute("termslist", pgTermManagementService.findByTerm(keyword));
+            model.addAttribute("termlist", pgTermManagementService.findByTerm(keyword));
         }
         return "termmanagement";
     }
