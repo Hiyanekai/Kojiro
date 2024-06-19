@@ -449,10 +449,10 @@ h1 a {
   margin-right: auto;
 }
 
-.btn-area .btn {
-  display: inline-block;
-}
-
 .option2{
     display: none;
+}
+
+.btn-area .btn {
+  display: inline-block;
 }
