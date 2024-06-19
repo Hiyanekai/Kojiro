@@ -48,7 +48,7 @@ public class TermManagementController {
         if (bindingResult.hasErrors()) {
             return "termAddition";
         }else if (result2 == null ){
-            pgTermManagementService.termAddition(new TermAddition(termForm.getTerm_name(), termForm.getExplain(), termForm.getFile()));
+            pgTermManagementService.termAddition(new TermAddition(termForm.getTerm_name(), termForm.getExplain(), termForm.getFile().getOriginalFilename()));
             return "redirect:/terms";
         }else {
 
