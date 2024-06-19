@@ -31,7 +31,6 @@ public class TestController {
         model.addAttribute("testData",testData);
 
         List<TestQuestion> testDataP2 = pgQuestionsService.findTestP2();
-        testDataP2.forEach(System.out::println);
         model.addAttribute("testDataP2",testDataP2);
 
         //テスト回数を判定
@@ -103,6 +102,8 @@ public class TestController {
                 p2.add(value);
             }
         });
+
+        //2点問題の回答を成形（3つの回答を1つの文字列として）
         List<String> userSelectP2 = new ArrayList<>();
         int fu = 0;
         String selectData = "";
@@ -131,10 +132,11 @@ public class TestController {
 
 
         int score = 0;//合計得点計算用の変数
-        List<Questions> testData = new ArrayList<>();//回答表示用のリスト型配列を作成
-        List<QuestionsP2> testDataP2 = new ArrayList<>();//回答表示用のリスト型配列を作成
-        List<Misses> miss = new ArrayList<>();
+        List<Questions> testData = new ArrayList<>();//回答用のリスト型配列を作成
+        List<QuestionsP2> testDataP2 = new ArrayList<>();//回答用のリスト型配列を作成（2点問題）
+        List<Misses> miss = new ArrayList<>();//ミスした問題を格納するリスト型配列を作成
         List<TestResults> results = new ArrayList<>();
+        List<TestResults> resultsP2 = new ArrayList<>();
 
         for(TestInput test_input : test) {//回答用ループ
             int flag = 0;
@@ -142,7 +144,7 @@ public class TestController {
             for (int q : flagsQ){
                 if (q == test_input.q_id()){
                     flag = 1;
-//                  Flags flags = new Flags(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+//                  Flags flags = new Flags(0,test_input.q_id(),0,sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
 //                  service.insertFlags(flags);//flagクラスに問題を追加
                 }
             }
@@ -154,7 +156,7 @@ public class TestController {
                 results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,15,0,flag));//回答ページ送信用リストに追加
                 Misses misses = new Misses(0,test_input.q_id(),0,15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
-                pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
+                //pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
             testData.add(question);//回答表示用のリストに採点した問題を格納
         }
@@ -165,19 +167,19 @@ public class TestController {
             for (int q : flagsQ_P2){
                 if (q == test_input.q_id()){
                     flag = 1;
-//                  Flags flags = new Flags(0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+//                  Flags flags = new Flags(0,0,test_input.q_id(),sessionUser.user_id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
 //                  service.insertFlags(flags);//flagクラスに問題を追加
                 }
             }
             if (question.answer().equals(test_input.user_select())){//答えを比較して採点
-                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,2,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,2,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
                 score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
             }
             else {//回答が間違えていた場合
-                results.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,0,flag));//回答ページ送信用リストに追加
+                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,0,flag));//回答ページ送信用リストに追加
                 Misses misses = new Misses(0,0,test_input.q_id(),15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
-                pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
+                //pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
             testDataP2.add(question);//回答表示用のリストに採点した問題を格納
         }
@@ -188,7 +190,7 @@ public class TestController {
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
 
-        Scores testScore = new Scores(0, "15", score, str1);//受験日、ユーザーID、点数等の受験結果を保持する変数
+        Scores testScore = new Scores(0, 15, score, str1);//受験日、ユーザーID、点数等の受験結果を保持する変数
         //service.insertScore(testScore);//受験結果をScoreテーブルに追加
         //service.insertTest_result(result);
 
@@ -198,10 +200,12 @@ public class TestController {
         results.forEach(System.out::println);
         System.out.println();
         miss.forEach(System.out::println);
-
-//        model.addAttribute("testData",results); //回答ページ送信用リストをaddAttribute
-//        model.addAttribute("testDataP2",results); //回答ページ送信用リストをaddAttribute
+        model.addAttribute("times",times);//HTMLに受け渡し
+        model.addAttribute("result",results);
+        model.addAttribute("resultP2",resultsP2);
+        model.addAttribute("testData",testData); //回答ページ送信用リストをaddAttribute
+        model.addAttribute("testDataP2",testDataP2); //回答ページ送信用リストをaddAttribute
 //        model.addAttribute("testScore",testScore);　//採点結果表示用の変数addAttribute
-        return "menu";
+        return "result";
     }
 }
