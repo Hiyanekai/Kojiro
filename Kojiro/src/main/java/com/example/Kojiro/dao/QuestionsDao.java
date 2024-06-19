@@ -1,9 +1,6 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.entity.Questions;
-import com.example.Kojiro.entity.TestQuestion;
-import com.example.Kojiro.entity.QuestionsP2;
-import com.example.Kojiro.entity.TestResults;
+import com.example.Kojiro.entity.*;
 
 import java.util.List;
 
@@ -16,5 +13,7 @@ public interface QuestionsDao {
     Questions findQuestion(int id);
 
     QuestionsP2 findQuestionP2(int id);
+
+    int insertMiss(Misses miss);
 
 }

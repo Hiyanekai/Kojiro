@@ -34,7 +34,7 @@
                         <div class="question" th:id="'question9' + ${loopCnt.count}">
                             <span class="q_No">問題9[[${loopCnt.count}]]</span><label class="toggle-button"><input type="checkbox" th:name="'P2flag' + ${loopCnt.count}" th:value="${testDataP2.id}"></label>
                             <div class="q-img" >
-                                <img th:src="'../images/' + ${testData.file}" th:if="${testDataP2.file} != null">
+                                <img th:src="'../images/' + ${testDataP2.file}" th:if="${testDataP2.file} != null">
                             </div>
                             <p class="q-text">
                                 [[${testDataP2.sentence}]]

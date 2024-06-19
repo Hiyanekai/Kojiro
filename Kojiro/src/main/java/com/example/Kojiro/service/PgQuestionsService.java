@@ -2,10 +2,7 @@ package com.example.Kojiro.service;
 
 import com.example.Kojiro.ProductNotFoundException;
 import com.example.Kojiro.dao.PgQuestionsDao;
-import com.example.Kojiro.entity.Questions;
-import com.example.Kojiro.entity.TestQuestion;
-import com.example.Kojiro.entity.QuestionsP2;
-import com.example.Kojiro.entity.TestResults;
+import com.example.Kojiro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +44,11 @@ public class PgQuestionsService implements QuestionsService{
         else {
             return iQuestionDao.findQuestionP2(id);
         }
+    }
+
+    @Override
+    public int insertMiss(Misses miss){
+        return iQuestionDao.insertMiss(miss);
     }
 
 }
