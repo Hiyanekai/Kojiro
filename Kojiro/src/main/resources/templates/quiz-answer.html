@@ -11,7 +11,7 @@
             <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
-            <h3>[[${qNum}]]/10問</h3>
+            <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
         </div>
     </div>
     <div id="answer"></div>
@@ -59,6 +59,7 @@
     <script th:inline="javascript">
         const nextBtn = document.getElementById("next");
         const qNum = /*[[${qNum}]]*/"qNum";
+        const qMax = /*[[${questions.size()}]]*/"questions.size()";
 
         const ans = /*[[${ans}]]*/"ans";
         const correct = /*[[${correct}]]*/"correct";

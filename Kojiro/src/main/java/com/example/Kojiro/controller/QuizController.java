@@ -2,8 +2,10 @@ package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.Questions;
 import com.example.Kojiro.entity.Questions2points;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.service.GenresService;
 import com.example.Kojiro.service.PgQuestionsForQuizService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,9 @@ public class QuizController {
     @Autowired
     private PgQuestionsForQuizService pgQuestionsForQuizService;
 
+    @Autowired
+    private HttpSession session;
+
     // 10問の問題を格納するリスト
     List<Questions2points> quizzes;
     // 問題ページの問題数標示と問題リストの要素数として使用。
@@ -50,10 +55,11 @@ public class QuizController {
             if(gId == 99){
                 quizzes = pgQuestionsForQuizService.findRandom();
             } else if(gId == 100) {
-                quizzes = pgQuestionsForQuizService.findByGenre(1);
+                var user = (Users)session.getAttribute("users");
+                quizzes = pgQuestionsForQuizService.findAllForFlag(user.id());
+                if(quizzes.isEmpty()) return "redirect:../menu";
             } else if(gId == 30){
                 quizzes = pgQuestionsForQuizService.quizGetBy2points(gId);
-                System.out.println(quizzes.get(0));
             }
             else if(gId > 30){
                 return "redirect:../quiz-select";
@@ -63,11 +69,12 @@ public class QuizController {
 //                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
-        if(quizzes != null) {
-            if (quizzes == null) return "redirect:../quiz-select";
+        if(!quizzes.isEmpty()) {
+//            if (quizzes.isEmpty()) return "redirect:../quiz-select";
             model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
             model.addAttribute("genres", genresService.findAll());
             model.addAttribute("qNum", index + 1);
+//            System.out.println(quizzes.size());
             model.addAttribute("questions", quizzes);
             // データベースにファイルパスがない場合、画像を表示しない
             if (quizzes.get(index).file() != null && !quizzes.get(index).file().equals("")) {
@@ -81,13 +88,13 @@ public class QuizController {
                 }
             }
         }
-        return gId==30? "quiz-2points" : "quiz";
+        return quizzes.get(index).genre_id()==30? "quiz-2points" : "quiz";
     }
 
     @GetMapping("/quiz/{gId}/next")
     public String indexAdd(@PathVariable("gId") int gId, Model model){
         index++;
-        if(index>9) index=0;
+        if(index>quizzes.size()-1) index=0;
         return "redirect:/quiz/" + gId;
     }
 
@@ -114,11 +121,29 @@ public class QuizController {
                 e.printStackTrace();
             }
         }
-        return "quiz-answer";
+//        return "quiz-answer";
+        return gId==100? "quiz-flag" : "quiz-answer";
     }
 
-    @GetMapping("quiz-flag")
-    public String quizFlag(){
-        return "quiz-flag";
+//    @GetMapping("/quiz-flag/{gId}/{ans}")
+//    public String quizFlag(@PathVariable("gId") int gId,
+//                           @PathVariable("ans") String ans, Model model){
+//        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
+////        correct = quizzes.get(index).answer().replaceAll("1", "×");
+//        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
+//        model.addAttribute("genres", genresService.findAll());
+//        model.addAttribute("qNum", index+1);
+//        model.addAttribute("correct", correct);
+//        model.addAttribute("questions", quizzes);
+//        return "quiz-flag";
+//    }
+
+    @GetMapping("/delete-flag/{id}/{gId}")
+    public String deleteFlag(@PathVariable("id") int id,
+                             @PathVariable("gId") int gId, Model model){
+        var result = pgQuestionsForQuizService.delFlagQuestion(id, gId);
+        System.out.println(result);
+        return "redirect:/quiz/"+100+"/next";
+
     }
 }
