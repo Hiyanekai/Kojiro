@@ -28,4 +28,12 @@ public class PgTermDao implements TermDao {
         param.addValue("keyword","%"+term+"%");
         return jdbcTemplate.query("SELECT terms.id ,terms.term_name ,terms.explain,terms.file FROM terms WHERE terms.term_name like :keyword", param, new DataClassRowMapper<>(Term.class));
     }
+
+    @Override
+    public Term findById(int id) {
+        var param = new MapSqlParameterSource();
+        param.addValue("id", id);
+        var list = jdbcTemplate.query("SELECT terms.id ,terms.term_name ,terms.explain,terms.file FROM terms WHERE id=:id", param, new DataClassRowMapper<>(Term.class));
+        return list.isEmpty() ? null : list.get(0);
+    }
 }

@@ -7,7 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 
 @Controller
 public class TermController {
@@ -29,5 +35,24 @@ public class TermController {
             model.addAttribute("termlist", termService.findByTerm(keyword));
         }
         return "term";
+    }
+
+    @GetMapping("term-detail/{id}")//id指定で詳細のページを出す
+    public String detail(@PathVariable("id") int id, Model model) {
+        System.out.println(id);
+        System.out.println(termService.findById(id));
+        var q = termService.findById(id);
+        model.addAttribute("term",q);
+        if(q.file()!=null && !q.file().equals("")) {
+            File img = new File("./Kojiro/src/main/resources/static/images/" + q.file());
+            try {
+                byte[] byteImg = Files.readAllBytes(img.toPath());
+                String base64Data = Base64.getEncoder().encodeToString(byteImg);
+                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "term-explain";
     }
 }
