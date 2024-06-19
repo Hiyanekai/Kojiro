@@ -13,15 +13,15 @@ public class PgQuestionsForQuizService {
     @Autowired
     private PgQuestionsForQuizDao pgQuestionsForQuizDao;
 
-    public List<Questions> findByGenre(int genreId){
+    public List<Questions2points> findByGenre(int genreId){
         return pgQuestionsForQuizDao.findByGenre(genreId);
     }
 
-    public List<Questions> findRandom(){
+    public List<Questions2points> findRandom(){
         return pgQuestionsForQuizDao.findRandom();
     }
 
-    public Questions findById(int id){
+    public Questions2points findById(int id){
         return pgQuestionsForQuizDao.findById(id);
     }
 
