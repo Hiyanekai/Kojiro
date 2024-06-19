@@ -12,11 +12,10 @@
 <div class="update">
   <div class="form-body">
     <div class="img_block">
-      <img th:src="${q_management.file}" class="product-img"><br>
+      <img th:if="${base64Data}!=null" th:src="${base64Data}"><br>
     </div>
     <form action="delete" method="post">
       <fieldset class="label-130 product_block">
-        <p class="error">エラーメッセージ</p>
         <div>
           <label>ID</label>
           <input type="text" name="productId" readonly class="base-text" th:value="${q_management.id}">
@@ -45,23 +44,10 @@
           <input type="button" th:onclick="|location.href='/quiz-update/__${id}__'|" value="更新" class="kousin-btn">
           <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
         </div>
-        <!-- <div id="modal">
-          <p class="modal-message">削除しますか？</p>
-          <div class="btns">
-            <button type="button" id="delete-btn" class="basic-btn">削除</button>
-            <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
-          </div> -->
       </div>
   </form>
 </div>
 </div>
 <div id="fadeLayer"></div>
-<!-- <script src="./js/commons.js"></script>
-<script>
-  'use strict'
-  document.getElementById('delete-btn').addEventListener('click', () => {
-    location.href = './menu.html'
-  })
-</script> -->
 </body>
 </html>
