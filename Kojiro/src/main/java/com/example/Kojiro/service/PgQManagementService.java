@@ -1,6 +1,7 @@
 package com.example.Kojiro.service;
 
 import com.example.Kojiro.dao.QManagementDao;
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class PgQManagementService implements QManagementService{
     @Override
     public int insert(TestQuestion question) {
         return qManagementDao.insert(question);
+    }
+
+    @Override
+    public int insert(Questions2points questions2points) {
+        return qManagementDao.insert(questions2points);
     }
 }

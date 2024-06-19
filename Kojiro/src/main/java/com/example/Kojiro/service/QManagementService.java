@@ -1,5 +1,6 @@
 package com.example.Kojiro.service;
 
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
 
@@ -14,4 +15,5 @@ public  interface QManagementService{
     public int update(TestQuestion question);
     public int delete(int id);
     public int insert(TestQuestion question);
+    int insert(Questions2points questions2points);
 }

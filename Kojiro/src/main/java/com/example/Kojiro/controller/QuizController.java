@@ -1,6 +1,7 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.service.GenresService;
 import com.example.Kojiro.service.PgQuestionsForQuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,19 +43,22 @@ public class QuizController {
     @GetMapping("/quiz/{gId}")
     public String quiz(@PathVariable("gId") int gId, Model model){
 //        model.addAttribute("gId", gId);
+//        System.out.println(pgQuestionsForQuizService.findById(345).sentence().split("\r")[0]);
         if(index == 0) {
             if(gId == 99){
                 quizzes = pgQuestionsForQuizService.findRandom();
             } else if(gId == 100) {
                 quizzes = pgQuestionsForQuizService.findByGenre(1);
-            } else if(gId > 29){
+            } else if(gId > 30){
                 return "redirect:../quiz-select";
             }
             else {
                 quizzes = pgQuestionsForQuizService.findByGenre(gId);
+//                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
         if(quizzes == null) return "redirect:../quiz-select";
+        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
         model.addAttribute("genres", genresService.findAll());
         model.addAttribute("qNum", index+1);
         model.addAttribute("questions", quizzes);
