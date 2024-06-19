@@ -1,5 +1,6 @@
 package com.example.Kojiro.dao;
 
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,17 @@ public class PgQManagementDao implements QManagementDao{
         param.addValue("file", question.file());
         param.addValue("score", question.score());
         return jdbcTemplate.update("INSERT INTO questions(genre_id,sentence,answer,explain,file,score) VALUES(:genre, :sentence, :answer, :explain, :file, :score)", param);
+    }
+
+    @Override
+    public int insert(Questions2points questions2points) {
+        var param = new MapSqlParameterSource();
+        param.addValue("genre",questions2points.genre_id());
+        param.addValue("sentence", questions2points.sentence());
+        param.addValue("answer", questions2points.answer());
+        param.addValue("explain", questions2points.explain());
+        param.addValue("file", questions2points.file());
+        param.addValue("score", questions2points.score());
+        return jdbcTemplate.update("INSERT INTO questions_2points(genre_id,sentence,answer,explain,file,score) VALUES(:genre, :sentence, :answer, :explain, :file, :score)", param);
     }
 }

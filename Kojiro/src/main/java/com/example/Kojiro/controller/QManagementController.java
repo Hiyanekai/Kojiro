@@ -2,6 +2,7 @@ package com.example.Kojiro.controller;
 
 //QManagementController = QuestionManagementController(問題管理) 長くてすみません
 
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.entity.TestQuestion;
 import com.example.Kojiro.entity.question;
 import com.example.Kojiro.form.QuizManagement;
@@ -91,21 +92,31 @@ public class QManagementController {
     @PostMapping("/quiz-add")
     public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
         System.out.println(add);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             System.out.println("バリデーション");
             return "quiz-add";
-        }else {
-            System.out.println("バリデーションなし");
-            var conProduct = new TestQuestion(0,add.getGenre(),add.getSentence(),add.getAnswer(),add.getExplain(),add.getFile(),add.getScore());
-            try{
-                var result1 = qManagementService.insert(conProduct);
-                System.out.println(conProduct);
-                successIndex=1;
+        } else {
+            try {
+                System.out.println("バリデーションなし");
+
+                if (add.getGenre().equals("30")) {
+                    var ansText = String.valueOf(add.getAnswer());
+                    if(ansText.length() == 1) ansText="00"+ansText;
+                    else if(ansText.length() == 2) ansText="0"+ansText;
+                    System.out.println("アンサー：" + ansText);
+                    var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
+                } else {
+                    var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
+//                    var result1 = qManagementService.insert(conProduct);
+                    System.out.println(conProduct);
+                }
+                successIndex = 1;
                 return "redirect:/quiz-management";
-            }catch (RuntimeException e){
+            } catch (RuntimeException e) {
                 System.out.println("重複しましたよ");
                 return "quiz-add";
             }
+
         }
     }
 }

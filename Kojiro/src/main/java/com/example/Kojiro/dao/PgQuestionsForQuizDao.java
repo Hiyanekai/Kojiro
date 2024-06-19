@@ -1,6 +1,7 @@
 package com.example.Kojiro.dao;
 
 import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.Questions2points;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,6 +20,13 @@ public class PgQuestionsForQuizDao {
         param.addValue("genre_id", genreId);
         return jdbcTemplate.query("SELECT * FROM questions WHERE genre_id = :genre_id ORDER BY random() LIMIT 10", param,
                 new DataClassRowMapper<>(Questions.class));
+    }
+
+    public List<Questions2points> quizGetBy2points(int genreId){
+        var param = new MapSqlParameterSource();
+        param.addValue("genre_id", genreId);
+        return jdbcTemplate.query("SELECT * FROM questions WHERE genre_id = :genre_id ORDER BY random() LIMIT 10", param,
+                new DataClassRowMapper<>(Questions2points.class));
     }
 
     public List<Questions> findRandom(){

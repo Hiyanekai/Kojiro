@@ -2,6 +2,7 @@ package com.example.Kojiro.service;
 
 import com.example.Kojiro.dao.PgQuestionsForQuizDao;
 import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.Questions2points;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,9 @@ public class PgQuestionsForQuizService {
 
     public Questions findById(int id){
         return pgQuestionsForQuizDao.findById(id);
+    }
+
+    public List<Questions2points> quizGetBy2points(int genreId){
+        return pgQuestionsForQuizDao.quizGetBy2points(genreId);
     }
 }
