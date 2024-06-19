@@ -31,3 +31,12 @@ function radio_func(data) {
     }
 }
 
+function radio_funcP2(data) {
+    let P2data = '9' + data;
+    console.log(P2data);
+    let element = document.getElementById(P2data); // IDに対応する要素を取得
+    if (element) {
+        element.style.backgroundColor = '#FFFF66'; // 背景色を変更
+    }
+}
+
