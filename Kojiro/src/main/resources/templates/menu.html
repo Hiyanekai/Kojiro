@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="/weakness" class="menu-link">
                             <div class="link-box">
                                 <img src="./images/バツ.png">
                                 <h3 class="img-label">あなたの<br>苦手分野</h3>
@@ -96,7 +96,7 @@
             </div>
         </li>
 
-        <!-- <li>
+         <li th:if="${session.users.role==1}">
             <div class="sub-menu">
                 <h1 class="img-label">管理者</h1>
                 <ul class="flex">
@@ -128,7 +128,7 @@
                     </li>
                 </ul>
             </div>
-        </li> -->
+        </li>
 
         <li>
             <div class="sub-menu">
@@ -143,7 +143,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKBGGI4wlmCOGXspAVj-orBJHZgLUpZvpgRRjj430z8euOWQ/viewform?usp=pp_url"
+                           target="_blank" rel="noreferrer noopener"
+                           class="menu-link">
                             <div class="link-box">
                                 <img src="./images/お問い合わせ.png">
                                 <h3 class="img-label">お問い合わせ<br></h3>
