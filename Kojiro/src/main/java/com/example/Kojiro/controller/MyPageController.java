@@ -3,6 +3,7 @@ package com.example.Kojiro.controller;
 import com.example.Kojiro.dao.MyPageDao;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.entity.Users;
+import com.example.Kojiro.entity.Weakness;
 import com.example.Kojiro.form.MypageForm;
 import com.example.Kojiro.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +36,15 @@ public class MyPageController {
         model.addAttribute("dataList",myPageService.findMe(user.id()));
 
         return "past-data";
+    }
+
+
+    @GetMapping("/weakness")
+    public String weakness(Model model){
+        var user = (Users)session.getAttribute("users");
+        model.addAttribute("missList",myPageService.WeaknessFindMe(user.id()));
+
+        return "weakness";
     }
 
 
