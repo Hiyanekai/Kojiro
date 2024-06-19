@@ -28,4 +28,12 @@ public class PgQuestionsForQuizService {
     public List<Questions2points> quizGetBy2points(int genreId){
         return pgQuestionsForQuizDao.quizGetBy2points(genreId);
     }
+
+    public List<Questions2points> findAllForFlag(int u_id){
+        return pgQuestionsForQuizDao.findAllForFlag(u_id);
+    }
+
+    public int delFlagQuestion(int id, int gId){
+        return pgQuestionsForQuizDao.delFlagQuestion(id, gId);
+    }
 }
