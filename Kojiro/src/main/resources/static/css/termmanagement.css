@@ -53,6 +53,7 @@ body {
   font-family: Miryo;
   width: 90%;
   margin: auto;
+  background-color: #dce3e7;
 }
 #app {
   text-align: center;
@@ -64,7 +65,7 @@ table {
   table-layout: fixed;
 }
 table th {
-  background:#68a9eb;
+  background:#949da7;
   font-weight: bold;
   color:#fff;
 }
@@ -73,10 +74,15 @@ table th,table td{
   border: none;
 }
 table tr:nth-child(odd){
-  background:#F7EFE3;
+  background:#ffffff;
 }
+
+td{
+background-color: #ffffff;
+}
+
 .detail_btn {
-  background-color:#004a94;
+  background-color:#9299a0;
   display: block;       /* リンクをブロックレベル化して表示 */
   padding: 25px 5px 25px 10px;
 }
@@ -91,7 +97,16 @@ a {
 .header {
   display: flex;
   justify-content: space-between;
+  margin: auto;
 }
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
+
 .user {
   display: flex;
   margin: 10px 200px 0 0;
@@ -216,6 +231,7 @@ hr {
 .search-container input[type="text"]{
   border: none;
   height: 2.0em;
+  background-color: #dce3e7;
 }
 .search-container input[type="text"]:focus {
   outline: 0;

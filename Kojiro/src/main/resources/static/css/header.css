@@ -31,9 +31,16 @@ header .gnav .menu li + li {
 
 .header{
     padding-left: 60px;
+    width: 200px;
+    height:60px;
 }
 
 .user{
     margin-right: auto;
     color: #000000;
+}
+
+.logout{
+    width:160px;
+    height:50px;
 }

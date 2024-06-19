@@ -3,18 +3,22 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>用語集管理</title>
+    <title>用語集</title>
     <link href="/css/term.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    <img src="/images/カエル.png" alt="蛙">
-    <h1>
-        用語集
-    </h1>
-    <img src="/images/ウサギ.png" alt="ウサギ">
-    <p>更新に成功</p>
+    <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+    </div>
+    <div class="title">
+        <img src="/images/カエル.png" alt="蛙">
+        <h1>
+            用語集
+        </h1>
+        <img src="/images/ウサギ.png" alt="ウサギ">
+    </div>
     <form method="get" action="#" class="search-form" >
         <div class="search-container">
             <input type="text" name="keyword" size="25" placeholder="キーワード検索">
