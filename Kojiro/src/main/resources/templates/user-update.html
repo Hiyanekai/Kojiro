@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ユーザー更新</title>
-  <link th:href="@{/css/management.css}" rel="stylesheet">
+  <link th:href="@{/css/user-management.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 
 <div class="update">
   <div class="form-body">
-    <form action="#" th:action="@{/update}" th:object="${update}" method="post">
+    <form action="#" th:action="@{/user-update}" th:object="${update}" method="post">
       <input type="hidden" th:field="*{id}" value="${update.id}" />
       <fieldset class="label-130 product_block">
         <p class="error" th:text="${errorMsg}"></p>

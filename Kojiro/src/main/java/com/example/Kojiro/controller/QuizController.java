@@ -1,6 +1,7 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.Questions;
+import com.example.Kojiro.entity.Questions2points;
 import com.example.Kojiro.service.GenresService;
 import com.example.Kojiro.service.PgQuestionsForQuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class QuizController {
                 quizzes = pgQuestionsForQuizService.findRandom();
             } else if(gId == 100) {
                 quizzes = pgQuestionsForQuizService.findByGenre(1);
-            } else if(gId > 29){
+            } else if(gId > 30){
                 return "redirect:../quiz-select";
             }
             else {

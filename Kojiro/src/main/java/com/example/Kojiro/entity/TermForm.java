@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class TermForm {
@@ -15,5 +16,5 @@ public class TermForm {
     @Length(min = 2,max = 500)
     public String explain;
 
-    public String file;
+    public MultipartFile file;
 }

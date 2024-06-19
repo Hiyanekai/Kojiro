@@ -1,7 +1,6 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.UserManagement;
-import com.example.Kojiro.service.PgUserManagementService;
 import com.example.Kojiro.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ public class UserManagementController {
     }
 
     @RequestMapping(value="/user-management", params="user_id")
-    public String menu(@RequestParam(value = "user_id", defaultValue = "") @PathVariable String user_id, Model model) {
+    public String userMenu(@RequestParam(value = "user_id", defaultValue = "") @PathVariable String user_id, Model model) {
         if (user_id != null && !user_id.trim().isEmpty()) {
             model.addAttribute("users", UserManagementService.search(user_id));
         } else {
@@ -33,27 +32,27 @@ public class UserManagementController {
     }
 
     @GetMapping("/user-detail/{id}")
-    public String userdeta(@PathVariable int id, Model model){
+    public String userDetail(@PathVariable int id, Model model){
         UserManagement detail = UserManagementService.findById(id);
         model.addAttribute("detail", detail);
         return "user-detail";
     }
 
     @PostMapping("/user-detail")
-    public String productDelete(@ModelAttribute("detail") UserManagement delete) {
+    public String userDelete(@ModelAttribute("detail") UserManagement delete) {
         UserManagementService.delete(delete.id());
-        return "success";
+        return "user-success";
     }
 
     @GetMapping("/user-update/{id}")
-    public String update(@PathVariable int id, Model model, @ModelAttribute("update") UserManagement change){
+    public String userUpdate(@PathVariable int id, Model model, @ModelAttribute("update") UserManagement change){
         UserManagement update = UserManagementService.findById(id);
         model.addAttribute("update", update);
         return "user-update";
     }
 
-    @PostMapping("/update")
-    public String change(@Validated @ModelAttribute("update") UserManagement change, BindingResult bindingResult, Model model){
+    @PostMapping("/user-update")
+    public String userChange(@Validated @ModelAttribute("update") UserManagement change, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
             return "user-update";
         }
@@ -63,6 +62,6 @@ public class UserManagementController {
             return "user-update";
         }
         UserManagementService.update(change);
-        return "success";
+        return "user-success";
     }
 }

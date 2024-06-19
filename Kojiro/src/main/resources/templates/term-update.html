@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用語集管理更新</title>
+    <link th:href="@{/css/user-management.css}" rel="stylesheet">
+</head>
+<body>
+<div class="insert">
+    <h1>用語集管理更新</h1>
+    <div class="discription">
+        <p>
+            （<span class="required"></span>は必須です）
+        </p>
+    </div>
+    <div class="form-body">
+        <form action="#" th:action="@{/term-update/{id}(id=${id})}" th:object="${update}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" value="${update.id}" />
+            <fieldset class="label-130">
+                <p class="error" th:text="${errorMsg}"></p>
+                <div>
+                    <label class="required">用語名:</label>
+                    <input type="text" th:field="*{term_name}" value="${update.term_name}" class="base-text">
+                    <span class="error"  th:each="error: ${#fields.errors('term_name')}">
+            [[ ${error} ]]
+                    </span>
+                </div>
+                <div>
+                    <label>画像:</label>
+                    <input type="file" name="file" th:field="*{file}">
+                </div>
+                <div>
+                    <label class="required">解説:</label>
+                    <textarea name="explain"  class="base-text" style="rgb(209, 209, 209);">
+[[ ${update.explain} ]]
+            </textarea>
+                    <span class="error"  th:each="error: ${#fields.errors('explain')}">
+            [[ ${error} ]]
+                    </span>
+                </div>
+<!--                <div>-->
+<!--                    <label  class="required">単元:</label>-->
+<!--                    <select name="genre_id" th:field="*{genre_id}" class="base-text">-->
+<!--                        <option th:each="genres : ${genresList}"-->
+<!--                                th:value="${genres.id}" th:text="${genres.genre_name}"  th:selected="${update.genre_id == genres.id}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+            </fieldset>
+            <div class="btns">
+                <input type="button" onclick="openModal()" value="更新" class="kousin-btn">
+                <input type="button" th:onclick="|location.href='/term-detail/${update.id}'|" value="戻る" class="cancel-btn">
+            </div>
+             <div id="modal">
+                 <p class="modal-message">登録しますか？</p>
+                 <div class="btns">
+                     <button type="submit" id="register-btn" class="basic-btn">登録</button>
+                     <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+                 </div>
+             </div>
+        </form>
+    </div>
+</div>
+<div id="fadeLayer"></div>
+<script src="/js/users-management.js"></script>
+<script>
+    'use strict'
+    document.getElementById('delete-btn').addEventListener('click', () => {
+      location.href = './menu.html'
+    })
+</script>
+</body>
+</html>
