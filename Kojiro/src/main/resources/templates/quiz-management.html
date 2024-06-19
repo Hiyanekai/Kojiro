@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>問題管理</title>
+    <link href="/css/management.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+        </div>
+        <h1 class="site_logo">問題管理</h1>
+        <hr>
+        <div class="btn-area">
+        <div class="btn"><a class="basic-btn regist" href="quiz-add">問題の追加</a></div>
+        </div>
+        <p>[[ ${success} ]]</p>
+        <form method="get" action="#" class="search-form">
+            <div class="search-container">
+                <input type="text" name="keyword" size="25" placeholder="キーワード検索">
+                <input type="submit" value="&#xf002">
+            </div>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>問題</th>
+                    <th>解答</th>
+                    <th>解説</th>
+                    <th>単元</th>
+                    <th>詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="q_management : ${management}">
+                    <td th:text="${q_management.id}"></td>
+                    <td th:text="${q_management.sentence}"></td>
+                    <td th:text="${q_management.answer}"></td>
+                    <td th:text="${q_management.explain}"></td>
+                    <td th:text="${q_management.genre}"></td>
+                    <td><a class="detail_btn" th:href="@{/quiz-detail/{id}(id=${q_management.id})}">詳細</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<footer></footer>
+</body>
+</html>

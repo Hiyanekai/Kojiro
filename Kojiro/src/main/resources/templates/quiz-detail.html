@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>問題管理詳細</title>
+  <link href="/css/management.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:insert="/common/header"></th:block>
+<h1 class="site_logo">問題管理詳細</h1>
+<hr>
+<div class="update">
+  <div class="form-body">
+    <div class="img_block">
+      <img th:if="${base64Data}!=null" th:src="${base64Data}"><br>
+    </div>
+    <form action="delete" method="post">
+      <fieldset class="label-130 product_block">
+        <div>
+          <label>ID</label>
+          <input type="text" name="productId" readonly class="base-text" th:value="${q_management.id}">
+        </div>
+        <div>
+          <label>問題</label>
+          <input type="text" name="description" readonly class="base-text" style="background-color: rgb(209, 209, 209);" th:value="${q_management.sentence}">
+        </div>
+        <div>
+          <label>解答</label>
+          <input type="text" name="productId" readonly class="base-text" th:value="${q_management.answer}">
+        </div>
+        <div>
+          <label>解説</label>
+          <input type="text" name="description" readonly class="base-text" style="background-color: rgb(209, 209, 209);" th:value="${q_management.explain}">
+        </div>
+        <div>
+          <label>単元</label>
+          <input type="text" name="categoryId" readonly class="base-text" th:value="${q_management.genre}">
+        </div>
+      </fieldset>
+      <div>
+        <div class="btns">
+          <!-- openModal -->
+          <input type="button" id="delete-btn" th:onclick="|location.href='/quiz-delete/__${id}__'|" value="削除" class="delete-btn">
+          <input type="button" th:onclick="|location.href='/quiz-update/__${id}__'|" value="更新" class="kousin-btn">
+          <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
+        </div>
+      </div>
+  </form>
+</div>
+</div>
+<div id="fadeLayer"></div>
+</body>
+</html>

@@ -1,7 +1,3 @@
 package com.example.Kojiro.entity;
 
-public record Genres(
-        Integer id,
-        String genre_name
-) {
-}
+public record Genres(int id, String genre_name, int step) {}
