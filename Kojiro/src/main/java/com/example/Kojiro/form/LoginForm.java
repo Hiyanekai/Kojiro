@@ -1,4 +1,5 @@
-package com.example.Kojiro.entity;
+package com.example.Kojiro.form;
+
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
