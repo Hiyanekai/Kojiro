@@ -2,6 +2,7 @@ package com.example.Kojiro.dao;
 
 import com.example.Kojiro.entity.Questions;
 import com.example.Kojiro.entity.TestQuestion;
+import com.example.Kojiro.entity.QuestionsP2;
 import com.example.Kojiro.entity.TestResults;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface QuestionsDao {
     List<TestResults> findTestResult(int userId);
 
     Questions findQuestion(int id);
+
+    QuestionsP2 findQuestionP2(int id);
+
 }

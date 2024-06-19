@@ -4,6 +4,7 @@ import com.example.Kojiro.ProductNotFoundException;
 import com.example.Kojiro.dao.PgQuestionsDao;
 import com.example.Kojiro.entity.Questions;
 import com.example.Kojiro.entity.TestQuestion;
+import com.example.Kojiro.entity.QuestionsP2;
 import com.example.Kojiro.entity.TestResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,15 @@ public class PgQuestionsService implements QuestionsService{
             throw new ProductNotFoundException();
         else {
             return iQuestionDao.findQuestion(id);
+        }
+    }
+
+    @Override
+    public QuestionsP2 findQuestionP2(int id){
+        if (iQuestionDao.findQuestion(id) == null)
+            throw new ProductNotFoundException();
+        else {
+            return iQuestionDao.findQuestionP2(id);
         }
     }
 
