@@ -105,11 +105,12 @@
         });
 
         ans.addEventListener('click', ()=>{
-            if(gId != 100){
+            /*if(gId != 100){
                 var url = "../quiz-answer/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
             } else {
                 var url = "../quiz-flag/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
-            }
+            }*/
+            var url = "../quiz-answer/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
             link.setAttribute('href', url);
         });
     </script>

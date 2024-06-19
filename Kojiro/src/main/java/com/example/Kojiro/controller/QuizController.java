@@ -74,7 +74,7 @@ public class QuizController {
             model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
             model.addAttribute("genres", genresService.findAll());
             model.addAttribute("qNum", index + 1);
-            System.out.println(quizzes.size());
+//            System.out.println(quizzes.size());
             model.addAttribute("questions", quizzes);
             // データベースにファイルパスがない場合、画像を表示しない
             if (quizzes.get(index).file() != null && !quizzes.get(index).file().equals("")) {
@@ -121,27 +121,29 @@ public class QuizController {
                 e.printStackTrace();
             }
         }
-        return "quiz-answer";
+//        return "quiz-answer";
+        return gId==100? "quiz-flag" : "quiz-answer";
     }
 
-    @GetMapping("/quiz-flag/{gId}/{ans}")
-    public String quizFlag(@PathVariable("gId") int gId,
-                           @PathVariable("ans") String ans, Model model){
-        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
-//        correct = quizzes.get(index).answer().replaceAll("1", "×");
-        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
-        model.addAttribute("genres", genresService.findAll());
-        model.addAttribute("qNum", index+1);
-        model.addAttribute("correct", correct);
-        model.addAttribute("questions", quizzes);
-        return "quiz-flag";
-    }
+//    @GetMapping("/quiz-flag/{gId}/{ans}")
+//    public String quizFlag(@PathVariable("gId") int gId,
+//                           @PathVariable("ans") String ans, Model model){
+//        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
+////        correct = quizzes.get(index).answer().replaceAll("1", "×");
+//        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
+//        model.addAttribute("genres", genresService.findAll());
+//        model.addAttribute("qNum", index+1);
+//        model.addAttribute("correct", correct);
+//        model.addAttribute("questions", quizzes);
+//        return "quiz-flag";
+//    }
 
     @GetMapping("/delete-flag/{id}/{gId}")
     public String deleteFlag(@PathVariable("id") int id,
                              @PathVariable("gId") int gId, Model model){
         var result = pgQuestionsForQuizService.delFlagQuestion(id, gId);
-        return "/quiz/"+100+"/next";
+        System.out.println(result);
+        return "redirect:/quiz/"+100+"/next";
 
     }
 }

@@ -56,7 +56,7 @@
     <button class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
 </div>
 <div class="change-page">
-    <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
+    <button onclick="location.href='/menu'" class="btn" id="link-btn">メニューへ戻る</button>
     <button th:if="${qNum!=questions.size()}" th:onclick="|location.href='/quiz/__${gId}__/next'|" class="btn" id="next">次の問題へ</button>
 </div>
 <script th:inline="javascript">
