@@ -15,8 +15,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class QuizController {
@@ -27,7 +29,7 @@ public class QuizController {
     private PgQuestionsForQuizService pgQuestionsForQuizService;
 
     // 10問の問題を格納するリスト
-    List<Questions> quizzes;
+    List<Questions2points> quizzes;
     // 問題ページの問題数標示と問題リストの要素数として使用。
     int index = 0;
 
@@ -49,7 +51,11 @@ public class QuizController {
                 quizzes = pgQuestionsForQuizService.findRandom();
             } else if(gId == 100) {
                 quizzes = pgQuestionsForQuizService.findByGenre(1);
-            } else if(gId > 30){
+            } else if(gId == 30){
+                quizzes = pgQuestionsForQuizService.quizGetBy2points(gId);
+                System.out.println(quizzes.get(0));
+            }
+            else if(gId > 30){
                 return "redirect:../quiz-select";
             }
             else {
@@ -57,23 +63,25 @@ public class QuizController {
 //                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
-        if(quizzes == null) return "redirect:../quiz-select";
-        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
-        model.addAttribute("genres", genresService.findAll());
-        model.addAttribute("qNum", index+1);
-        model.addAttribute("questions", quizzes);
-        // データベースにファイルパスがない場合、画像を表示しない
-        if(quizzes.get(index).file()!=null && !quizzes.get(index).file().equals("")) {
-            File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(index).file());
-            try {
-                byte[] byteImg = Files.readAllBytes(img.toPath());
-                String base64Data = Base64.getEncoder().encodeToString(byteImg);
-                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(quizzes != null) {
+            if (quizzes == null) return "redirect:../quiz-select";
+            model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
+            model.addAttribute("genres", genresService.findAll());
+            model.addAttribute("qNum", index + 1);
+            model.addAttribute("questions", quizzes);
+            // データベースにファイルパスがない場合、画像を表示しない
+            if (quizzes.get(index).file() != null && !quizzes.get(index).file().equals("")) {
+                File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(index).file());
+                try {
+                    byte[] byteImg = Files.readAllBytes(img.toPath());
+                    String base64Data = Base64.getEncoder().encodeToString(byteImg);
+                    model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        return "quiz";
+        return gId==30? "quiz-2points" : "quiz";
     }
 
     @GetMapping("/quiz/{gId}/next")
@@ -88,7 +96,9 @@ public class QuizController {
                              @PathVariable("ans") String ans, Model model){
 //        model.addAttribute("ans", ans);
         if(quizzes == null) return "redirect:../../quiz-select";
-        var correct = quizzes.get(index).answer()==0? "〇" : "×";
+        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
+//        correct = quizzes.get(index).answer().replaceAll("1", "×");
+        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
         model.addAttribute("genres", genresService.findAll());
         model.addAttribute("qNum", index+1);
         model.addAttribute("correct", correct);
