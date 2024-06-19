@@ -1,4 +1,4 @@
 package com.example.Kojiro.entity;
 
-public record Scores(int id, String user_ID, int score, String test_date) {
+public record Scores(int id, int user_id, int score, String test_date) {
 }
