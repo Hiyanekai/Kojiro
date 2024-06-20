@@ -100,8 +100,13 @@ img{
 #ans{
     margin-left: 200px;
     margin-right: 200px;
-    background-color: skyblue;
+
+    background-color: midnightblue;
+    color: white;
+
+    /*border: solid 3px midnightblue;*/
 }
 #ans:hover{
+    /*color: midnightblue;*/
     background-color: lightgray;
 }

@@ -36,4 +36,10 @@ public class PgQuestionsForQuizService {
     public int delFlagQuestion(int id, int gId){
         return pgQuestionsForQuizDao.delFlagQuestion(id, gId);
     }
+
+    public List<Questions2points> findAllForMiss(int u_id){
+        return pgQuestionsForQuizDao.findAllForMiss(u_id);
+    }
+
+    public int delMissQuestion(int id, int gId){return pgQuestionsForQuizDao.delMissQuestion(id, gId);}
 }
