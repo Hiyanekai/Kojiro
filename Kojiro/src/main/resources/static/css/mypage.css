@@ -24,7 +24,7 @@ h1{
     /* background-color:rgb(219, 243, 253); */
 }
 h3{
-    background-color:rgb(219, 243, 253);
+     background-color:rgb(208, 208, 208);
 }
 
 .lineup{
@@ -39,12 +39,16 @@ h3{
     border-radius: 100px;
     display: block;
     margin: auto;
-    background-color: rgb(42, 193, 42);
+    background-color: #787daa;
     color: aliceblue;
 }
 
+a{
+text-decoration: none;
+}
+
 .request:hover {
-    background-color:#5bff69;
+     background-color:#44475f;
   }
 
 .box{

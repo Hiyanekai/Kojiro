@@ -14,20 +14,21 @@
         <h3 class="userid">
             ユーザーID
         </h3>
-        <input type="text" class="userid" th:value="${user.user_id}" >
+        <input type="text" class="userid" th:value="${user.user_id}" readonly >
     </div>
     <br>
     <div class="lineup">
         <h3 class="userdate">
             登録日
         </h3>
-        <input type="text" class="userdate" th:value="${userDate}" >
+        <input type="text" class="userdate" th:value="${userDate}" readonly>
     </div>
     </form>
 </div>
 
 <p>
-    <button class="request">ユーザー情報修正依頼</button>
+    <a href ="https://docs.google.com/forms/d/e/1FAIpQLSf7PmU_TLvJl9ZA_Dz9PxO3hEGJFOlTeW4KDhF1Nt5_GSapMA/viewform?usp=pp_url"target="_blank" rel="noreferrer noopener">
+        <button class="request">ユーザー情報修正依頼</button></a>
 </p>
 </body>
 </html>
