@@ -103,7 +103,7 @@ public class TestController {
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
 
-        Scores testScore = new Scores(0, "testuser", score,str1);//受験日、ユーザーID、点数等の受験結果を保持する変数
+        Scores testScore = new Scores(0, 15, score,str1);//受験日、ユーザーID、点数等の受験結果を保持する変数
         //service.insertScore(testScore);//受験結果をScoreテーブルに追加
         //service.insertTest_result(result);
 

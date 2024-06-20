@@ -4,6 +4,7 @@ import com.example.Kojiro.dao.MyPageDao;
 import com.example.Kojiro.entity.Scores;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.entity.Users;
+import com.example.Kojiro.entity.Weakness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,10 @@ public class PgMyPageService implements MyPageService {
     @Override
     public List<Scores> findMe(int userId){
         return myPageDao.findMe(userId);
+    }
+
+    @Override
+    public List<Weakness> WeaknessFindMe(int userId){
+        return myPageDao.WeaknessFindMe(userId);
     }
 }
