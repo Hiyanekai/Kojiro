@@ -160,6 +160,7 @@ public class QuizController {
         return "redirect:/quiz/"+100+"/next";
 
     }
+
     @GetMapping("/delete-miss/{id}/{gId}")
     public String deleteMiss(@PathVariable("id") int id,
                              @PathVariable("gId") int gId, Model model){
@@ -167,8 +168,8 @@ public class QuizController {
         var result = pgQuestionsForQuizService.delMissQuestion(id, gId);
         System.out.println(result);
         return "redirect:/quiz/"+999+"/next";
-
     }
+
     @GetMapping("/return-menu")
     public String returnMenu(){
         if(request.getSession(false)==null) return "redirect:/index";

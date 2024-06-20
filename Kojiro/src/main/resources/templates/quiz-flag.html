@@ -64,6 +64,8 @@
     const nextBtn = document.getElementById("next");
     const qNum = /*[[${qNum}]]*/"qNum";
     const qMax = /*[[${questions.size()}]]*/"questions.size()";
+    const name = /*[[${questions}]]*/"questions";
+    console.log(name[0]);
 
     const ans = /*[[${ans}]]*/"ans";
     const correct = /*[[${correct}]]*/"correct";
@@ -72,7 +74,6 @@
     var ansText = document.getElementById("ans-text");
 
     console.log("解答");
-
     if(ans == correct){
         answer.innerHTML = "〇";
         answer.style.color = "#ffb3b3";
