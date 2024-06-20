@@ -27,6 +27,21 @@ public class TestController {
     //テスト表示用
     @GetMapping("test")
     public String test(Model model){
+        int length = 10;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+
+        StringBuilder stringBuilder = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            stringBuilder.append(characters.charAt(index));
+        }
+
+        String randomString = stringBuilder.toString();
+        System.out.println("生成されたランダム文字列: " + randomString);
+        session.setAttribute("token", randomString);
+
+
         List<TestQuestion> testData = pgQuestionsService.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
         model.addAttribute("testData",testData);
 
@@ -49,10 +64,21 @@ public class TestController {
     //回答取得用　
     @PostMapping("result")
     public String testResult(@RequestParam Map<String, String> formData,
-                             @RequestParam(name = "times") Integer times,Model model){
+                             @RequestParam(name = "times") Integer times,
+                             @RequestParam(name = "token") String token,Model model){
+
+        String sessionToken = (String) session.getAttribute("token");//セッションにあるuserタグのデータを取得
+        System.out.println(sessionToken);
+        System.out.println(token);
 //        var data = session.getAttribute("user");//セッションにあるuserタグのデータを取得
 //        Users sessionUser = (Users) session.getAttribute("user");//user型の変数にデータを格納
-
+        if (sessionToken == null){
+            return "csrf-counter";
+        }
+        else if (!sessionToken.equals(token)){
+            return "csrf-counter";
+        }
+        session.removeAttribute("token");
         //Mapで問題IDを取得
         List<Integer> q_list = new ArrayList<>();
         formData.forEach((key, value) -> {
@@ -60,8 +86,6 @@ public class TestController {
                 q_list.add(Integer.parseInt(value));
             }
         });
-
-        q_list.forEach(System.out::println);
 
         //Mapでユーザーの回答を取得
         List<Integer> choices = new ArrayList<>();
@@ -117,6 +141,7 @@ public class TestController {
             }
         }
 
+        userSelectP2.forEach(System.out::println);
 
         //テストの入力結果をリストにまとめて格納
         List<TestInput> test = new ArrayList<>();
@@ -171,13 +196,19 @@ public class TestController {
 //                  service.insertFlags(flags);//flagクラスに問題を追加
                 }
             }
+            System.out.println();
+            System.out.println(question.answer());
+            System.out.println(test_input.user_select());
+            System.out.println();
             if (question.answer().equals(test_input.user_select())){//答えを比較して採点
                 resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,2,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+                System.out.println("Y");
                 score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
             }
             else {//回答が間違えていた場合
                 resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,0,flag));//回答ページ送信用リストに追加
                 Misses misses = new Misses(0,0,test_input.q_id(),15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+                System.out.println("N");
                 miss.add(misses);
                 //pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
@@ -200,11 +231,11 @@ public class TestController {
         results.forEach(System.out::println);
         System.out.println();
         miss.forEach(System.out::println);
-        model.addAttribute("times",times);//HTMLに受け渡し
-        model.addAttribute("result",results);
-        model.addAttribute("resultP2",resultsP2);
-        model.addAttribute("testData",testData); //回答ページ送信用リストをaddAttribute
-        model.addAttribute("testDataP2",testDataP2); //回答ページ送信用リストをaddAttribute
+        model.addAttribute("times",times);//HTMLに受け渡し(ユーザーの受けたテストの回数 表示したいtest_resultsのscore_id)
+        model.addAttribute("result",results);//1点問題 回答結果の受け渡し(TestResults型配列　取得テーブル:test_results)
+        model.addAttribute("resultP2",resultsP2);//2点問題 回答結果の受け渡し（TestResults型配列　取得テーブル:test_results_2points）
+        model.addAttribute("testData",testData); //回答ページ送信用リストをaddAttribute(リストのentity:Questions 取得テーブル:Questions resultのq_idから問題を取得)
+        model.addAttribute("testDataP2",testDataP2); //回答ページ送信用リストをaddAttribute(リストのentity:QuestionsPoints 取得テーブル:questions_2points resultのq_idから問題を取得)
 //        model.addAttribute("testScore",testScore);　//採点結果表示用の変数addAttribute
         return "result";
     }

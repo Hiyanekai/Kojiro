@@ -33,6 +33,23 @@
     padding: 10px;
 }
 
+.answer{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .q-text{
     font-weight: bold;
 }
@@ -413,5 +430,9 @@ form{
 }
 
 .toggle{
+    text-align: right;
+}
+
+.flag_display{
     text-align: right;
 }

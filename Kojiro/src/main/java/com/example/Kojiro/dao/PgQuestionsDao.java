@@ -55,8 +55,7 @@ public class PgQuestionsDao implements QuestionsDao{
         var param = new MapSqlParameterSource();
         param.addValue("user_id", miss.user_ID());
         param.addValue("q_id", miss.q_id());
-        return jdbcTemplate.update("INSERT INTO miss(user_id,q_id) VALUES(:user_id,:q_id)", param);
+        param.addValue("q_id_2points", miss.q_id_2points());
+        return jdbcTemplate.update("INSERT INTO miss(user_id,q_id,q_id_2points) VALUES(:user_id,:q_id,:q_id_2points)", param);
     }
-
-
 }
