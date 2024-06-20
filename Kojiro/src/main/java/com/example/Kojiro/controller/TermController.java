@@ -23,7 +23,7 @@ public class TermController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("/term")
+    @GetMapping("/word")
     public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
 //        if (session.getAttribute("user")==null){//ユーザーのセッション判定
 //            return "redirect:/login-test";
@@ -37,7 +37,7 @@ public class TermController {
         return "term";
     }
 
-    @GetMapping("term-detail/{id}")//id指定で詳細のページを出す
+    @GetMapping("terms-detail/{id}")//id指定で詳細のページを出す
     public String detail(@PathVariable("id") int id, Model model) {
         System.out.println(id);
         System.out.println(termService.findById(id));
