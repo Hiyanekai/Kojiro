@@ -92,13 +92,15 @@ h2{
     display: flex;
     align-items: center;
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 380px;
+    height: 380px;
     padding: 2em 2.2em;
     background-color: #acbac6;
     color: #333333;
     margin-right: 100px;
     border: none;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .explain::before {
@@ -116,4 +118,30 @@ h2{
 
 body{
     background-color: #dce3e7;
+}
+
+.term input[name="explain1"]{
+    background-color: #dce3e7;
+    font-size: 70px;
+    text-align: center;
+    border: none;
+}
+
+.picture{
+    width: 390px;
+    height: 390px;
+}
+
+input[name="button"]{
+    width: 100px;
+    height: 50px;
+    border-radius:30px;
+    background-color: #7086a9;
+    border: none;
+    color: #ffffff;
+}
+
+.btn{
+    text-align: center;
+    padding-top: 20px;
 }
