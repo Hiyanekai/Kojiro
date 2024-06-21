@@ -1,5 +1,5 @@
 body{
-  background-color:#dce3e7;
+  background-color:#f6f6f6;
 }
 
 /**.design01 {
@@ -87,4 +87,15 @@ body{
   font-width: bold;
   }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
 
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

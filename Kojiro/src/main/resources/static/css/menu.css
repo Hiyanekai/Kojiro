@@ -7,7 +7,7 @@
       transform: translate(-50%, -50%);
     text-align: center;
     border-radius: 10px;
-    background-color: #dce3e7;
+    background-color: #f6f6f6;
   }
 
 img{
@@ -83,5 +83,5 @@ header{
 }
 
 body{
-    background-color: #dce3e7;
+    background-color: #f6f6f6;
 }
