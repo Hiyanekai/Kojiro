@@ -51,4 +51,24 @@ public class PgQuestionsService implements QuestionsService{
         return iQuestionDao.insertMiss(miss);
     }
 
+    @Override
+    public int insertFlags(Flags flags){
+        return iQuestionDao.insertFlags(flags);
+    }
+
+    @Override
+    public int insertScores(Scores scores){
+        return iQuestionDao.insertScores(scores);
+    }
+
+    @Override
+    public int insertTestResults(TestResults testResults){
+        return iQuestionDao.insertTestResults(testResults);
+    }
+
+    @Override
+    public int insertTestResultsP2(TestResults testResults){
+        return iQuestionDao.insertTestResultsP2(testResults);
+    }
+
 }

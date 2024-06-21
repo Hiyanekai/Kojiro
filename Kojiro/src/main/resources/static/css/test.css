@@ -382,7 +382,6 @@ form{
     overflow: hidden; /* 追加 */
 
     margin-top: 8px;
-    margin-left: 500px;
 }
 
 .toggle-button:has(:checked) {
