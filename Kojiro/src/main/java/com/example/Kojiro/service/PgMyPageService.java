@@ -15,6 +15,12 @@ public class PgMyPageService implements MyPageService {
     public Users findById(int id) {
         return myPageDao.findById(id);
     }
+
+    @Override
+    public Scores findByIdForScores(int id) {
+        return myPageDao.findByIdForScores(id);
+    }
+
     @Override
     public List<Scores> findAll() {
         return myPageDao.findAll();
@@ -31,4 +37,7 @@ public class PgMyPageService implements MyPageService {
     }
     @Override
     public List<Concern> ConcernFindMe(int userId){return myPageDao.ConcernFindMe(userId);}
+
+    @Override
+    public List<ScoreDetail> ScoreDetailFindMe(int userId,int scoreId){return myPageDao.ScoreDetailFindMe(userId, scoreId);}
 }
