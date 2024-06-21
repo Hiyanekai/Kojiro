@@ -34,6 +34,15 @@ public class PgMyPageDao implements MyPageDao {
     }
 
     @Override
+    public Scores findByIdForScores(int id) {
+        var param=new MapSqlParameterSource();
+        param.addValue("id",id);
+        var r =  jdbcTemplate.query("SELECT * FROM scores where id = :id",param,
+                new DataClassRowMapper<>(Scores.class));
+        return r.isEmpty()? null:r.get(0);
+    }
+
+    @Override
     public List<Weakness> WeaknessFindMe(int userId){
         var param=new MapSqlParameterSource();
         param.addValue("user_id",userId);
@@ -77,6 +86,32 @@ public class PgMyPageDao implements MyPageDao {
                 "join questions_2points\n" +
                 "on flags.q_id_2points = questions_2points.id\n" +
                 "where user_id = :user_id;",param,new DataClassRowMapper<>(Concern.class));
+    }
+
+    public List<ScoreDetail> ScoreDetailFindMe(int userId,int scoreId){
+        var param=new MapSqlParameterSource();
+        param.addValue("user_id",userId);
+        param.addValue("score_id",scoreId);
+        return jdbcTemplate.query("select scores.id \n" +
+                ",questions.sentence,cast(questions.answer as varchar(10)),questions.explain,questions.file,questions.score as s\n" +
+                ",test_results.user_select,test_results.score,test_results.flag,test_results.id as i\n" +
+                "from test_results\n" +
+                "join questions\n" +
+                "on test_results.q_id=questions.id\n" +
+                "join scores\n" +
+                "on test_results.score_id=scores.id\n" +
+                "where test_results.user_id = :user_id AND score_id= :score_id \n" +
+                "union\n" +
+                "select scores.id\n" +
+                ",questions_2points.sentence,questions_2points.answer,questions_2points.explain,questions_2points.file,questions_2points.score \n" +
+                ",test_results_2points.user_select,test_results_2points.score,test_results_2points.flag,test_results_2points.id \n" +
+                "from test_results_2points\n" +
+                "join questions_2points\n" +
+                "on test_results_2points.q_id=questions_2points.id\n" +
+                "join scores\n" +
+                "on test_results_2points.score_id=scores.id\n" +
+                "where test_results_2points.user_id= :user_id  AND score_id= :score_id\n" +
+                "order by s,i;\n",param,new DataClassRowMapper<>(ScoreDetail.class));
     }
 
 }

@@ -21,7 +21,7 @@ h1{
     width: 450px;
     margin-right: auto;
     margin-left: auto;
-    white-space: pre-wrap;
+    white-space: pre-line;
 }
 
 .answer {
@@ -30,7 +30,7 @@ h1{
         width: 450px;
         margin-right: auto;
         margin-left: auto;
-        white-space: pre-wrap;
+        white-space: pre-line;
 }
 h3{
     text-align: center;

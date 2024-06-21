@@ -1,10 +1,12 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.dao.MyPageDao;
+import com.example.Kojiro.entity.ScoreDetail;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.entity.Weakness;
 import com.example.Kojiro.form.MypageForm;
+import com.example.Kojiro.form.ScoresForm;
 import com.example.Kojiro.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,28 @@ public class MyPageController {
         return "weakness";
     }
 
+    @GetMapping("/concern")
+    public String concern(Model model){
+        var user = (Users)session.getAttribute("users");
+        model.addAttribute("concernList",myPageService.ConcernFindMe(user.id()));
+        return "concern";
+    }
+
+
+    @GetMapping("/scoredetail/{id}")
+    public String scoredetail(@PathVariable("id") int scoreId, Model model){
+        var user=(Users)session.getAttribute("users");
+        var testResult = myPageService.ScoreDetailFindMe(user.id(),scoreId);
+        model.addAttribute("users", user);
+        model.addAttribute("scoredetailList",testResult);
+        model.addAttribute("scores",myPageService.findByIdForScores(scoreId));
+
+
+
+
+        return "scoredetail";
+
+    }
 
 
 
