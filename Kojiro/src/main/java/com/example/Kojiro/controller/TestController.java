@@ -23,6 +23,11 @@ public class TestController {
     @Autowired
     private PgQuestionsService pgQuestionsService;
 
+    @GetMapping("cation")
+    public String cation(){
+        return "cation";
+    }
+
 
     //テスト表示用
     @GetMapping("test")
