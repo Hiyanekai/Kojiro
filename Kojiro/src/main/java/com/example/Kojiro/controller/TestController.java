@@ -27,8 +27,8 @@ public class TestController {
     //テスト表示用
     @GetMapping("test")
     public String test(Model model){
+
         //ランダムな10桁のトークンを生成
-        ///////////////////////////////////////////////////////////////////////////////////////
         int length = 10;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
@@ -40,25 +40,27 @@ public class TestController {
 
         String randomString = stringBuilder.toString();
         System.out.println("生成されたランダム文字列: " + randomString);
+        //作成したトークンをセッションにセット
         session.setAttribute("token", randomString);
-        ////////////////////////////////////////////////////////////////////////////////////////
 
-        List<TestQuestion> testData = pgQuestionsService.findTest();//1点問題90問、2点問題5問の配列を取得するfindTestメソッドを呼び出す。
+        //1点問題90問の配列を取得するメソッドを呼び出す
+        List<TestQuestion> testData = pgQuestionsService.findTest();
         model.addAttribute("testData",testData);
 
+        //2点問題5問の配列を取得するメソッドを呼び出す
         List<TestQuestion> testDataP2 = pgQuestionsService.findTestP2();
         model.addAttribute("testDataP2",testDataP2);
 
         //テスト回数を判定
         int times = 1;
         var resultDB = pgQuestionsService.findTestResult(15);//userIdを渡すことでそのユーザーのテスト履歴を検索
-//        resultDB.forEach(System.out::println);
         if(resultDB != null){//テスト履歴が無い場合は1回目
             for(TestResults test_results : resultDB) {//回答用ループ
                 if (times == test_results.score_id()) times += 1;//テスト履歴がある場合、最新のカウントにする
             }
         }
-        model.addAttribute("times",times);//HTMLに受け渡し
+        //HTMLに受け渡し
+        model.addAttribute("times",times);
         return "test";
     }
 
@@ -68,9 +70,8 @@ public class TestController {
                              @RequestParam(name = "times") Integer times,
                              @RequestParam(name = "token") String token,Model model){
 
-        String sessionToken = (String) session.getAttribute("token");//セッションにあるuserタグのデータを取得
-//        var data = session.getAttribute("user");//セッションにあるuserタグのデータを取得
-//        Users sessionUser = (Users) session.getAttribute("user");//user型の変数にデータを格納
+        String sessionToken = (String) session.getAttribute("token");//セッションにあるtokenタグのデータを取得
+        var user = (Users)session.getAttribute("users");//セッションにあるuserタグのデータを取得
 
         //CSRF対策
         if (sessionToken == null){//トークンの有無を確認
@@ -174,17 +175,17 @@ public class TestController {
             for (int q : flagsQ){
                 if (q == test_input.q_id()){
                     flag = 1;
-                    Flags flags = new Flags(0,test_input.q_id(),0,15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+                    Flags flags = new Flags(0,test_input.q_id(),0,user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
                     flagsList.add(flags);
                 }
             }
             if (question.answer() == test_input.user_select()){//答えを比較して採点
-                results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,15,1,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+                results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,user.id(),1,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
                 score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
             }
             else {//回答が間違えていた場合
-                results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,15,0,flag));//回答ページ送信用リストに追加
-                Misses misses = new Misses(0,test_input.q_id(),0,15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+                results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,user.id(),0,flag));//回答ページ送信用リストに追加
+                Misses misses = new Misses(0,test_input.q_id(),0,user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
                 pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
@@ -197,17 +198,17 @@ public class TestController {
             for (int q : flagsQ_P2){
                 if (q == test_input.q_id()){
                   flag = 1;
-                  Flags flags = new Flags(0,0,test_input.q_id(),15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
+                  Flags flags = new Flags(0,0,test_input.q_id(),user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するflags型の変数
                   flagsList.add(flags);
                 }
             }
             if (question.answer().equals(test_input.user_select())){//答えを比較して採点
-                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,2,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
+                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,user.id(),2,flag));//回答ページ送信用リストに追加 scoreは正解が１、不正解は0
                 score += question.score();//回答と同じの場合のみ点数を加算                                                             //score_idは何回目のテストか（第X回模擬試験）
             }
             else {//回答が間違えていた場合
-                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,15,0,flag));//回答ページ送信用リストに追加
-                Misses misses = new Misses(0,0,test_input.q_id(),15);//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
+                resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,user.id(),0,flag));//回答ページ送信用リストに追加
+                Misses misses = new Misses(0,0,test_input.q_id(),user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
                 pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
@@ -219,7 +220,7 @@ public class TestController {
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
         //受験日、ユーザーID、点数等の受験結果を保持する変数
-        Scores testScore = new Scores(0, 15, score, str1);
+        Scores testScore = new Scores(0, user.id(), score, str1);
         //受験結果をScoreテーブルに追加
         pgQuestionsService.insertScores(testScore);
 
