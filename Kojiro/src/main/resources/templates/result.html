@@ -18,6 +18,7 @@
                 <input type="hidden" th:name="'question_id' + ${loopCnt.count}" th:value="${testData.id}">
                 <input type="hidden" name="times" th:value="${times}">
                 <input type="hidden" th:id="'answer_1pt' + ${loopCnt.count}" th:value=${result.get(loopCnt.count-1).score}>
+
                 <div class="question" th:id="'question' + ${loopCnt.count}">
                         <div class="q_No">問題[[${loopCnt.count}]]</div>
                         <div th:if="${result.get(loopCnt.count-1).flag} == 1">
@@ -30,17 +31,29 @@
                     <div class="q-img" >
                         <img th:src="'../images/' + ${testData.file}" th:if="${testData.file} != null">
                     </div>
-                </div>
-                <div class="answer" th:id="'question_answer' + ${loopCnt.count}">
-                    <div th:if="${result.get(loopCnt.count-1).score} == 1"><img src="../images/answer_o.png"></div>
-                    <div th:if="${result.get(loopCnt.count-1).score} == 0"><img src="../images/answer_x.png"></div>
+                    <br>
+                    <div class="result">
+                        <label class="answer_display">
+                            あなたの回答：
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == 0"><img src="../images/answer_o.png"  class="answerImage"></div>
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == 1"><img src="../images/answer_x.png"  class="answerImage"></div>
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == -1"><img src="../images/answer_not.png"  class="answerImage"></div>
+                        </label>
+
+                        <label class="answer_display">
+                            正解：
+                        <div th:if="${testData.answer} == 0"><img src="../images/answer_o.png" class="answerImage"></div>
+                        <div th:if="${testData.answer} == 1"><img src="../images/answer_x.png" class="answerImage"></div>
+                        </label>
+                    </div>
+                    解説：<p class="q-text">[[${testData.explain}]]</p>
                 </div>
             </div>
             <div th:each="testDataP2,loopCnt : ${testDataP2}">
                 <input type="hidden" th:name="'P2question_id' + ${loopCnt.count}" th:value="${testDataP2.id}">
                 <input type="hidden" th:id="'answer_2pt' + ${loopCnt.count}" th:value=${resultP2.get(loopCnt.count-1).score}>
 
-                <div class="question" th:id="'question9' + ${loopCnt.count}">
+                <div class="questionP2" th:id="'question9' + ${loopCnt.count}">
                     <div class="q_No">問題9[[${loopCnt.count}]]</div>
                     <div th:if="${resultP2.get(loopCnt.count-1).flag} == 1">
                         <img src="../images/check.png" class="checkImage">
@@ -54,10 +67,15 @@
                     <p class="q-text">
                         [[${testDataP2.sentence}]]
                     </p>
-                </div>
-                <div class="answer" th:id="'question_answer' + ${loopCnt.count}">
-                    <div th:if="${resultP2.get(loopCnt.count-1).score} == 2"><img src="../images/answer_o.png"></div>
-                    <div th:if="${resultP2.get(loopCnt.count-1).score} == 0"><img src="../images/answer_x.png"></div>
+                    <div class="answer_display">
+                    <label class="answer_display">
+                        あなたの回答：[[${resultP2.get(loopCnt.count-1).user_select.replaceAll("-1","未回答 ").replaceAll("0","〇 ").replaceAll("1","X ")}]]
+                    </label>
+                    <label class="answer_display">
+                        正解：[[${testDataP2.answer.replaceAll("0","〇 ").replaceAll("1","X ")}]]
+                    </label>
+                    </div>
+                    <br>解説：<span class="q-text">[[${testDataP2.explain}]]</span>
                 </div>
             </div>
         </div>
