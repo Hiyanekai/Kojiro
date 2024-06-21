@@ -7,7 +7,7 @@
       transform: translate(-50%, -50%);
     text-align: center;
     border-radius: 10px;
-    background-color: white;
+    background-color: #dce3e7;
   }
 
 img{
@@ -80,4 +80,8 @@ header{
   justify-content: space-between;
   margin-right: auto;
   margin-left : auto;
+}
+
+body{
+    background-color: #dce3e7;
 }
