@@ -35,7 +35,7 @@ public class LoginController {
     @PostMapping("index")
     public String index2(@Validated @ModelAttribute("login") LoginForm loginForm, BindingResult bindingResult, Model model) {
         var result = pgLoginService.findbylogin(loginForm.getUserId(), loginForm.getPassword());
-        session.setAttribute("Users", result);
+        session.setAttribute("users", result);
         if (bindingResult.hasErrors()) {
             return "index";
         }else if (result != null) {
