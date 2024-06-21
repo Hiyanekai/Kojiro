@@ -20,26 +20,31 @@
 
   </ul>
 </div>
-  <script th:inline="javascript" th:each="data : ${missList}">
+  <script th:inline="javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
 
-     let Name1 = [[${data.genre_name}]];
+<!--     let Name1 = [[${data.genre_name}]];-->
 
-     let Rate1 = [[${data.mistake_rate}]];
+<!--     let Rate1 = [[${data.mistake_rate}]];-->
 
-  console.log(Name1);
+<!--  console.log(Name1);-->
 
-  console.log(Rate1);
-
+<!--  console.log(Rate1);-->
+const missList = /*[[${missList}]]*/"missList";
+console.log(missList);
+for(let i = 0; i < missList.length; i++) {
+      let labels = /*[[${missList.get(i).genre_name}]]*/"missList.get(i).genre_name";
+      let data = /*[[${missList.get(i).mistake_rate}]]*/"MissList.get(i).mistake_rate";
+}
 
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: [Name1],
+          labels: [labels],
 
             datasets: [{
                 label: '# of Votes',
-                data: [Rate1],
+                data: [data],
 
 
   <!--              backgroundColor: [-->
