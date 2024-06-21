@@ -3,13 +3,13 @@
 <header>
     <h1>
         <a href="/menu">
-            <img src="/images/logo5.png" class="header" alt="ヘッダー" width="200" height="60">
+            <img src="/images/logo5.png" class="header" alt="ヘッダー">
         </a>
     </h1>
     <nav class="gnav">
         <ul class="menu">
-            <li><a class="user">[[${session.userId}]]さん、こんにちは</a></li>
-            <li><a href="logout.html"><input type="image" src="/images/logo6.png" alt="ログアウト" width="160" height="50"></a></li>
+            <li><a class="user">[[${session.users.userId}]]さん、こんにちは</a></li>
+            <li><a href="logout.html"><input type="image" src="/images/logo6.png" class="logout" alt="ログアウト"></a></li>
         </ul>
     </nav>
 </header>

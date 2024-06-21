@@ -1,3 +1,30 @@
+@charset "UTF-8";
+
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: inline-block;
+  vertical-align: top;
+}
+
+fieldset.label-60 label {
+  width: 60px;
+}
+
+fieldset.label-130 label {
+  width: 130px;
+}
+
+fieldset div {
+  margin: 5px;
+}
+
+form ~ div, table ~ div {
+  margin-top: 10px;
+}
+
 .search-container {
     box-sizing: border-box;
     position: relative;
@@ -44,7 +71,7 @@ h1{
 
 .title{
     display: flex;
-    padding: 10px 50px 0px 480px;
+    padding: 10px 50px 0px 410px;
 }
 
 img{
@@ -67,6 +94,7 @@ table, table th, table td {
     background:#949da7;
       font-weight: bold;
       color:#ffffff;
+      font-size: 25px;
   }
 
   table th,table td{
@@ -89,5 +117,42 @@ table, table th, table td {
   }
 
   body{
+
+    font-family: Miryo;
+    width: 90%;
+    margin: auto;
     background-color: #dce3e7;
+}
+
+td{
+  background-color: #ffffff;
+}
+
+div .caption{
+   text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
+
+.detail_btn {
+  color: white;
+  background-color:#9299a0;
+  display: block;       /* リンクをブロックレベル化して表示 */
+  padding: 5px 10px 5px 10px;
+  text-decoration:none
+}
+
+.detail_btn:hover {
+  background-color:#417ebb;
 }

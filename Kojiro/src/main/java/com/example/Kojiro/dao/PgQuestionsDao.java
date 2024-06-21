@@ -1,8 +1,6 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.entity.Questions;
-import com.example.Kojiro.entity.TestQuestion;
-import com.example.Kojiro.entity.TestResults;
+import com.example.Kojiro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -23,9 +21,17 @@ public class PgQuestionsDao implements QuestionsDao{
     }
 
     @Override
-    public List<TestResults> findTestResult() {
-        return jdbcTemplate.query("SELECT * from test_result",
-                new DataClassRowMapper<>(TestResults.class));
+    public List<TestQuestion> findTestP2() {
+        return jdbcTemplate.query("SELECT q.id,g.genre_name AS genre,q.sentence,q.answer,q.explain,q.file,q.score FROM questions_2points AS q " +
+                        "JOIN genres AS g ON q.genre_id = g.id WHERE score = 2 ORDER BY random() LIMIT 5",
+                new DataClassRowMapper<>(TestQuestion.class));
+    }
+
+    @Override
+    public List<TestResults> findTestResult(int userId) {
+        var param = new MapSqlParameterSource();
+        param.addValue("user_id", userId);
+        return jdbcTemplate.query("SELECT * FROM test_results WHERE user_id = :user_id", param, new DataClassRowMapper<>(TestResults.class));
     }
 
     @Override
@@ -34,5 +40,22 @@ public class PgQuestionsDao implements QuestionsDao{
         param.addValue("id", id);
         var list = jdbcTemplate.query("SELECT * FROM questions WHERE id = :id", param, new DataClassRowMapper<>(Questions.class));
         return list.isEmpty() ? null : list.get(0);
+    }
+
+    @Override
+    public QuestionsP2 findQuestionP2(int id) {
+        var param = new MapSqlParameterSource();
+        param.addValue("id", id);
+        var list = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id = :id", param, new DataClassRowMapper<>(QuestionsP2.class));
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    @Override
+    public int insertMiss(Misses miss){
+        var param = new MapSqlParameterSource();
+        param.addValue("user_id", miss.user_ID());
+        param.addValue("q_id", miss.q_id());
+        param.addValue("q_id_2points", miss.q_id_2points());
+        return jdbcTemplate.update("INSERT INTO miss(user_id,q_id,q_id_2points) VALUES(:user_id,:q_id,:q_id_2points)", param);
     }
 }

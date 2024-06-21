@@ -9,4 +9,5 @@ public interface TermDao {
 
     List<Term> findAll();
     List<Term> findByTerm(String term);
+    Term findById(int id);
 }

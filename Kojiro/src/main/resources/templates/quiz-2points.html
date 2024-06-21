@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>一問一答（問題）</title>
+    <link th:href="@{/css/quiz-ver2.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="q-header">
+        <div class="genre-name">
+            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
+        </div>
+        <div class="q-num">
+            <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+        </div>
+    </div>
+    <div class="quiz-area">
+        <div class="question">
+            <h1>問題</h1>
+            <th:block th:if="${point2!=-1}">
+                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
+                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
+                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
+                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
+            </th:block>
+            <th:block th:if="${point2==-1}">
+                <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+            </th:block>
+            <div class="q-img">
+                <img th:if="${base64Data}!=null" th:src="${base64Data}">
+            </div>
+        </div>
+        <div class="ans-area">
+            <div class="answer">
+                <p class="q-text">（１）</p>
+                <button class="btn" id="circle1">〇</button>
+                <button class="btn" id="cross1">×</button>
+            </div>
+            <div class="answer">
+                <p class="q-text">（２）</p>
+                <button class="btn" id="circle2">〇</button>
+                <button class="btn" id="cross2">×</button>
+            </div>
+            <div class="answer">
+                <p class="q-text">（３）</p>
+                <button class="btn" id="circle3">〇</button>
+                <button class="btn" id="cross3">×</button>
+            </div>
+            <div>
+                <a href="" id="link">
+                    <input type="button" class="btn" id="ans" value="答え">
+                </a>
+            </div>
+        </div>
+    </div>
+<!-- <div class="change-page">
+    <button onclick="location.href='./select-quiz.html'" class="btn" id="link-btn">ジャンル選択へ</button>
+</div> -->
+    <script th:inline="javascript">
+        var circle1 = document.getElementById("circle1");
+        var circle2 = document.getElementById("circle2");
+        var circle3 = document.getElementById("circle3");
+        var cross1 = document.getElementById("cross1");
+        var cross2 = document.getElementById("cross2");
+        var cross3 = document.getElementById("cross3");
+        var ans = document.getElementById("ans");
+
+        var link = document.getElementById("link");
+
+        const gId = /*[[${gId}]]*/"gId";
+        const genre_id = /*[[${questions.get(qNum-1).genre_id}]]*/"questions.get(qNum-1).genre_id";
+
+        const ansAry = ["〇","〇","〇"];
+
+        circle1.addEventListener('click', ()=>{
+            circle1.style.backgroundColor = "red";
+            cross1.style.backgroundColor = "lightgray";
+            ansAry[0] = "〇";
+            console.log(ansAry.to)
+        });
+        cross1.addEventListener('click', ()=>{
+            circle1.style.backgroundColor = "lightgray";
+            cross1.style.backgroundColor = "blue";
+            ansAry[0] = "×";
+        });
+        circle2.addEventListener('click', ()=>{
+            circle2.style.backgroundColor = "red";
+            cross2.style.backgroundColor = "lightgray";
+            ansAry[1] = "〇";
+        });
+        cross2.addEventListener('click', ()=>{
+            circle2.style.backgroundColor = "lightgray";
+            cross2.style.backgroundColor = "blue";
+            ansAry[1] = "×";
+        });
+        circle3.addEventListener('click', ()=>{
+            circle3.style.backgroundColor = "red";
+            cross3.style.backgroundColor = "lightgray";
+            ansAry[2] = "〇";
+        });
+        cross3.addEventListener('click', ()=>{
+            circle3.style.backgroundColor = "lightgray";
+            cross3.style.backgroundColor = "blue";
+            ansAry[2] = "×";
+        });
+
+        ans.addEventListener('click', ()=>{
+            /*if(gId != 100){
+                var url = "../quiz-answer/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
+            } else {
+                var url = "../quiz-flag/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
+            }*/
+            var url = "../quiz-answer/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
+            link.setAttribute('href', url);
+        });
+    </script>
+</body>
+</html>

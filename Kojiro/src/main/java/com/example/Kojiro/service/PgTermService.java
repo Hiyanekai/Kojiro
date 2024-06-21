@@ -21,4 +21,7 @@ public class PgTermService implements TermService{
     }
     @Override
     public List<Term> findByTerm(String term) {return termDao.findByTerm(term);}
+    @Override
+    public Term findById(int id) {return termDao.findById(id);
+    }
 }

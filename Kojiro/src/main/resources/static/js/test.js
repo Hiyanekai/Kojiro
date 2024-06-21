@@ -5,6 +5,8 @@
 window.addEventListener('DOMContentLoaded', ()=>{
   const t0=60*60*1000;
   const t1=new Date().getTime();
+  const form = document.querySelector('form'); // フォーム要素を取得
+
   setInterval(()=>{
     const t2=new Date().getTime();
     const t3=t0+t1-t2
@@ -12,9 +14,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
     const s=(parseInt(t3/1000)%60).toString().padStart(2,'0');
     const ms=(parseInt(t3/10)%100).toString().padStart(2,'0');
     timer.textContent=`残り時間：${m}分${s}秒${ms}`;
-//    if(${m} == 59 && ${s} == 50 && ${ms} == 00){
-//        document.getElementById('submit').onclick;
-//    }
+    if (t3 <= 0) {
+        clearInterval(intervalId); // タイマー停止
+        form.submit(); // フォームを自動的に送信
+    }
   },10);
 });
 
@@ -30,4 +33,15 @@ function radio_func(data) {
         element.style.backgroundColor = '#FFFF66'; // 背景色を変更
     }
 }
+
+function radio_funcP2(data) {
+    let P2data = '9' + data;
+    console.log(P2data);
+    let element = document.getElementById(P2data); // IDに対応する要素を取得
+    if (element) {
+        element.style.backgroundColor = '#FFFF66'; // 背景色を変更
+    }
+}
+
+
 

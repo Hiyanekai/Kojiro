@@ -96,6 +96,40 @@
             </div>
         </li>
 
+        <!-- <li>
+            <div class="sub-menu">
+                <h1 class="img-label">管理者</h1>
+                <ul class="flex">
+                    <li>
+                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                            <div class="link-box">
+                                <img src="./images/管理.png">
+                                <h3 class="img-label">ユーザー<br>管理</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                            <div class="link-box">
+                                <img src="./images/管理.png">
+                                <h3 class="img-label">問題管理<br><br></h3>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="flex">
+                    <li>
+                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                            <div class="link-box">
+                                <img src="./images/管理.png">
+                                <h3 class="img-label">用語の<br>管理</h3>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li> -->
+
         <li>
             <div class="sub-menu">
                 <h1 class="img-label">その他</h1>
@@ -119,41 +153,6 @@
                 </ul>
             </div>
         </li>
-
-        <li>
-            <div class="sub-menu" th:if="${session.users.role==1}">
-                <h1 class= "img-label">管理者</h1>
-                <ul class="flex">
-                    <li>
-                        <a href="/user-management" class="/user-management">
-                            <div class="link-box">
-                               <img src="./images/設定の歯車アイコン　1.png">
-                                <h3 class="img-label">ユーザー<br>管理</h3>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                         <a href="quiz-management" class="quiz-management">
-                            <div class="link-box">
-                                <img src="./images/設定の歯車アイコン　2.png">
-                                <h3 class="img-label">問題管理<br><br></h3>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="flex">
-                    <li>
-                         <a href="/term" class="term">
-                            <div class="link-box">
-                                <img src="./images/設定の歯車アイコン　3.png">
-                                <h3 class="img-label">用語の<br>管理</h3>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
 
     </ul>
 </div>

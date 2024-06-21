@@ -83,6 +83,7 @@ table th {
   background:#949da7;
 	font-weight: bold;
 	color:#fff;
+	font-size: 25px;
 }
 
 table th,table td{
@@ -357,7 +358,6 @@ input[name="text"]{
     resize: none;
     width: 300px;
     height: 100px;
-    width:100%;
 }
 
 /** 確認モーダル用 **/
@@ -434,7 +434,7 @@ h1 a {
 }
 
 .update .form-body form {
-  width: 1000px;
+  width: 600px;
 }
 
 .update .product-img {
@@ -456,8 +456,18 @@ h1 a {
   margin-right: auto;
 }
 
+<<<<<<<< HEAD:Kojiro/src/main/resources/static/css/management.css
 .btn-area .btn {
   display: inline-block;
 }
 
 
+========
+.option2{
+    display: none;
+}
+
+.btn-area .btn {
+  display: inline-block;
+}
+>>>>>>>> 61aab01aaeee989318bbfd630875b36da6ddfb70:Kojiro/src/main/resources/static/css/user-management.css

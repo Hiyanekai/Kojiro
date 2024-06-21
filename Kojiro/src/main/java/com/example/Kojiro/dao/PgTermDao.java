@@ -18,7 +18,7 @@ public class PgTermDao implements TermDao {
 
     @Override
     public List<Term> findAll() {
-        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score FROM questions INNER JOIN genres ON questions.genre_id = genres.id ORDER BY questions.id",
+        return jdbcTemplate.query("SELECT * FROM terms ORDER BY id",
                 new DataClassRowMapper<>(Term.class));
     }
 
@@ -26,6 +26,14 @@ public class PgTermDao implements TermDao {
     public List<Term> findByTerm(String term) {
         var param = new MapSqlParameterSource();
         param.addValue("keyword","%"+term+"%");
-        return jdbcTemplate.query("SELECT questions.id, genres.genre_name AS genre, questions.sentence, questions.answer, questions.explain, questions.file, questions.score  FROM questions INNER JOIN genres ON questions.genre_id = genres.id WHERE questions.sentence like :keyword ORDER BY questions.id", param, new DataClassRowMapper<>(Term.class));
+        return jdbcTemplate.query("SELECT terms.id ,terms.term_name ,terms.explain,terms.file FROM terms WHERE terms.term_name like :keyword", param, new DataClassRowMapper<>(Term.class));
+    }
+
+    @Override
+    public Term findById(int id) {
+        var param = new MapSqlParameterSource();
+        param.addValue("id", id);
+        var list = jdbcTemplate.query("SELECT terms.id ,terms.term_name ,terms.explain,terms.file FROM terms WHERE id=:id", param, new DataClassRowMapper<>(Term.class));
+        return list.isEmpty() ? null : list.get(0);
     }
 }

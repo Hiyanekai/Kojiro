@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/weakness.css">
+  <title>苦手分野</title>
+<body>
+<h1>あなたの苦手分野</h1>
+<br><br>
+<div class="list-box">
+  <div class="tit-bor"><p class="list-tit"><span>苦手分野割合</span></p></div>
+  <ul class="list-design" th:each="data : ${missList}">
+    <li><a th:href="'/quiz/'+${data.genre_id}">[[${data.genre_name}]]</a><div>[[${data.mistake_rate}]]%</div></li>
+
+  </ul>
+</div>
+</body>
+</head>
+</html>

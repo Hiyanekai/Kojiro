@@ -9,4 +9,5 @@ public interface TermService {
 
     public List<Term> findAll();
     public List<Term> findByTerm(String term);
+    public Term findById(int id);
 }

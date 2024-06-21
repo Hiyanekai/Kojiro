@@ -38,105 +38,22 @@
                         </tr>
                     </tbody>
                 </table>
-
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/1}">-->
-<!--                                <p>運転者の心得</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/2}">-->
-<!--                                <p>信号に従うこと</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/3}">-->
-<!--                                <p>標識・標示等</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/4}">-->
-<!--                                <p>車の通過について</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/6}">-->
-<!--                                <p>交差点と踏切</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/5}">-->
-<!--                                <p>緊急自動車について</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/7}">-->
-<!--                                <p>安全な速度と車間距離</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/8}">-->
-<!--                                <p>歩行者の保護等</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/9}">-->
-<!--                                <p>安全と警音器</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/10}">-->
-<!--                                <p>進路変更等</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/11}">-->
-<!--                                <p>追い越し</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/12}">-->
-<!--                                <p>行き違い</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/13}">-->
-<!--                                <p>AT車の運転</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <a th:href="@{/quiz/14}">-->
-<!--                                <p>各制度について</p>-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
             </div>
             <div class="tab__panel-box tab__panel-box002" data-panel="02">
                 <table>
                     <tbody>
-                    <tr th:each="i : ${#numbers.sequence(0,__${genres2.size()}-1__,2)}">
-                        <td>
-                            <a th:href="@{/quiz/__${genres2.get(i).id}__}">
-                                <p>[[${genres2.get(i).id}]]. [[${genres2.get(i).genre_name}]]</p>
-                            </a>
-                        </td>
-                        <td>
-                            <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__}">
-                                <p>[[${genres2.get(i+1).id}]]. [[${genres2.get(i+1).genre_name}]]</p>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr th:each="i : ${#numbers.sequence(0,__${genres2.size()}-1__,2)}">
+                            <td>
+                                <a th:href="@{/quiz/__${genres2.get(i).id}__}">
+                                    <p>[[${genres2.get(i).id}]]. [[${genres2.get(i).genre_name}]]</p>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__}">
+                                    <p>[[${genres2.get(i+1).id}]]. [[${genres2.get(i+1).genre_name}]]</p>
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -145,7 +62,7 @@
                     <tr>
                         <td>
                             <a th:href="@{/quiz/99}">
-                                <p>99. すべてのジャンル</p>
+                                <p>99. ランダム</p>
                             </a>
                         </td>
                     </tr>
