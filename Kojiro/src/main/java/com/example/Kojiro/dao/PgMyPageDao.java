@@ -1,9 +1,6 @@
 package com.example.Kojiro.dao;
 
-import com.example.Kojiro.entity.Scores;
-import com.example.Kojiro.entity.SignUp;
-import com.example.Kojiro.entity.Users;
-import com.example.Kojiro.entity.Weakness;
+import com.example.Kojiro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -64,6 +61,22 @@ public class PgMyPageDao implements MyPageDao {
                         "    order by count DESC"
                 ,param,
                 new DataClassRowMapper<>(Weakness.class));
+    }
+
+    @Override
+    public List<Concern> ConcernFindMe(int userId){
+        var param=new MapSqlParameterSource();
+        param.addValue("user_id",userId);
+        return jdbcTemplate.query("select flags.user_id,questions.sentence,cast(questions.answer as varchar(10)),questions.explain,questions.file\n" +
+                "from flags\n" +
+                "join questions\n" +
+                "on flags.q_id = questions.id\n" +
+                "union \n" +
+                "select flags.user_id,questions_2points.sentence,questions_2points.answer,questions_2points.explain,questions_2points.file\n" +
+                "from flags\n" +
+                "join questions_2points\n" +
+                "on flags.q_id_2points = questions_2points.id\n" +
+                "where user_id = :user_id;",param,new DataClassRowMapper<>(Concern.class));
     }
 
 }

@@ -1,10 +1,7 @@
 package com.example.Kojiro.service;
 
 import com.example.Kojiro.dao.MyPageDao;
-import com.example.Kojiro.entity.Scores;
-import com.example.Kojiro.entity.SignUp;
-import com.example.Kojiro.entity.Users;
-import com.example.Kojiro.entity.Weakness;
+import com.example.Kojiro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +29,6 @@ public class PgMyPageService implements MyPageService {
     public List<Weakness> WeaknessFindMe(int userId){
         return myPageDao.WeaknessFindMe(userId);
     }
+    @Override
+    public List<Concern> ConcernFindMe(int userId){return myPageDao.ConcernFindMe(userId);}
 }

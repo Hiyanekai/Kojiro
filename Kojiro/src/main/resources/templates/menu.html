@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="/weakness" class="menu-link">
                             <div class="link-box">
                                 <img src="./images/バツ.png">
                                 <h3 class="img-label">あなたの<br>苦手分野</h3>
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="/concern" class="menu-link">
                             <div class="link-box">
                                 <img src="./images/気になった問題.png">
                                 <h3 class="img-label">気になった<br>問題</h3>
@@ -58,7 +58,7 @@
                 <h1 class="img-label">問題集</h1>
                 <ul class="flex">
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="/test" class="menu-link">
                             <div class="link-box">
                                 <img src="./images/模擬試験.png">
                                 <h3 class="img-label">模擬試験<br><br></h3>
@@ -95,8 +95,8 @@
                 </ul>
             </div>
         </li>
-
-        <!-- <li>
+<!--jji-->
+         <li th:if="${session.users.role==1}">
             <div class="sub-menu">
                 <h1 class="img-label">管理者</h1>
                 <ul class="flex">
@@ -128,7 +128,7 @@
                     </li>
                 </ul>
             </div>
-        </li> -->
+        </li>
 
         <li>
             <div class="sub-menu">
@@ -143,7 +143,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.neumann.jp/product/musasi" class="menu-link">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKBGGI4wlmCOGXspAVj-orBJHZgLUpZvpgRRjj430z8euOWQ/viewform?usp=pp_url"
+                           target="_blank" rel="noreferrer noopener"
+                           class="menu-link">
                             <div class="link-box">
                                 <img src="./images/お問い合わせ.png">
                                 <h3 class="img-label">お問い合わせ<br></h3>
