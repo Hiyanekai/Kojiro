@@ -1,5 +1,6 @@
 package com.example.Kojiro.dao;
 
+import com.example.Kojiro.entity.Concern;
 import com.example.Kojiro.entity.Scores;
 import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.entity.Weakness;
@@ -11,4 +12,5 @@ public interface MyPageDao {
     public List<Scores> findAll();
     public List<Scores> findMe(int userId);
     public List<Weakness> WeaknessFindMe(int userId);
+    public List<Concern> ConcernFindMe(int userId);
 }
