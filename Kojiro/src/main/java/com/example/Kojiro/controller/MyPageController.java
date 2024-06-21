@@ -47,6 +47,14 @@ public class MyPageController {
         return "weakness";
     }
 
+    @GetMapping("/concern")
+    public String concern(Model model){
+        var user=(Users)session.getAttribute("users");
+        model.addAttribute("concernList",myPageService.ConcernFindMe(user.id()));
+
+        return "concern";
+    }
+
 
 
 
