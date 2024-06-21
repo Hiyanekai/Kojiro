@@ -2,7 +2,7 @@
     width: 1500px;
     /* height: 450px; */
     position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
     text-align: center;
@@ -69,3 +69,15 @@ a{
     text-align: center;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
