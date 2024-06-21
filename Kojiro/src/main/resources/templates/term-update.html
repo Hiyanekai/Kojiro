@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>用語集管理更新</title>
-    <link th:href="@{/css/user-management.css}" rel="stylesheet">
+    <link th:href="@{/css/management.css}" rel="stylesheet">
 </head>
 <body>
+<div class="header">
+    <th:block th:insert="/common/header"></th:block>
+</div>
+<h1 class="site_logo">
+    用語更新
+</h1>
 <div class="insert">
-    <h1>用語集管理更新</h1>
     <div class="discription">
         <p>
             （<span class="required"></span>は必須です）
