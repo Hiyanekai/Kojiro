@@ -14,7 +14,7 @@
         <form action="" method="post" th:object="${add}">
             <fieldset class="label-130">
                 <div>
-                    <label class="required">単元:</label> <select name="subject" th:field="${add.genre}">
+                    <label class="required">単元:</label> <select name="subject" id="subject" onchange="change()" th:field="${add.genre}">
                     <option value="1">運転者の心得</option>
                     <option value="2">信号に従うこと</option>
                     <option value="3">標識・標示などに従うこと</option>
@@ -44,23 +44,32 @@
                     <option value="27">経路の設計</option>
                     <option value="28">高速道路での運転</option>
                     <option value="29">二人乗り運手に関する知識</option>
+                    <option value="30">危険予測ディスカッション</option>
                 </select>
                 </div>
                 <div>
                     <label class="required">問題</label>
-                    <input type="text" name="description"  class="base-text" th:field="${add.sentence}">
+                    <textarea name="description"  class="base-text" th:field="${add.sentence}"></textarea>
                     <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
                 </div>
                 <div>
-                    <label class="required">解答</label>
-                    <select name="anser" th:field="${add.answer}">
-                        <option value="0">〇</option>
-                        <option value="1">×</option>
+                    <label class="required" >解答</label>
+                    <select name="answer" th:field="${add.answer}" id="answer">
+                        <option value="000" class="option2">〇〇〇</option>
+                        <option value="001" class="option2">〇〇×</option>
+                        <option value="010" class="option2">〇×〇</option>
+                        <option value="011" class="option2">〇××</option>
+                        <option value="100" class="option2">×〇〇</option>
+                        <option value="101" class="option2">×〇×</option>
+                        <option value="110" class="option2">××〇</option>
+                        <option value="111" class="option2">×××</option>
+                        <option value="0" class="option1" selected>〇</option>
+                        <option value="1" class="option1">×</option>
                     </select>
                 </div>
                 <div>
                     <label class="required">解説</label>
-                    <input type="text" name="description"  class="base-text" th:field="${add.explain}">
+                    <textarea name="description"  class="base-text" th:field="${add.explain}"></textarea>
                     <span class="error" th:each="error: ${#fields.errors('explain')}">[[ ${error} ]]</span>
                 </div>
                 <div>
@@ -70,8 +79,8 @@
                 <div>
                     <label class="required">点数</label>
                     <select name="points" th:field="${add.score}">
-                        <option value="1">1点</option>
-                        <option value="2">2点</option>
+                        <option id="point1" value="1">1点</option>
+                        <option id="point2" value="2">2点</option>
                     </select>
                 </div>
             </fieldset>
@@ -82,5 +91,39 @@
         </form>
     </div>
 </div>
+<script th:inline="javascript">
+    function change(){
+        var option1 = document.getElementsByClassName("option1");
+        var option2 = document.getElementsByClassName("option2");
+
+        var point1 = document.getElementById("point1");
+        var point2 = document.getElementById("point2");
+
+        console.log(option2.length);
+
+        if(subject.value == 30){
+            console.log("選択肢追加");
+            for(var i = 0; i < option2.length; i++){
+                if(i < 2) option1[i].style.display = 'none';
+                option2[i].style.display = 'block';
+            }
+            option2[0].selected = true;
+            point1.style.display = 'none';
+            point2.style.display = 'block';
+            point2.selected = true;
+        }else{
+            for(var i = 0; i < option2.length; i++){
+                console.log(i);
+                if(i < 2) option1[i].style.display = 'block';
+                option2[i].style.display = 'none';
+            }
+            option1[0].selected = true;
+            point1.style.display = 'block';
+            point1.selected = true;
+            point2.style.display = 'none';
+        }
+    }
+
+</script>
 </body>
 </html>

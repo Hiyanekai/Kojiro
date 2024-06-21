@@ -37,7 +37,6 @@ public class LoginController {
         var result = pgLoginService.findbylogin(loginForm.getUserId(), loginForm.getPassword());
         session.setAttribute("users", result);
         if (bindingResult.hasErrors()) {
-            System.out.println("nnn");
             return "index";
         }else if (result != null) {
             return "redirect:/menu";
@@ -65,7 +64,7 @@ public class LoginController {
             return "sign-up-success";
 
         } else {
-            model.addAttribute("error", "IDまたはパスワードが不正です");
+            model.addAttribute("error", "ユーザー名がすでに使用されいます。");
             return "sign-up";
         }
 

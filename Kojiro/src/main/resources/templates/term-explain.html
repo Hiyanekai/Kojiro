@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用語詳細</title>
+    <link th:href="@{/css/term-explain.css}" rel="stylesheet">
+</head>
+<body>
+<div class="title">
+    <img src="/images/カエル.png" alt="蛙">
+    <h1>
+        用語集
+    </h1>
+    <img src="/images/ウサギ.png" alt="ウサギ">
+</div>
+<!--<form method="get" action="#" class="search-form" >-->
+<!--    <div class="search-container">-->
+<!--        <input type="text" name="keyword" size="25" placeholder="検索">-->
+<!--        <input type="submit" value="&#xf002">-->
+<!--    </div>-->
+<!--</form>-->
+<h2 class="term">
+    <input type="text" name="explain1" readonly class="word" th:value="${term.term_name}">
+</h2>
+<div class="fusen">
+    <div class="fusen-1">
+        <img th:if="${base64Data}!=null" th:src="${base64Data}" class="picture"><br>
+    </div>
+    <div class="fusen-2">
+<!--        <input type="textarea" name="explain" readonly class="explain" th:value="${term.explain}">-->
+<!--        <textarea name="explain" readonly class="explain">${term.explain}</textarea>-->
+        <table>
+            <tr>
+                <td class="explain" th:text="${term.explain}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="btn">
+    <input type="button" name="button" onclick="location.href='/word'" value="戻る">
+</div>
+</body>
+</html>

@@ -42,6 +42,7 @@
     width: fit-content;
     margin: auto;
 }
+
 .btn{
     width: 100px;
     height: 50px;
@@ -55,12 +56,21 @@
     border: none;
     border-radius: 10px;
 }
-#circle{
+#circle, #circle1, #circle2, #circle3{
     background-color: red;
 }
 #cross{
     background-color: blue;
 }
+#cross1, #cross2, #cross3{
+    background-color: lightgray;
+}
+/*#circle1:hover, #circle2:hover, #circle3:hover{
+    background-color: red;
+}
+#cross1:hover, #cross2:hover, #cross3:hover{
+    background-color: blue;
+}*/
 #cross:hover, #circle:hover, #link-btn:hover{
     background-color: lightgray;
 }
@@ -80,4 +90,23 @@
 img{
     object-fit: cover;
     height: 200px;
+}
+/* 危険予測ディスカッション */
+.quiz-area{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+#ans{
+    margin-left: 200px;
+    margin-right: 200px;
+
+    background-color: midnightblue;
+    color: white;
+
+    /*border: solid 3px midnightblue;*/
+}
+#ans:hover{
+    /*color: midnightblue;*/
+    background-color: lightgray;
 }
