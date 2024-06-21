@@ -41,7 +41,8 @@
                     <td th:text="${q_management.answer}"></td>
                     <td th:text="${q_management.explain}"></td>
                     <td th:text="${q_management.genre}"></td>
-                    <td><a class="detail_btn" th:href="@{/quiz-detail/{id}(id=${q_management.id})}">詳細</a></td>
+<!--                    <td><a class="detail_btn" th:href="@{/quiz-detail/{id}(id=${q_management.id})}">詳細</a></td>-->
+                    <td><a class="detail_btn" th:href="@{/quiz-detail/__${q_management.id}__/{genre}(genre=${q_management.genre})}">詳細</a></td>
                 </tr>
             </tbody>
         </table>

@@ -65,7 +65,6 @@ body {
   font-family: Miryo;
   width: 90%;
   margin: auto;
-  background-color: #dce3e7;
 }
 
 #app {
@@ -80,7 +79,7 @@ table {
 }
 
 table th {
-  background:#949da7;
+  background:#68a9eb;
 	font-weight: bold;
 	color:#fff;
 }
@@ -91,15 +90,11 @@ table th,table td{
 }
 
 table tr:nth-child(odd){
-  background:#ffffff;
-}
-
-td{
-  background-color: #ffffff;
+  background:#F7EFE3;
 }
 
 .detail_btn {
-  background-color:#9299a0;
+  background-color:#004a94;
   display: block;       /* リンクをブロックレベル化して表示 */
   padding: 5px 10px 5px 10px;
 }
@@ -269,7 +264,6 @@ hr {
 .search-container input[type="text"]{
   border: none;
   height: 2.0em;
-  background-color: #dce3e7;
 }
 .search-container input[type="text"]:focus {
   outline: 0;
@@ -329,7 +323,7 @@ hr {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: #ffffff;
+	background-color: transparent;
 	background-image: none;
 	border: 1px solid rgba(0, 0, 0, 0.16);
 	border-radius: 0;
@@ -433,7 +427,7 @@ h1 a {
 }
 
 .update .form-body form {
-  width: 600px;
+  width: 1000px;
 }
 
 .update .product-img {
@@ -455,22 +449,6 @@ h1 a {
   margin-right: auto;
 }
 
-.option2{
-    display: none;
-}
-
-<<<<<<<< HEAD:Kojiro/src/main/resources/static/css/management.css
 .btn-area .btn {
   display: inline-block;
 }
-
-
-========
-.option2{
-    display: none;
-}
-
-.btn-area .btn {
-  display: inline-block;
-}
->>>>>>>> 61aab01aaeee989318bbfd630875b36da6ddfb70:Kojiro/src/main/resources/static/css/user-management.css
