@@ -23,10 +23,12 @@
         <div>
           <label>問題</label>
           <input type="text" name="description" readonly class="base-text" style="background-color: rgb(209, 209, 209);" th:value="${q_management.sentence}">
+<!--          <textarea name="description" readonly class="base-text" style="background-color: rgb(209, 209, 209);" th:value="${q_management.sentence}"></textarea>-->
         </div>
         <div>
           <label>解答</label>
           <input type="text" name="productId" readonly class="base-text" th:value="${q_management.answer}">
+<!--          <textarea name="productId" readonly class="base-text" th:value="${q_management.answer}"></textarea>-->
         </div>
         <div>
           <label>解説</label>
@@ -40,8 +42,8 @@
       <div>
         <div class="btns">
           <!-- openModal -->
-          <input type="button" id="delete-btn" th:onclick="|location.href='/quiz-delete/__${id}__'|" value="削除" class="delete-btn">
-          <input type="button" th:onclick="|location.href='/quiz-update/__${id}__'|" value="更新" class="kousin-btn">
+          <input type="button" id="delete-btn" th:onclick="|location.href='/quiz-delete/__${id}__/__${q_management.genre}__'|" value="削除" class="delete-btn">
+          <input type="button" th:onclick="|location.href='/quiz-update/__${id}__/__${q_management.genre}__'|" value="更新" class="kousin-btn">
           <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
         </div>
       </div>

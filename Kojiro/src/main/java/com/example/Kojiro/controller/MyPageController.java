@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//適当
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class MyPageController {
     @Autowired
@@ -42,17 +45,25 @@ public class MyPageController {
     @GetMapping("/weakness")
     public String weakness(Model model){
         var user = (Users)session.getAttribute("users");
+        var missList = myPageService.WeaknessFindMe(user.id());
+        double othersRate = 0.0;
+        List<String> genreNames = new ArrayList<>();
+        List<Double> genreRates = new ArrayList<>();
+        for(var i = 0; i < missList.size(); i++){
+            if(i < 10) {
+                genreNames.add(missList.get(i).genre_name());
+                genreRates.add(missList.get(i).mistake_rate());
+            } else {
+                othersRate += missList.get(i).mistake_rate();
+            }
+        }
+        genreNames.add("その他");
+        genreRates.add(othersRate);
         model.addAttribute("missList",myPageService.WeaknessFindMe(user.id()));
+        model.addAttribute("genreNames", genreNames);
+        model.addAttribute("genreRates", genreRates);
 
         return "weakness";
-    }
-
-    @GetMapping("/concern")
-    public String concern(Model model){
-        var user=(Users)session.getAttribute("users");
-        model.addAttribute("concernList",myPageService.ConcernFindMe(user.id()));
-
-        return "concern";
     }
 
 
