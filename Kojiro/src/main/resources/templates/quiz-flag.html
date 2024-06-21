@@ -53,16 +53,19 @@
     </div>
 </div>
 <div class="flag-del">
-    <button class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==100}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==999}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
 </div>
 <div class="change-page">
-    <button onclick="location.href='/menu'" class="btn" id="link-btn">メニューへ戻る</button>
+    <button onclick="location.href='/return-menu'" class="btn" id="link-btn">メニューへ戻る</button>
     <button th:if="${qNum!=questions.size()}" th:onclick="|location.href='/quiz/__${gId}__/next'|" class="btn" id="next">次の問題へ</button>
 </div>
 <script th:inline="javascript">
     const nextBtn = document.getElementById("next");
     const qNum = /*[[${qNum}]]*/"qNum";
     const qMax = /*[[${questions.size()}]]*/"questions.size()";
+    const name = /*[[${questions}]]*/"questions";
+    console.log(name[0]);
 
     const ans = /*[[${ans}]]*/"ans";
     const correct = /*[[${correct}]]*/"correct";
@@ -70,8 +73,7 @@
     var answer = document.getElementById("answer");
     var ansText = document.getElementById("ans-text");
 
-    if(qNum==10) nextBtn.style.display = 'none';
-
+    console.log("解答");
     if(ans == correct){
         answer.innerHTML = "〇";
         answer.style.color = "#ffb3b3";
@@ -84,6 +86,7 @@
     }else{
         answer.innerHTML = "✖";
         answer.style.color = "#b3c7ff";
+        /*answer.style.color = "#ffb3b3";*/
         answer.classList.add("ans");
         setTimeout(function(){
             answer.style.display = 'none';
