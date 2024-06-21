@@ -43,7 +43,7 @@ form ~ div, table ~ div {
 .search-container input[type="text"]{
     border: none;
     height: 2.0em;
-    background-color: #dce3e7;
+    background-color: #f6f6f6;
 }
 
 .search-container input[type="text"]:focus {
