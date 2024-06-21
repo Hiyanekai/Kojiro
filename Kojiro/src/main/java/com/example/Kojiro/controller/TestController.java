@@ -239,4 +239,10 @@ public class TestController {
 //        model.addAttribute("testScore",testScore);　//採点結果表示用の変数addAttribute
         return "result";
     }
+
+    @GetMapping("/csrf-counter")
+    public String error1(){
+        return "csrf-counter";
+    }
+
 }

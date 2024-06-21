@@ -145,3 +145,16 @@ input[name="button"]{
     text-align: center;
     padding-top: 20px;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

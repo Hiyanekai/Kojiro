@@ -6,6 +6,9 @@
     <link th:href="@{/css/term-explain.css}" rel="stylesheet">
 </head>
 <body>
+<div class="header">
+    <th:block th:insert="/common/header"></th:block>
+</div>
 <div class="title">
     <img src="/images/カエル.png" alt="蛙">
     <h1>
@@ -13,12 +16,6 @@
     </h1>
     <img src="/images/ウサギ.png" alt="ウサギ">
 </div>
-<!--<form method="get" action="#" class="search-form" >-->
-<!--    <div class="search-container">-->
-<!--        <input type="text" name="keyword" size="25" placeholder="検索">-->
-<!--        <input type="submit" value="&#xf002">-->
-<!--    </div>-->
-<!--</form>-->
 <h2 class="term">
     <input type="text" name="explain1" readonly class="word" th:value="${term.term_name}">
 </h2>
@@ -27,8 +24,6 @@
         <img th:if="${base64Data}!=null" th:src="${base64Data}" class="picture"><br>
     </div>
     <div class="fusen-2">
-<!--        <input type="textarea" name="explain" readonly class="explain" th:value="${term.explain}">-->
-<!--        <textarea name="explain" readonly class="explain">${term.explain}</textarea>-->
         <table>
             <tr>
                 <td class="explain" th:text="${term.explain}"></td>
