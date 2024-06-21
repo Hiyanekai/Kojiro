@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/weakness.css">
   <title>苦手分野</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0 "></script>
+  <script src="https://unpkg.com/chartjs-plugin-colorschemes"></script>
+</head>
 <body>
 <h1>あなたの苦手分野</h1>
+<canvas id="myChart" width="600px" height="600px"></canvas>
 <br><br>
 <div class="list-box">
   <div class="tit-bor"><p class="list-tit"><span>苦手分野割合</span></p></div>
@@ -15,6 +20,58 @@
 
   </ul>
 </div>
+  <script type="text/javascript" th:inline="javascript">
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var genreNames = [[ ${genreNames} ]];
+
+    console.log(genreNames[0]);
+
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: [[ ${genreNames} ]],
+
+            datasets: [{
+                label: '# of Votes',
+                data: [[ ${genreRates} ]],
+
+
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(200, 200, 200, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(200, 200, 200, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+<!--        plugins: [ChartDataLabels],-->
+        options: {
+            responsive: false,
+            maintainAspectRatio: true,
+            plugins: {
+<!--    datalabels: { // パーセンテージからラベル表記に変更-->
+<!--             formatter: function(value, context) {-->
+<!--               return context.chart.data.labels[context.dataIndex];-->
+<!--             }-->
+
+<!--           },-->
+<!--           colorschemes: {-->
+<!--                  scheme: 'tableau.Tableau20'-->
+<!--              }-->
+         }
+              },
+<!--               plugins: [ChartDataLabels]-->
+          });
+  </script>
 </body>
-</head>
+
 </html>
