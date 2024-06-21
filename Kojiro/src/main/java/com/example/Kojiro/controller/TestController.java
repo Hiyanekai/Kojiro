@@ -23,6 +23,10 @@ public class TestController {
     @Autowired
     private PgQuestionsService pgQuestionsService;
 
+    @GetMapping("cation")
+    public String cation(){
+        return "cation";
+    }
 
     //テスト表示用
     @GetMapping("test")
@@ -240,8 +244,6 @@ public class TestController {
         for(Flags flag : flagsList){
             pgQuestionsService.insertFlags(flag);//flagクラスに問題を追加
         }
-
-        testDataP2.forEach(System.out::println);
 
         model.addAttribute("times",times);//HTMLに受け渡し(ユーザーの受けたテストの回数 表示したいtest_resultsのscore_id)
         model.addAttribute("result",results);//1点問題 回答結果の受け渡し(TestResults型配列　取得テーブル:test_results)
