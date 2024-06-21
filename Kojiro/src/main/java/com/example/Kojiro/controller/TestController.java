@@ -80,7 +80,7 @@ public class TestController {
         else if (!sessionToken.equals(token)){//正規トークンか判定
             return "csrf-counter";//異なる場合、カウンター画面に遷移
         }
-        session.removeAttribute("token");//トークンを削除(必須)
+        //session.removeAttribute("token");//トークンを削除(必須)
 
 
         //Mapで問題IDを取得
