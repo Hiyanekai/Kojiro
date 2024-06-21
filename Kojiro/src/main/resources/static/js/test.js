@@ -3,7 +3,7 @@
 /* ローカルスコープ */
 
 window.addEventListener('DOMContentLoaded', ()=>{
-  const t0=60*60*1000;
+  const t0=50*60*1000;
   const t1=new Date().getTime();
   const form = document.querySelector('form'); // フォーム要素を取得
 

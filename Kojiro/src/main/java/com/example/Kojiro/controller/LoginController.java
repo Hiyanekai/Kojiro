@@ -78,6 +78,6 @@ public class LoginController {
     @GetMapping("/logout.html")
     public String logout1(){
         session.invalidate();
-        return "logout.html";
+        return "logout";
     }
 }

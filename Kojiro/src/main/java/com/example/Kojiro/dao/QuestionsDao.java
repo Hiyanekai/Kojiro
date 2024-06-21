@@ -16,4 +16,11 @@ public interface QuestionsDao {
 
     int insertMiss(Misses miss);
 
+    int insertFlags(Flags miss);
+
+    int insertScores(Scores scores);
+    int insertTestResults(TestResults results);
+
+    int insertTestResultsP2(TestResults results);
+
 }

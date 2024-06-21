@@ -16,4 +16,12 @@ public interface QuestionsService {
     QuestionsP2 findQuestionP2(int id);
 
     int insertMiss(Misses miss);
+
+    int insertFlags(Flags flags);
+
+    int insertScores(Scores scores);
+
+    int insertTestResults(TestResults results);
+
+    int insertTestResultsP2(TestResults results);
 }
