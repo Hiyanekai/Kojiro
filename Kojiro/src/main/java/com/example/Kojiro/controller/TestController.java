@@ -226,7 +226,7 @@ public class TestController {
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
         //受験日、ユーザーID、点数等の受験結果を保持する変数を作成
-        Scores testScore = new Scores(0, user.id(), score, str1);
+        Scores testScore = new Scores(0, user.id(), score,times,str1);
         //受験結果をScoreテーブルに追加
         pgQuestionsService.insertScores(testScore);
 
@@ -244,7 +244,7 @@ public class TestController {
         for(Flags flag : flagsList){
             pgQuestionsService.insertFlags(flag);//flagクラスに問題を追加
         }
-
+        model.addAttribute("userName",user.user_id());
         model.addAttribute("times",times);//HTMLに受け渡し(ユーザーの受けたテストの回数 表示したいtest_resultsのscore_id)
         model.addAttribute("result",results);//1点問題 回答結果の受け渡し(TestResults型配列　取得テーブル:test_results)
         model.addAttribute("resultP2",resultsP2);//2点問題 回答結果の受け渡し（TestResults型配列　取得テーブル:test_results_2points）
@@ -260,3 +260,4 @@ public class TestController {
     }
 
 }
+//aaaaaaa

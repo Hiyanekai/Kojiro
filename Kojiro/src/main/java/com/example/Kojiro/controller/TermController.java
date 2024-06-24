@@ -17,7 +17,7 @@ import java.util.Base64;
 
 @Controller
 public class TermController {
-
+//aaaaaa
     @Autowired
     TermService termService;
     @Autowired

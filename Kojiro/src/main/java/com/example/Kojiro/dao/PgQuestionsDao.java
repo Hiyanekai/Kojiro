@@ -73,8 +73,9 @@ public class PgQuestionsDao implements QuestionsDao{
         var param = new MapSqlParameterSource();
         param.addValue("user_id", scores.user_id());
         param.addValue("score", scores.score());
+        param.addValue("score_id", scores.score_id());
         param.addValue("test_date", scores.test_date());
-        return jdbcTemplate.update("INSERT INTO scores(user_id,score,test_date) VALUES(:user_id,:score,:test_date)", param);
+        return jdbcTemplate.update("INSERT INTO scores(user_id,score,score_id,test_date) VALUES(:user_id,:score,:score_id,:test_date)", param);
     }
 
     @Override

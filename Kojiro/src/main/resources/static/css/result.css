@@ -119,7 +119,7 @@
 }
 
 /* 図 */
-img{
+img .checkImage{
 
     object-fit: cover;
     height: 200px;
@@ -145,7 +145,7 @@ img{
 .inline{
     display: flex;
     justify-content: center;
-    margin-left: 100px
+    margin-left: 10
 }
 
 ////
@@ -492,4 +492,27 @@ form{
 .score-card span {
     font-weight: bold;
     color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
+
+.header img {
+    width: 260px;
+    height: 60px;
+}
+
+.user{
+    font-size: 15px;
+    font-weight: lighter;
 }
