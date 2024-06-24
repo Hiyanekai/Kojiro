@@ -99,7 +99,7 @@ public class MyPageController {
 //        }
         model.addAttribute("users", user);
         model.addAttribute("scoredetailList",testResult);
-        model.addAttribute("scores",myPageService.findByIdForScores(scoreId));
+        model.addAttribute("scores",myPageService.findByIdForScores(user.id(),scoreId));
 
 
 

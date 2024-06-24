@@ -17,8 +17,8 @@ public class PgMyPageService implements MyPageService {
     }
 
     @Override
-    public Scores findByIdForScores(int id) {
-        return myPageDao.findByIdForScores(id);
+    public Scores findByIdForScores(int userId,int scoreId) {
+        return myPageDao.findByIdForScores(userId,scoreId);
     }
 
     @Override
