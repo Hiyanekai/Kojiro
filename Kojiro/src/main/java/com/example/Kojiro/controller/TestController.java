@@ -33,11 +33,6 @@ public class TestController {
         return "cation";
     }
 
-    @GetMapping("cation")
-    public String cation(){
-        return "cation";
-    }
-
     //テスト表示用
     @GetMapping("test")
     public String test(Model model){
