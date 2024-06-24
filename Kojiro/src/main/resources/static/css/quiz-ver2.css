@@ -1,7 +1,7 @@
 .q-header{
     display: flex;
     width: fit-content;
-    margin: auto;
+    margin: 0 auto;
 }
 .genre-name{
     margin: 25px;
@@ -87,7 +87,7 @@
     font-size: 20px;
 }
 /* 図 */
-img{
+.q-img img{
     object-fit: cover;
     height: 200px;
 }
