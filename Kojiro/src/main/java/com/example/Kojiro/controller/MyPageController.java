@@ -80,6 +80,12 @@ public class MyPageController {
     public String scoredetail(@PathVariable("id") int scoreId, Model model){
         var user=(Users)session.getAttribute("users");
         var testResult = myPageService.ScoreDetailFindMe(user.id(),scoreId);
+//        var times =myPageService.findMe(user.id());
+//        for(int i = 0;i < times.size();i++){
+//            if(scoreId==times.get(i).id()){
+//                model.addAttribute("times",i+1)
+//            }
+//        }
         model.addAttribute("users", user);
         model.addAttribute("scoredetailList",testResult);
         model.addAttribute("scores",myPageService.findByIdForScores(scoreId));

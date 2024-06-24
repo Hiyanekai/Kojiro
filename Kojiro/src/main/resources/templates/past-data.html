@@ -13,6 +13,7 @@
 <h1>過去のテスト結果</h1>
 <table class="design01">
   <tr>
+    <th>受験回数</th>
     <th>受験日</th>
     <th>点数</th>
     <th>合否</th>
@@ -20,10 +21,11 @@
   </tr>
   <tbody>
   <tr th:each="data : ${dataList}">
+    <td th:text="${data.score_id}"></td>
     <td th:text="${data.test_date.split(' ')[0]}"></td>
     <td th:text="${data.score}"></td>
     <td th:text="${data.score>=90}? '合格':'不合格'"></td>
-    <td><a class="detail_btn" th:href="@{/scoredetail/__${data.id}__}">詳細</a></td>
+    <td><a class="detail_btn" th:href="@{/scoredetail/__${data.score_id}__}">詳細</a></td>
   </tr>
   </tbody>
 </table>
