@@ -54,7 +54,7 @@
             </fieldset>
             <div class="btns">
                 <input type="button" onclick="openModal()" value="更新" class="kousin-btn">
-                <input type="button" th:onclick="|location.href='/terms/${update.id}'|" value="戻る" class="cancel-btn">
+                <input type="button" th:onclick="|location.href='/term-detail/${update.id}'|" value="戻る" class="cancel-btn">
             </div>
              <div id="modal">
                  <p class="modal-message">登録しますか？</p>

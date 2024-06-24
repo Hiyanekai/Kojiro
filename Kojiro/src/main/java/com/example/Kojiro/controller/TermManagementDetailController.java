@@ -23,7 +23,7 @@ public class TermManagementDetailController {
     @Autowired
     TermManagementDetailService TermManagementService;
 
-    @GetMapping("/terms/{id}")
+    @GetMapping("/term-detail/{id}")
     public String termDetail(@PathVariable int id, Model model) {
         TermManagementDetail detail = TermManagementService.findById(id);
 //        var genres = TermManagementService.findByGenres(detail.genre_id());
