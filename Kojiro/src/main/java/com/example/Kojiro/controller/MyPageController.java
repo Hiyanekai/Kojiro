@@ -48,6 +48,8 @@ public class MyPageController {
     public String weakness(Model model){
         var user = (Users)session.getAttribute("users");
         var missList = myPageService.WeaknessFindMe(user.id());
+        System.out.println(missList==null);
+
         double othersRate = 0.0;
         List<String> genreNames = new ArrayList<>();
         List<Double> genreRates = new ArrayList<>();
