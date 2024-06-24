@@ -5,6 +5,7 @@ import com.example.Kojiro.entity.TermForm;
 import com.example.Kojiro.entity.TermManagement;
 import com.example.Kojiro.entity.TermManagementDetail;
 import com.example.Kojiro.service.PgTermManagementService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class TermManagementController {
     private HttpSession session;
     @Autowired
     private PgTermManagementService pgTermManagementService;
+    @Autowired
+    private HttpServletRequest request;
 
 //    @GetMapping("/terms")
 ////    public String TermManagement(@ModelAttribute("termslist") Model model ) {
@@ -36,10 +39,11 @@ public class TermManagementController {
 
     @GetMapping("/term")
     public String TermManagement2(@RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         if (keyword.isEmpty()) {
-            model.addAttribute("termslist", pgTermManagementService.findAll());
+            model.addAttribute("termlist", pgTermManagementService.findAll());
         } else {
-            model.addAttribute("termslist", pgTermManagementService.findByTerm(keyword));
+            model.addAttribute("termlist", pgTermManagementService.findByTerm(keyword));
         }
         return "termmanagement";
     }
@@ -51,6 +55,7 @@ public class TermManagementController {
 
     @PostMapping("/termAddition")
     public String TermAddition2(@Validated @ModelAttribute("termaddition") TermForm termForm, BindingResult bindingResult, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         var result2 = pgTermManagementService.findtermAddition(termForm.getTerm_name());
         if (bindingResult.hasErrors()) {
             return "termAddition";
@@ -65,6 +70,7 @@ public class TermManagementController {
     }
 
     public void insertImgFiles(MultipartFile file) {
+//        if(request.getSession(false)==null) return "redirect:/index";
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {

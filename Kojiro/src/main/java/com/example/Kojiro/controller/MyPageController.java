@@ -6,6 +6,7 @@ import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.entity.Weakness;
 import com.example.Kojiro.form.MypageForm;
 import com.example.Kojiro.service.MyPageService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

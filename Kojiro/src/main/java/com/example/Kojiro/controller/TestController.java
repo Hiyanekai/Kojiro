@@ -1,7 +1,9 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.*;
+import com.example.Kojiro.form.LoginForm;
 import com.example.Kojiro.service.PgQuestionsService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,20 @@ public class TestController {
 
     @Autowired
     private PgQuestionsService pgQuestionsService;
+    @Autowired
+    private HttpServletRequest request;
+
+    @GetMapping("cation")
+    public String cartion() {
+        if(request.getSession(false)==null) return "redirect:/index";
+        return "cation";
+    }
 
 
     //テスト表示用
     @GetMapping("test")
     public String test(Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
 
         //ランダムな10桁のトークンを生成
         int length = 10;
@@ -69,6 +80,7 @@ public class TestController {
     public String testResult(@RequestParam Map<String, String> formData,
                              @RequestParam(name = "times") Integer times,
                              @RequestParam(name = "token") String token,Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
 
         String sessionToken = (String) session.getAttribute("token");//セッションにあるtokenタグのデータを取得
         var user = (Users)session.getAttribute("users");//セッションにあるuserタグのデータを取得
