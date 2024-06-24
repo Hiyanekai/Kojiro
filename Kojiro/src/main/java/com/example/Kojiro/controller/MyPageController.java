@@ -8,6 +8,7 @@ import com.example.Kojiro.entity.Weakness;
 import com.example.Kojiro.form.MypageForm;
 import com.example.Kojiro.form.ScoresForm;
 import com.example.Kojiro.service.MyPageService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,12 @@ public class MyPageController {
     @Autowired
     MyPageService myPageService;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping("/mypage")
     public String mypage(Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         model.addAttribute("user",myPageService.findById(user.id()));
         model.addAttribute("userDate", user.created_at().split(" ")[0]);
@@ -37,6 +42,7 @@ public class MyPageController {
 
     @GetMapping("/past-data")
     public String result(Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         model.addAttribute("dataList",myPageService.findMe(user.id()));
 
@@ -46,6 +52,7 @@ public class MyPageController {
 
     @GetMapping("/weakness")
     public String weakness(Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         var missList = myPageService.WeaknessFindMe(user.id());
         System.out.println(missList==null);
@@ -72,6 +79,7 @@ public class MyPageController {
 
     @GetMapping("/concern")
     public String concern(Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         model.addAttribute("concernList",myPageService.ConcernFindMe(user.id()));
         return "concern";
@@ -80,6 +88,7 @@ public class MyPageController {
 
     @GetMapping("/scoredetail/{id}")
     public String scoredetail(@PathVariable("id") int scoreId, Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         var user=(Users)session.getAttribute("users");
         var testResult = myPageService.ScoreDetailFindMe(user.id(),scoreId);
 //        var times =myPageService.findMe(user.id());
