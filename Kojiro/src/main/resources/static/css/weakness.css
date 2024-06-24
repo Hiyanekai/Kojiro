@@ -50,4 +50,19 @@ h1 {
   color:red;
   }
 
+.line{
+    display: flex;
+}
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

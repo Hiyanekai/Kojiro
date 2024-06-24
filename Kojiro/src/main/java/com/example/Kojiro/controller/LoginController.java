@@ -80,7 +80,7 @@ public class LoginController {
         return "sign-up-success";
     }
 
-    @GetMapping("/logout.html")
+    @GetMapping("/logout")
     public String logout1(){
         session.invalidate();
         return "logout";

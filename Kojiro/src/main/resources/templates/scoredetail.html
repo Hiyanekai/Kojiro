@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>模擬試験詳細</title>
+    <link href="/css/scoredetail" rel="stylesheet">
+</head>
+<!--th:fieldの問題IDを何回目のテストかを作成しておく-->
+<body>
+<div class="inline">
+    <div>
+        <div class="score-card">
+            <div class="score">得点: <span th:text="${scores.score}"></span></div>
+            <div class="exam-date">試験日: <span th:text="${scores.test_date}"></span></div>
+            <div class="user">受験者名: <span th:text="${users.user_id}"></span></div>
+        </div><div></div></div></div>
+
+
+</body>
+</html>

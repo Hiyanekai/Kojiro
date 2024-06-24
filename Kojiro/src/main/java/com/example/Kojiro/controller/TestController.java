@@ -33,6 +33,10 @@ public class TestController {
         return "cation";
     }
 
+    @GetMapping("cation")
+    public String cation(){
+        return "cation";
+    }
 
     //テスト表示用
     @GetMapping("test")
@@ -54,6 +58,11 @@ public class TestController {
         //作成したトークンをセッションにセット
         session.setAttribute("token", randomString);
 
+        //テスト用ユーザー
+//        var user = new Users(15,"a","a",2,"xx/xx/xx");
+//        session.setAttribute("users", user);
+        var user = (Users)session.getAttribute("users");//セッションにあるuserタグのデータを取得
+
         //1点問題90問の配列を取得するメソッドを呼び出す
         List<TestQuestion> testData = pgQuestionsService.findTest();
         model.addAttribute("testData",testData);
@@ -64,7 +73,7 @@ public class TestController {
 
         //テスト回数を判定
         int times = 1;
-        var resultDB = pgQuestionsService.findTestResult(15);//userIdを渡すことでそのユーザーのテスト履歴を検索
+        var resultDB = pgQuestionsService.findTestResult(user.id());//userIdを渡すことでそのユーザーのテスト履歴を検索
         if(resultDB != null){//テスト履歴が無い場合は1回目
             for(TestResults test_results : resultDB) {//回答用ループ
                 if (times == test_results.score_id()) times += 1;//テスト履歴がある場合、最新のカウントにする
@@ -92,7 +101,7 @@ public class TestController {
         else if (!sessionToken.equals(token)){//正規トークンか判定
             return "csrf-counter";//異なる場合、カウンター画面に遷移
         }
-        //session.removeAttribute("token");//トークンを削除(必須)
+        session.removeAttribute("token");//トークンを削除(必須)
 
 
         //Mapで問題IDを取得
@@ -134,9 +143,6 @@ public class TestController {
                 flagsQ_P2.add(Integer.parseInt(value));
             }
         });
-
-        flagsQ.forEach(System.out::println);
-        flagsQ_P2.forEach(System.out::println);
 
         //Mapでユーザーの回答を取得(2点問題)
         List<String> p2 = new ArrayList<>();
@@ -231,7 +237,7 @@ public class TestController {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");////今日の日付を取得
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
-        //受験日、ユーザーID、点数等の受験結果を保持する変数
+        //受験日、ユーザーID、点数等の受験結果を保持する変数を作成
         Scores testScore = new Scores(0, user.id(), score, str1);
         //受験結果をScoreテーブルに追加
         pgQuestionsService.insertScores(testScore);
@@ -251,10 +257,6 @@ public class TestController {
             pgQuestionsService.insertFlags(flag);//flagクラスに問題を追加
         }
 
-        //testData.forEach(System.out::println);
-        //results.forEach(System.out::println);
-        //System.out.println();
-        //miss.forEach(System.out::println);
         model.addAttribute("times",times);//HTMLに受け渡し(ユーザーの受けたテストの回数 表示したいtest_resultsのscore_id)
         model.addAttribute("result",results);//1点問題 回答結果の受け渡し(TestResults型配列　取得テーブル:test_results)
         model.addAttribute("resultP2",resultsP2);//2点問題 回答結果の受け渡し（TestResults型配列　取得テーブル:test_results_2points）

@@ -6,6 +6,9 @@
     <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
 </head>
 <body>
+<div class="header">
+    <th:block th:insert="/common/header"></th:block>
+</div>
     <div class="q-header">
         <div class="genre-name">
             <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
