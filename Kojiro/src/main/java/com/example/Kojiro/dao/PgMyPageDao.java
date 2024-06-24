@@ -34,10 +34,11 @@ public class PgMyPageDao implements MyPageDao {
     }
 
     @Override
-    public Scores findByIdForScores(int id) {
+    public Scores findByIdForScores(int userId,int scoreId) {
         var param=new MapSqlParameterSource();
-        param.addValue("id",id);
-        var r =  jdbcTemplate.query("SELECT * FROM scores where id = :id",param,
+        param.addValue("user_id",userId);
+        param.addValue("score_id",scoreId);
+        var r =  jdbcTemplate.query("SELECT * FROM scores where user_id = :user_id AND score_id= :score_id",param,
                 new DataClassRowMapper<>(Scores.class));
         return r.isEmpty()? null:r.get(0);
     }
@@ -80,6 +81,7 @@ public class PgMyPageDao implements MyPageDao {
                 "from flags\n" +
                 "join questions\n" +
                 "on flags.q_id = questions.id\n" +
+                "where user_id = :user_id\n"+
                 "union \n" +
                 "select flags.user_id,questions_2points.sentence,questions_2points.answer,questions_2points.explain,questions_2points.file\n" +
                 "from flags\n" +
