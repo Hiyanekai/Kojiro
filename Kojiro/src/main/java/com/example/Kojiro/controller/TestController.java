@@ -226,7 +226,7 @@ public class TestController {
         String str1 = sdf1.format(cl.getTime());//////////////////////////////////////////////
 
         //受験日、ユーザーID、点数等の受験結果を保持する変数を作成
-        Scores testScore = new Scores(0, user.id(), score, str1);
+        Scores testScore = new Scores(0, user.id(), score,times,str1);
         //受験結果をScoreテーブルに追加
         pgQuestionsService.insertScores(testScore);
 
