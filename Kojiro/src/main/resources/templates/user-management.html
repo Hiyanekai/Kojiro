@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>ユーザー管理</title>
-    <link th:href="@{/css/user-management.css}" rel="stylesheet">
+    <link th:href="@{/css/management.css}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
+    <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+    </div>
     <h1 class="site_logo">ユーザー管理</h1>
     <hr>
     <form method="get" action="user-management" class="search-form">

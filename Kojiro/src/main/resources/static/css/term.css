@@ -43,7 +43,7 @@ form ~ div, table ~ div {
 .search-container input[type="text"]{
     border: none;
     height: 2.0em;
-    background-color: #dce3e7;
+    background-color: #f6f6f6;
 }
 
 .search-container input[type="text"]:focus {
@@ -94,6 +94,7 @@ table, table th, table td {
     background:#949da7;
       font-weight: bold;
       color:#ffffff;
+      font-size: 25px;
   }
 
   table th,table td{
@@ -120,7 +121,7 @@ table, table th, table td {
     font-family: Miryo;
     width: 90%;
     margin: auto;
-    background-color: #dce3e7;
+    background-color: #f6f6f6;
 }
 
 td{

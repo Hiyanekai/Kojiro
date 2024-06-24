@@ -10,15 +10,20 @@
   <script src="https://unpkg.com/chartjs-plugin-colorschemes"></script>
 </head>
 <body>
+<div class="header">
+  <th:block th:insert="/common/header"></th:block>
+</div>
 <h1>あなたの苦手分野</h1>
-<canvas id="myChart" width="600px" height="600px"></canvas>
-<br><br>
-<div class="list-box">
-  <div class="tit-bor"><p class="list-tit"><span>苦手分野割合</span></p></div>
-  <ul class="list-design" th:each="data : ${missList}">
-    <li><a th:href="'/quiz/'+${data.genre_id}">[[${data.genre_name}]]</a><div>[[${data.mistake_rate}]]%</div></li>
+<div class="line">
+  <canvas id="myChart" width="800px" height="800px"></canvas>
+  <br><br>
+  <div class="list-box">
+    <div class="tit-bor"><p class="list-tit"><span>苦手分野割合</span></p></div>
+    <ul class="list-design" th:each="data : ${missList}">
+      <li><a th:href="'/quiz/'+${data.genre_id}">[[${data.genre_name}]]</a><div>[[${data.mistake_rate}]]%</div></li>
 
-  </ul>
+    </ul>
+  </div>
 </div>
   <script type="text/javascript" th:inline="javascript">
 
@@ -42,28 +47,42 @@
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
+                    '#8dff5c8a',
+                    '#41b3508a',
+                    '#e245a18a',
+                    '#2533f78a',
+                    '#75fee08a',
+                    '#fac9608a',
+                    '#c760fa8a',
                     'rgba(200, 200, 200, 0.5)'
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(200, 200, 200, 1)'
-                ],
+<!--                borderColor: [-->
+<!--                    'rgba(255, 99, 132, 1)',-->
+<!--                    'rgba(54, 162, 235, 1)',-->
+<!--                    'rgba(255, 206, 86, 1)',-->
+<!--                    '#8dff5c8a',-->
+<!--                    '#41b3508a',-->
+<!--                    '#e245a18a',-->
+<!--                    '#2533f78a',-->
+<!--                    '#75fee08a',-->
+<!--                    '#fac9608a',-->
+<!--                    '#c760fa8a',-->
+<!--                    'rgba(200, 200, 200, 1)'-->
+<!--                ],-->
                 borderWidth: 1
             }]
         },
-<!--        plugins: [ChartDataLabels],-->
+        plugins: [ChartDataLabels],
         options: {
             responsive: false,
             maintainAspectRatio: true,
             plugins: {
-<!--    datalabels: { // パーセンテージからラベル表記に変更-->
-<!--             formatter: function(value, context) {-->
-<!--               return context.chart.data.labels[context.dataIndex];-->
-<!--             }-->
+    datalabels: { // パーセンテージからラベル表記に変更
+             formatter: function(value, context) {
+               return context.chart.data.labels[context.dataIndex];
+             }
 
-<!--           },-->
+           },
 <!--           colorschemes: {-->
 <!--                  scheme: 'tableau.Tableau20'-->
 <!--              }-->

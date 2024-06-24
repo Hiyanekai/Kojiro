@@ -16,7 +16,7 @@ public class PgQuestionsDao implements QuestionsDao{
     @Override
     public List<TestQuestion> findTest() {
         return jdbcTemplate.query("SELECT q.id,g.genre_name AS genre,q.sentence,q.answer,q.explain,q.file,q.score FROM questions AS q " +
-                                       "JOIN genres AS g ON q.genre_id = g.id WHERE score = 1 ORDER BY random() LIMIT 10",
+                                       "JOIN genres AS g ON q.genre_id = g.id WHERE score = 1 ORDER BY random() LIMIT 90",
                 new DataClassRowMapper<>(TestQuestion.class));
     }
 
@@ -55,8 +55,49 @@ public class PgQuestionsDao implements QuestionsDao{
         var param = new MapSqlParameterSource();
         param.addValue("user_id", miss.user_ID());
         param.addValue("q_id", miss.q_id());
-        return jdbcTemplate.update("INSERT INTO miss(user_id,q_id) VALUES(:user_id,:q_id)", param);
+        param.addValue("q_id_2points", miss.q_id_2points());
+        return jdbcTemplate.update("INSERT INTO miss(user_id,q_id,q_id_2points) VALUES(:user_id,:q_id,:q_id_2points)", param);
     }
 
+    @Override
+    public int insertFlags(Flags flags){
+        var param = new MapSqlParameterSource();
+        param.addValue("user_id", flags.user_ID());
+        param.addValue("q_id", flags.q_id());
+        param.addValue("q_id_2points", flags.q_id_2points());
+        return jdbcTemplate.update("INSERT INTO flags(q_id,q_id_2points,user_id) VALUES(:q_id,:q_id_2points,:user_id)", param);
+    }
 
+    @Override
+    public int insertScores(Scores scores){
+        var param = new MapSqlParameterSource();
+        param.addValue("user_id", scores.user_id());
+        param.addValue("score", scores.score());
+        param.addValue("test_date", scores.test_date());
+        return jdbcTemplate.update("INSERT INTO scores(user_id,score,test_date) VALUES(:user_id,:score,:test_date)", param);
+    }
+
+    @Override
+    public int insertTestResults(TestResults results){
+        var param = new MapSqlParameterSource();
+        param.addValue("q_id", results.q_id());
+        param.addValue("user_select", Integer.parseInt(results.user_select()));
+        param.addValue("score_id", results.score_id());
+        param.addValue("score", results.score());
+        param.addValue("flag", results.flag());
+        param.addValue("user_id", results.user_id());
+        return jdbcTemplate.update("INSERT INTO test_results(q_id,user_select,score_id,score,flag,user_id) VALUES(:q_id,:user_select,:score_id,:score,:flag,:user_id)", param);
+    }
+
+    @Override
+    public int insertTestResultsP2(TestResults results){
+        var param = new MapSqlParameterSource();
+        param.addValue("q_id", results.q_id());
+        param.addValue("user_select", results.user_select());
+        param.addValue("score_id", results.score_id());
+        param.addValue("score", results.score());
+        param.addValue("flag", results.flag());
+        param.addValue("user_id", results.user_id());
+        return jdbcTemplate.update("INSERT INTO test_results_2points(q_id,user_select,score_id,score,flag,user_id) VALUES(:q_id,:user_select,:score_id,:score,:flag,:user_id)", param);
+    }
 }

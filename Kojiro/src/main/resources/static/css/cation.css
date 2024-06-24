@@ -1,0 +1,86 @@
+body{
+    background-color: #f6f6f6;
+}
+
+.taitle {
+    display: flex;
+    justify-content: center;
+    width: 450;
+    color: red;
+  }
+
+  .sentence{
+    font-size: 35px;
+    margin-left: 30px;
+  }
+
+  .line{
+    border: 2px solid #000000;
+    border-radius: 30px;
+
+  }
+
+  /**.strt-btn{
+    border-radius: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+
+  }**/
+  .btn,
+  a.btn,
+  button.btn {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-radius: 0.5rem;
+
+  }
+
+  a.btn--yellow {
+    align-items: center;
+    color: #000;
+    background-color: #67eb79;
+    border-bottom: 5px solid  rgb(53, 160, 101);
+  }
+
+  a.btn--yellow:hover {
+    margin-top: 3px;
+    color: #000;
+    background:  #0fae0f;
+    border-bottom: 2px solid #0fae0f;
+  }
+
+  .btn1{
+    text-align: center;
+    padding-top: 10px;
+  }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

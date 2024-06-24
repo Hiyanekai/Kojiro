@@ -6,8 +6,11 @@
   <link rel="stylesheet" href="/css/past-data.css">
   <title>過去テストの結果画面</title>
 <body>
-<h1>過去のテスト結果</h1>
+<div class="header">
+  <th:block th:insert="/common/header"></th:block>
+</div>
 
+<h1>過去のテスト結果</h1>
 <table class="design01">
   <tr>
     <th>受験日</th>
@@ -20,10 +23,11 @@
     <td th:text="${data.test_date.split(' ')[0]}"></td>
     <td th:text="${data.score}"></td>
     <td th:text="${data.score>=90}? '合格':'不合格'"></td>
-    <td><a class="detail_btn" href="./detail.html">詳細</a></td>
+    <td><a class="detail_btn" th:href="@{/scoredetail/__${data.id}__}">詳細</a></td>
   </tr>
   </tbody>
 </table>
+</form>
 </body>
 </head>
 </html>

@@ -1,20 +1,61 @@
-.design01 {
+body{
+  background-color:#f6f6f6;
+}
+
+/**.design01 {
     width: 80%;
     text-align: center;
     border-collapse: collapse;
     border-spacing: 0;
     margin-left: auto;
     margin-right: auto;
+    table-layout: fixed;
    }
    .design01 th {
+    font-weight: bold;
     padding: 10px;
     background:#949da7;
-    border: solid 1px #778ca3;
+    /*border: solid 3px #f2f9fd;*/
+    /**border:none;
    }
    .design01 td {
     padding: 10px;
-    border: solid 1px #778ca3;
-   }
+    /*border: solid 3px #dce3e7;*/
+    /**border:none;
+    background: white;
+   }**/
+
+   table, table th, table td {
+       border: solid 1px;
+     }
+
+     table {
+       margin: auto;
+       width: 80%;
+       border: none;
+       table-layout: fixed;
+     }
+
+     table th {
+       background:#949da7;
+         font-weight: bold;
+         color:#ffffff;
+         font-size: 25px;
+     }
+
+     table th,table td{
+       text-align: center;
+       border: none;
+     }
+
+     table tr:nth-child(odd){
+       background:#ffffff;
+     }
+
+     td{
+        background-color: #ffffff;
+     }
+
    h1 {
     background: #e7e7e7;/*背景色*/
     padding: 0.5em;/*文字まわり（上下左右）の余白*/
@@ -29,6 +70,8 @@
     display: block;       /* リンクをブロックレベル化して表示 */
     padding: 5px 10px 5px 10px;
     border-radius:30px;
+    color:white;
+    text-decoration: none;
   }
 
   .detail_btn:hover {
@@ -38,3 +81,21 @@
   a{
   color: black;
   }
+
+  th{
+  color: white;
+  font-width: bold;
+  }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

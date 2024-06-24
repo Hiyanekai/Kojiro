@@ -1,8 +1,10 @@
 .user_Infomation{
-    margin: 90px 100px 50px 100px;
+    margin: 20px 100px 50px 100px;
     text-align: center;
 }
-
+body{
+  background-color:#f6f6f6
+}
 h1{
     background: #e7e7e7;/*背景色*/
     padding: 0.5em;/*文字まわり（上下左右）の余白*/
@@ -60,4 +62,18 @@ text-decoration: none;
     border-top-right-radius: 50px 50px;
     border-bottom-left-radius: 50px 50px;
     border-bottom-right-radius: 50px 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  border: none;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
 }

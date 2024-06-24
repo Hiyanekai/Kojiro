@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>ユーザー更新</title>
-  <link th:href="@{/css/user-management.css}" rel="stylesheet">
+  <link th:href="@{/css/management.css}" rel="stylesheet">
 </head>
 <body>
 
 <div class="header">
-  <h1 class="site_logo">ユーザー管理更新</h1>
-  <div class="user">
-    <p class="user_name">ヘッダー</p>
-    </form>
-  </div>
+  <th:block th:insert="/common/header"></th:block>
 </div>
-
+<h1 class="site_logo">
+  ユーザー管理更新
+</h1>
 <hr>
 
 <div class="update">

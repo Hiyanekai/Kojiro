@@ -3,34 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>第[[${times}]]回模擬試験</title>
-    <link href="../css/test.css" rel="stylesheet">
+    <link href="../css/result.css" rel="stylesheet">
 </head>
 <!--th:fieldの問題IDを何回目のテストかを作成しておく-->
 <body>
     <div class="inline">
         <div>
+            <div class="score-card">
+                <div class="score">得点: <span th:text="${testScore.score}"></span></div>
+                <div class="exam-date">試験日: <span th:text="${testScore.test_date}"></span></div>
+                <div class="user">受験者名: <span th:text="${testScore.user_id}"></span></div>
+            </div>
             <div th:each="testData,loopCnt : ${testData}">
                 <input type="hidden" th:name="'question_id' + ${loopCnt.count}" th:value="${testData.id}">
                 <input type="hidden" name="times" th:value="${times}">
+                <input type="hidden" th:id="'answer_1pt' + ${loopCnt.count}" th:value=${result.get(loopCnt.count-1).score}>
+
                 <div class="question" th:id="'question' + ${loopCnt.count}">
-                    <span class="q_No">問題[[${loopCnt.count}]]</span><label  th:if="${result.get(loopCnt.count-1).flag} == 1">気になる！</label>
+                        <div class="q_No">問題[[${loopCnt.count}]]</div>
+                        <div th:if="${result.get(loopCnt.count-1).flag} == 1">
+                            <img src="../images/check.png" class="checkImage">
+                            <label class="flag_display">
+                                気になる！
+                            </label>
+                        </div>
                     <p class="q-text">[[${testData.sentence}]]</p>
                     <div class="q-img" >
                         <img th:src="'../images/' + ${testData.file}" th:if="${testData.file} != null">
                     </div>
+                    <br>
+                    <div class="result">
+                        <label class="answer_display">
+                            あなたの回答：
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == 0"><img src="../images/answer_o.png"  class="answerImage"></div>
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == 1"><img src="../images/answer_x.png"  class="answerImage"></div>
+                        <div th:if="${result.get(loopCnt.count-1).user_select} == -1"><img src="../images/answer_not.png"  class="answerImage"></div>
+                        </label>
+
+                        <label class="answer_display">
+                            正解：
+                        <div th:if="${testData.answer} == 0"><img src="../images/answer_o.png" class="answerImage"></div>
+                        <div th:if="${testData.answer} == 1"><img src="../images/answer_x.png" class="answerImage"></div>
+                        </label>
+                    </div>
+                    解説：<p class="q-text">[[${testData.explain}]]</p>
                 </div>
             </div>
             <div th:each="testDataP2,loopCnt : ${testDataP2}">
                 <input type="hidden" th:name="'P2question_id' + ${loopCnt.count}" th:value="${testDataP2.id}">
+                <input type="hidden" th:id="'answer_2pt' + ${loopCnt.count}" th:value=${resultP2.get(loopCnt.count-1).score}>
 
-                <div class="question" th:id="'question9' + ${loopCnt.count}">
-                    <span class="q_No">問題9[[${loopCnt.count}]]</span><label  th:if="${resultP2.get(loopCnt.count-1).flag} == 1">気になる！</label>
+                <div class="questionP2" th:id="'question9' + ${loopCnt.count}">
+                    <div class="q_No">問題9[[${loopCnt.count}]]</div>
+                    <div th:if="${resultP2.get(loopCnt.count-1).flag} == 1">
+                        <img src="../images/check.png" class="checkImage">
+                        <label class="flag_display">
+                            気になる！
+                        </label>
+                    </div>
                     <div class="q-img" >
                         <img th:src="'../images/' + ${testDataP2.file}" th:if="${testDataP2.file} != null">
                     </div>
                     <p class="q-text">
                         [[${testDataP2.sentence}]]
                     </p>
+                    <div class="answer_display">
+                    <label class="answer_display">
+                        あなたの回答：[[${resultP2.get(loopCnt.count-1).user_select.replaceAll("-1","未回答 ").replaceAll("0","〇 ").replaceAll("1","X ")}]]
+                    </label>
+                    <label class="answer_display">
+                        正解：[[${testDataP2.answer.replaceAll("0","〇 ").replaceAll("1","X ")}]]
+                    </label>
+                    </div>
+                    <br>解説：<span class="q-text">[[${testDataP2.explain}]]</span>
                 </div>
             </div>
         </div>
@@ -38,8 +83,8 @@
         <div class="MuiBox-root css-rlbyz">
             <div class="MuiStack-root css-18zsr3k">
                 <h2>第[[${times}]]回模擬試験</h2>
-                <button class="btn btn-flat" type="button" id="submit">
-                    <span class="MuiTouchRipple-root css-w0pj6f">回答を送信する</span>
+                <button onclick="location.href='/menu'" class="btn btn-flat" type="button" id="submit">
+                    <span class="MuiTouchRipple-root css-w0pj6f">テストを終了する</span>
                 </button>
                 <div></div>
                 <div></div>
@@ -47,12 +92,12 @@
                 <div class="MuiBox-root css-2imjyh">
                     <div th:each="testData,Cnt : ${testData}">
                         <div class="MuiBox-root css-1y62lli" th:id="${Cnt.count}" >
-                            <a class="MuiTypography-root MuiTypography-body1 css-9l3uo3" style="cursor: pointer; text-decoration: none;">[[${Cnt.count}]]</a>
+                            <a class="MuiTypography-root MuiTypography-body1 css-9l3uo3" style="cursor: pointer; text-decoration: none;" th:href="'#question' + ${Cnt.count}">[[${Cnt.count}]]</a>
                         </div>
                     </div>
                     <div th:each="testDataP2,CntP2 : ${testDataP2}">
                         <div class="MuiBox-root css-1y62lli" th:id="'9' + ${CntP2.count}" >
-                            <a class="MuiTypography-root MuiTypography-body1 css-9l3uo3" style="cursor: pointer; text-decoration: none;">9[[${CntP2.count}]]</a>
+                            <a class="MuiTypography-root MuiTypography-body1 css-9l3uo3" style="cursor: pointer; text-decoration: none;" th:href="'#question9' + ${CntP2.count}">9[[${CntP2.count}]]</a>
                         </div>
                     </div>
                 </div>
@@ -61,8 +106,8 @@
     </div>
     <br>
     <div class="btn-bottom">
-        <button class="btn btn-flat" type="button">
-            <span class="MuiTouchRipple-root css-w0pj6f">回答を送信する</span>
+        <button onclick="location.href='/menu'" class="btn btn-flat" type="button">
+            <span class="MuiTouchRipple-root css-w0pj6f">テストを終了する</span>
         </button>
     </div>
 <br><br>
@@ -74,6 +119,6 @@
     </ul>
     <p class="copyright">© 2023 Example Inc. All Rights Reserved.</p>
 </footer>
-<script src="./js/test.js"></script>
+<script src="./js/result.js"></script>
 </body>
 </html>

@@ -33,9 +33,43 @@
     padding: 10px;
 }
 
+.questionP2{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+    white-space: pre-line;
+}
+
+.answer{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .q-text{
     font-weight: bold;
-    white-space: pre-line;
 }
 .q-img{
     margin: 5px;
@@ -383,6 +417,7 @@ form{
     overflow: hidden; /* 追加 */
 
     margin-top: 8px;
+    margin-left: 500px;
 }
 
 .toggle-button:has(:checked) {
@@ -416,28 +451,45 @@ form{
     text-align: right;
 }
 
-.radio-button-group {
+.flag_display{
+    color: #f57449;
+    font-weight: 600;
+}
+
+.answer_display{
+    font-weight: 600;
+}
+
+.result{
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+.checkImage{
+    vertical-align: bottom;
+    width: 3%;
+    height: 3%;
 }
 
-.radio-button-label {
-    display: inline-block;
-    width: 45px;
-    height: 30px;
-    margin: 0 10px;
+.answerImage{
+    vertical-align: bottom;
+    width: 15%;
+    height: 15%;
+    margin-bottom: 5px;
+}
+
+.score-card {
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 15px;
     text-align: center;
-    cursor: pointer;
-    border: 2px ridge #e53b4e;
+    background-color: #f0f0f0;
     border-radius: 5px;
-    transition: background-color 0.3s;
 }
 
-.radio-button-label:hover {
-    background-color: #f8b9c4;
+.score-card div {
+    margin-bottom: 8px;
 }
 
-.btn--pink.btn--border-ridge {
-    border: 6px ridge #e53b4e;
+.score-card span {
+    font-weight: bold;
+    color: #333;
 }
