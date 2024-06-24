@@ -39,7 +39,7 @@ public class QuizController {
     // 10問の問題を格納するリスト
     List<Questions2points> quizzes;
     // 問題ページの問題数標示と問題リストの要素数として使用。
-    int index = 0;
+    public static int index = 0;
 
 
     @GetMapping("/quiz-select")
