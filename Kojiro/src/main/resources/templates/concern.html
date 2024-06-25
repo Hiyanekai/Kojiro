@@ -16,7 +16,7 @@
 <div class="getdata" th:each="data : ${concernList}">
 <div class="question" >
     <h3> 問題</h3>
-    <img th:src="@{/images/__${data.file}__}">
+    <img th:src="@{/images/__${data.file}__}" th:if="${data.file} != null">
     [[${data.sentence}]]
 
 </div>
