@@ -4,6 +4,7 @@ import com.example.Kojiro.entity.TermManagementDetail;
 import com.example.Kojiro.entity.TermManagementNotFile;
 import com.example.Kojiro.form.TermUpdateForm;
 import com.example.Kojiro.service.TermManagementDetailService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,12 @@ import java.util.Base64;
 public class TermManagementDetailController {
     @Autowired
     TermManagementDetailService TermManagementService;
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/term-detail/{id}")
     public String termDetail(@PathVariable int id, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         TermManagementDetail detail = TermManagementService.findById(id);
 //        var genres = TermManagementService.findByGenres(detail.genre_id());
 //        model.addAttribute("genres", genres);
@@ -46,12 +50,14 @@ public class TermManagementDetailController {
 
     @PostMapping("/term-detail")
     public String termDelete(@ModelAttribute("detail") TermManagementDetail delete) {
+        if(request.getSession(false)==null) return "redirect:/index";
         TermManagementService.delete(delete.id());
         return "term-success";
     }
 
     @GetMapping("/term-update/{id}")
     public String termUpdate(@PathVariable int id, @ModelAttribute("update") TermManagementDetail termManagement, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         TermManagementDetail update = TermManagementService.findById(id);
         model.addAttribute("update", update);
 //        model.addAttribute("genresList", TermManagementService.findAll());
@@ -61,6 +67,7 @@ public class TermManagementDetailController {
 
     @PostMapping("/term-update/{id}")
     public String termChange(@PathVariable int id, @Validated @ModelAttribute("update") TermUpdateForm changes, BindingResult bindingResult, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
 
         if (bindingResult.hasErrors()) {
             return "/term-update";
@@ -82,6 +89,7 @@ public class TermManagementDetailController {
     }
 
     public void insertImgFile(MultipartFile file) {
+//        if(request.getSession(false)==null) return "redirect:/index";
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {
