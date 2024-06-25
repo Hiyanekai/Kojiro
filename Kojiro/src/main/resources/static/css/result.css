@@ -1,0 +1,518 @@
+.q-header{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+.genre-name{
+    margin: 25px;
+}
+.q-num{
+    margin: 25px;
+}
+
+/* .question-area{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+} */
+
+.question{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.questionP2{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+    white-space: pre-line;
+}
+
+.answer{
+    width: 600px;
+    /* width: fit-content; */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    padding: 20px;
+    /* padding-bottom: 100px; */
+    background-color: ivory;
+
+    border: solid 3px #555555;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.q-text{
+    font-weight: bold;
+}
+.q-img{
+    margin: 5px;
+    text-align: center;
+}
+
+/* 解答欄 */
+.answer{
+    width: fit-content;
+    margin: auto;
+}
+.btn{
+    width: 100px;
+    height: 30px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px
+
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+}
+#circle{
+    background-color: red;
+}
+#cross{
+    background-color: blue;
+}
+#cross:hover, #circle:hover, #link-btn:hover{
+    background-color: lightgray;
+}
+
+/* ジャンル選択 */
+.change-page{
+    text-align: center;
+}
+#link-btn{
+    background-color: orange;
+
+    width: 200px;
+
+    font-size: 20px;
+}
+
+/* 図 */
+img .checkImage{
+
+    object-fit: cover;
+    height: 200px;
+}
+
+.css-rlbyz {
+    width: 40ch;
+    margin-left: 60px;
+    margin-top: 40px;
+    /*border: 1px solid rgb(25, 118, 210);*/
+    border-radius: 12px;
+    overflow: auto;
+    padding: 40px;
+    position: sticky;
+    top: 60px;
+    max-height: 60vh;
+    position: sticky;
+    top: 100px;/*自分が固定したい位置(例は上から0pxの位置)*/
+    right: 100px;/*自分が固定したい位置(例は左から10pxの位置)*/
+    background-color: white;
+}
+
+.inline{
+    display: flex;
+    justify-content: center;
+    margin-left: 10
+}
+
+////
+
+.css-18zsr3k {
+    display: flex;
+    flex-direction: column;
+}
+
+.css-2imjyh {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px
+}
+
+.css-1y62lli {
+    padding: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    width: 5ch;
+    border: 2px solid black;
+    /*border-radius: 4px;*/
+    background-color: rgb(255, 255, 255);
+}
+
+.css-1xolyd1 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    /*border-radius: 4px;*/
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 118, 210);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    width: 18ch;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.btn,
+button.btn,
+button.btn {
+  font-size: 1rem;
+  /*font-weight: 700;*/
+  font-weight: 300;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  /*padding: 1rem 4rem;*/
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+button.btn-flat {
+  overflow: hidden;
+
+  /*padding: 1.5rem 6rem;*/
+
+  color: #fff;
+  border-radius: 0;
+  background: #000;
+}
+
+button.btn-flat span {
+  position: relative;
+}
+
+button.btn-flat:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 150%;
+  height: 500%;
+
+  content: "";
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+
+  background: #00b7ee;
+}
+
+button.btn-flat:hover:before {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.q_No{
+    font-size: 15px;
+}
+
+.genre{
+    text-align: right;
+    margin-left: 20px;
+}
+
+.footer html {
+  font-family: sans-serif;
+}
+
+.footer body {
+  background: #333;
+}
+
+.footer a {
+  color: #999;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer {
+  padding: 2rem;
+  font-size: 15px;
+  color: #999;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer a:hover {
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .md-flex {
+    display: flex;
+  }
+
+  .md-flex li + li {
+    margin-left: 16px;
+  }
+}
+
+/**/
+group + group {
+  margin-top: 20px;
+}
+
+.inline-radio {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #b6b6b6;
+
+
+  div {
+    position: relative;
+    flex: 1;
+  }
+
+  input {
+    width: 100%;
+    height: 60px;
+    opacity: 0;
+  }
+
+  label {
+    position: absolute;
+    top: 0; left: 0;
+    color: #b6b6b6;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    border-right: 1px solid #b6b6b6;
+  }
+
+  div:last-child label {
+    border-right: 0;
+  }
+
+  input:checked + label {
+    background: #d81b60;
+    font-weight: 500;
+    color: #fff;
+  }
+}
+
+.radio-div{
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-bottom{
+    margin-left: 200px;
+}
+
+.default_set{
+    display: none !important;
+}
+
+form{
+    background-color: #f1eeee;
+}
+
+.toggle-button {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    border-radius: 50px;
+    border: 2px solid #070707;
+    background-color: #ffffff;
+    box-sizing: content-box;
+    cursor: pointer;
+    transition: border-color .4s;
+    overflow: hidden; /* 追加 */
+
+    margin-top: 8px;
+    margin-left: 500px;
+}
+
+.toggle-button:has(:checked) {
+    border-color: #4bd865;
+    border: 2px solid #ec4f23;
+}
+
+.toggle-button::after {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    width: 10px; /* 変更 */
+    height: 10px; /* 変更 */
+    border-radius: 50%;
+    background-color: #070707;
+    content: '';
+    transition: left .4s;
+}
+
+.toggle-button:has(:checked)::after {
+    left: 18px; /* 変更 */
+    background-color: #ec4f23;
+}
+
+.toggle-button input {
+    display: none;
+}
+
+.toggle{
+    text-align: right;
+}
+
+.flag_display{
+    color: #f57449;
+    font-weight: 600;
+}
+
+.answer_display{
+    font-weight: 600;
+}
+
+.result{
+    display: flex;
+}
+.checkImage{
+    vertical-align: bottom;
+    width: 3%;
+    height: 3%;
+}
+
+.answerImage{
+    vertical-align: bottom;
+    width: 15%;
+    height: 15%;
+    margin-bottom: 5px;
+}
+
+.score-card {
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.score-card div {
+    margin-bottom: 8px;
+}
+
+.score-card span {
+    font-weight: bold;
+    color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
+
+.header img {
+    width: 260px;
+    height: 60px;
+}
+
+.user{
+    font-size: 15px;
+    font-weight: lighter;
+}

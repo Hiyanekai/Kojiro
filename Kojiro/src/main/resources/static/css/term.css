@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: inline-block;
+  vertical-align: top;
+}
+
+fieldset.label-60 label {
+  width: 60px;
+}
+
+fieldset.label-130 label {
+  width: 130px;
+}
+
+fieldset div {
+  margin: 5px;
+}
+
+form ~ div, table ~ div {
+  margin-top: 10px;
+}
+
+.search-container {
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #999;
+    display: block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    height: 2.3em;
+    width: 260px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 20px;
+}
+
+.search-container input[type="text"]{
+    border: none;
+    height: 2.0em;
+    background-color: #f6f6f6;
+}
+
+.search-container input[type="text"]:focus {
+    outline: 0;
+}
+
+  .search-container input[type="submit"]{
+    cursor: pointer;
+    font-family: FontAwesome;
+    font-size: 1.3em;
+    border: none;
+    background: none;
+    color: #3879D9;
+    position: absolute;
+    width: 2.5em;
+    height: 2.5em;
+    right: 0;
+    top: -10px;
+    outline : none;
+}
+
+h1{
+    font-size: 60px;
+}
+
+.title{
+    display: flex;
+    padding: 10px 50px 0px 410px;
+}
+
+img{
+    width: 180px;
+    height: 140px;
+}
+
+table, table th, table td {
+    border: solid 1px;
+  }
+
+  table {
+    margin: auto;
+    width: 80%;
+    border: none;
+    table-layout: fixed;
+  }
+
+  table th {
+    background:#949da7;
+      font-weight: bold;
+      color:#ffffff;
+      font-size: 25px;
+  }
+
+  table th,table td{
+    text-align: center;
+    border: none;
+  }
+
+  table tr:nth-child(odd){
+    background:#ffffff;
+  }
+
+  .detail_btn {
+    background-color:#9299a04d;
+    display: block;       /* リンクをブロックレベル化して表示 */
+    padding: 5px 10px 5px 10px;
+  }
+
+  .detail_btn:hover {
+    background-color:#bfc5cb;
+  }
+
+  body{
+
+    font-family: Miryo;
+    width: 90%;
+    margin: auto;
+    background-color: #f6f6f6;
+}
+
+td{
+  background-color: #ffffff;
+}
+
+div .caption{
+   text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}
+
+.detail_btn {
+  color: white;
+  background-color:#9299a0;
+  display: block;       /* リンクをブロックレベル化して表示 */
+  padding: 5px 10px 5px 10px;
+  text-decoration:none
+}
+
+.detail_btn:hover {
+  background-color:#417ebb;
+}

@@ -1,0 +1,56 @@
+body{
+  background-color:#f6f6f6
+}
+.concern{
+    margin: 90px 100px 50px 100px;
+    text-align: center;
+}
+
+h1{
+    background: #e7e7e7;/*背景色*/
+    padding: 0.5em;/*文字まわり（上下左右）の余白*/
+    border-left: solid 5px #ff0084;/*左線*/
+    border-bottom: solid 3px #d7d7d7;
+    width: 20%;
+    height: 100%;
+}
+
+.question {
+    background:#e2e2e2bc; /*背景色の指定*/
+    padding:10px;
+    width: 450px;
+    margin-right: auto;
+    margin-left: auto;
+    white-space: pre-line;
+}
+
+.answer {
+        background:#b5b5b5d8; /*背景色の指定*/
+        padding:10px;
+        width: 450px;
+        margin-right: auto;
+        margin-left: auto;
+        white-space: pre-line;
+}
+h3{
+    text-align: center;
+}
+
+img{
+object-fit: cover;
+width: 430px;
+height: 300px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
+}

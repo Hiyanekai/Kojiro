@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/cation.css" rel="stylesheet">
+<!--注意事項-->
+<head>
+    <meta charset="UTF-8">
+    <title>注意事項</title>
+</head>
+    <body>
+    <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+    </div>
+        <h1 class="taitle">注意事項</h1>
+            <div class="line">
+                <form class="sentence">
+                    <ol>
+                        <li>試験時間は50分です。</li>
+                        <li>全問で９５問あります。</li>
+                        <li>１点問題９０問と２点問題５問があります。</li>
+                        <li>学科試験の出題形式は、〇×式で行います。</li>
+                        <li>９０点以上で合格です。</li>
+                        <li>終了時には送信ボタンを押下してください。</li>
+                        <li>途中終了の際にも送信ボタンを押下してください。</li>
+                    </ol>
+                </form>
+            </div>
+                <div class="btn1">
+                    <a href="/test" class="btn btn--yellow btn--cubic">試験開始</a>
+                </div>
+    </body>
+</html>

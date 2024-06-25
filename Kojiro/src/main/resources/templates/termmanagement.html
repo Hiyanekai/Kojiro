@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--用語管理画面　用語一覧-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用語集管理</title>
+    <link href="css/termManagement.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+    </div>
+    <h1 class="site_logo">
+        用語管理
+    </h1>
+    <hr>
+    <div class="btn-area">
+        <!-- <div class="btn"><a class="basic-btn regist" href="insert.html">新規登録</a></div> -->
+        <div class="btn"><a class="basic-btn regist" href="/termAddition">用語の追加</a></div>
+    </div>
+    <p>更新に成功</p>
+    <form method="get" action="#" class="search-form" >
+        <div class="search-container">
+            <input type="text" name="keyword" size="25" placeholder="キーワード検索">
+            <input type="submit" value="&#xf002">
+        </div>
+    </form>
+    <table>
+        <div class="caption"><p>検索結果：[[${termlist.size}]]件</p></div>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用語</th>
+            <th>解説</th>
+            <th>詳細</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="term : ${termlist}">
+            <td th:text="${term.id}"></td>
+            <td th:text="${term.term_name}"></td>
+            <td th:text ="${term.explain}"></td>
+<!--            <td th:text ="${term.file}"></td>-->
+            <td><a class="detail_btn" th:href="@{'term-detail/' + ${term.id}}" >詳細</a></td>
+
+        </tr>
+
+    </table>
+</div>
+<footer></footer>
+</body>
+</html>

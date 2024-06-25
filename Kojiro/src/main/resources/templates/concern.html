@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>気になった問題一覧</title>
+    <link href="/css/concern.css" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <th:block th:insert="/common/header"></th:block>
+</div>
+<h1 class="concern">
+    気になった問題一覧
+</h1>
+<br><br>
+<div class="getdata" th:each="data : ${concernList}">
+<div class="question" >
+    <h3> 問題</h3>
+    <img th:src="@{/images/__${data.file}__}">
+    [[${data.sentence}]]
+
+</div>
+<div class="answer" >
+    <h3> 解答・解説</h3>
+    解答：[[${data.answer.replaceAll("0","〇").replaceAll("1","×")}]]<br>
+    [[${data.explain}]]
+</div>
+</div>
+</body>
+</html>

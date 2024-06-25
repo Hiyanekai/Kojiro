@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--ユーザー管理-->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー管理</title>
+    <link th:href="@{/css/management.css}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <th:block th:insert="/common/header"></th:block>
+    </div>
+    <h1 class="site_logo">ユーザー管理</h1>
+    <hr>
+    <form method="get" action="user-management" class="search-form">
+        <div class="search-container">
+            <input type="text" name="user_id" size="25" placeholder="キーワード検索">
+            <input type="submit" value="&#xf002">
+        </div>
+    </form>
+    <table border="1">
+        <div class="caption"><p>検索結果：[[ ${users.size()} ]]件</p></div>
+        <thead>
+        <tr><th>ユーザーID</th><th>パスワード</th><th>詳細</th>
+        </thead>
+        </tr>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.user_id}"></td>
+            <td th:text="${user.password}"></td>
+            <td><a class="detail_btn" th:href="@{/user-detail/{id}(id=${user.id})}">詳細</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

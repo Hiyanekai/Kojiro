@@ -1,3 +1,4 @@
+
 .q-header{
     display: flex;
     width: fit-content;
@@ -19,27 +20,27 @@
 .question{
     width: 600px;
     /* width: fit-content; */
-    margin: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
 
     padding: 20px;
     /* padding-bottom: 100px; */
     background-color: ivory;
 
-    /* border: solid 5px #555555;
+    border: solid 3px #555555;
     border-radius: 10px;
-    padding: 10px; */
+    padding: 10px;
 }
+
 .q-text{
     font-weight: bold;
+    white-space: pre-line;
 }
 .q-img{
     margin: 5px;
     text-align: center;
-}
-img{
-    object-fit: cover; 
-    width: 128px; 
-    height: 128px;
 }
 
 /* 解答欄 */
@@ -49,9 +50,11 @@ img{
 }
 .btn{
     width: 100px;
-    height: 50px;
+    height: 30px;
 
-    margin: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px
 
     font-size: 20px;
     font-weight: bold;
@@ -82,21 +85,360 @@ img{
     font-size: 20px;
 }
 
-label {
-    margin-right: 5px; /* ボタン同士の間隔 */
+/* 図 */
+img{
+
+    object-fit: cover;
+    height: 200px;
 }
-label input {
-    display: none; /* デフォルトのinputは非表示にする */
+
+.css-rlbyz {
+    width: 40ch;
+    margin-left: 60px;
+    margin-top: 40px;
+    /*border: 1px solid rgb(25, 118, 210);*/
+    border-radius: 12px;
+    overflow: auto;
+    padding: 40px;
+    position: sticky;
+    top: 60px;
+    max-height: 60vh;
+    position: sticky;
+    top: 100px;/*自分が固定したい位置(例は上から0pxの位置)*/
+    right: 100px;/*自分が固定したい位置(例は左から10pxの位置)*/
+    background-color: white;
 }
-label span {
-    color: #333; /* 文字色を黒に */
-    font-size: 14px; /* 文字サイズを14pxに */
-    border: 1px solid #333; /* 淵の線を指定 */
-    border-radius: 20px; /* 角丸を入れて、左右が丸いボタンにする */
-    padding: 5px 20px; /* 上下左右に余白をトル */
+
+.inline{
+    display: flex;
+    justify-content: center;
+    margin-left: 100px
 }
-label input:checked + span {
-    color: #FFF; /* 文字色を白に */
-    background: #FBB; /* 背景色を薄い赤に */
-    border: 1px solid #FBB; /* 淵の線を薄い赤に */
+
+////
+
+.css-18zsr3k {
+    display: flex;
+    flex-direction: column;
+}
+
+.css-2imjyh {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px
+}
+
+.css-1y62lli {
+    padding: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    width: 5ch;
+    border: 2px solid black;
+    /*border-radius: 4px;*/
+    background-color: rgb(255, 255, 255);
+}
+
+.css-1xolyd1 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    /*border-radius: 4px;*/
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 118, 210);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    width: 18ch;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.btn,
+button.btn,
+button.btn {
+  font-size: 1rem;
+  /*font-weight: 700;*/
+  font-weight: 300;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  /*padding: 1rem 4rem;*/
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+button.btn-flat {
+  overflow: hidden;
+
+  /*padding: 1.5rem 6rem;*/
+
+  color: #fff;
+  border-radius: 0;
+  background: #000;
+}
+
+button.btn-flat span {
+  position: relative;
+}
+
+button.btn-flat:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 150%;
+  height: 500%;
+
+  content: "";
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+
+  background: #00b7ee;
+}
+
+button.btn-flat:hover:before {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.q_No{
+    font-size: 15px;
+}
+
+.genre{
+    text-align: right;
+    margin-left: 20px;
+}
+
+.footer html {
+  font-family: sans-serif;
+}
+
+.footer body {
+  background: #333;
+}
+
+.footer a {
+  color: #999;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer {
+  padding: 2rem;
+  font-size: 15px;
+  color: #999;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer a:hover {
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .md-flex {
+    display: flex;
+  }
+
+  .md-flex li + li {
+    margin-left: 16px;
+  }
+}
+
+/**/
+group + group {
+  margin-top: 20px;
+}
+
+.inline-radio {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #b6b6b6;
+
+
+  div {
+    position: relative;
+    flex: 1;
+  }
+
+  input {
+    width: 100%;
+    height: 60px;
+    opacity: 0;
+  }
+
+  label {
+    position: absolute;
+    top: 0; left: 0;
+    color: #b6b6b6;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    border-right: 1px solid #b6b6b6;
+  }
+
+  div:last-child label {
+    border-right: 0;
+  }
+
+  input:checked + label {
+    background: #d81b60;
+    font-weight: 500;
+    color: #fff;
+  }
+}
+
+.radio-div{
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-bottom{
+    margin-left: 200px;
+}
+
+.default_set{
+    display: none !important;
+}
+
+form{
+    background-color: #f1eeee;
+}
+
+.toggle-button {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    border-radius: 50px;
+    border: 2px solid #070707;
+    background-color: #ffffff;
+    box-sizing: content-box;
+    cursor: pointer;
+    transition: border-color .4s;
+    overflow: hidden; /* 追加 */
+
+    margin-top: 8px;
+}
+
+.toggle-button:has(:checked) {
+    border-color: #4bd865;
+    border: 2px solid #ec4f23;
+}
+
+.toggle-button::after {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    width: 10px; /* 変更 */
+    height: 10px; /* 変更 */
+    border-radius: 50%;
+    background-color: #070707;
+    content: '';
+    transition: left .4s;
+}
+
+.toggle-button:has(:checked)::after {
+    left: 18px; /* 変更 */
+    background-color: #ec4f23;
+}
+
+.toggle-button input {
+    display: none;
+}
+
+.toggle{
+    text-align: right;
+}
+
+.radio-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-button-label {
+    display: inline-block;
+    width: 45px;
+    height: 30px;
+    margin: 0 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px ridge #e53b4e;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.radio-button-label:hover {
+    background-color: #f8b9c4;
+}
+
+.btn--pink.btn--border-ridge {
+    border: 6px ridge #e53b4e;
 }

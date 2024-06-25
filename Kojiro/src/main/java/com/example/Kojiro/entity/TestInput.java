@@ -4,10 +4,5 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
-public class TestInput{
-        int q_id;
-        int user_select;
-        int flag;
-        List<TestInput> inputList;
+public record TestInput(int q_id,Integer user_select,int flag){
 }

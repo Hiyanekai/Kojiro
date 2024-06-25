@@ -1,7 +1,7 @@
 .tab {
     max-width: 800px;
     margin: 0 auto;
-    margin-top: 120px;
+    margin-top: 0px;
   }
 
   /* タブメニュー */
@@ -105,4 +105,17 @@ a{
 }
 td{
     padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left : auto;
 }

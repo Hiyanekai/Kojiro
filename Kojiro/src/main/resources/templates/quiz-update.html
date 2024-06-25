@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>問題管理更新</title>
+    <link href="/css/management.css" rel="stylesheet">
+</head>
+<body>
+<div class="insert">
+    <th:block th:insert="/common/header"></th:block>
+    <h1>問題管理更新</h1>
+    <div class="form-body">
+        <form action="" method="post" th:object="${q_management}">
+            <fieldset class="label-130">
+                <div>
+<!--                    <label class="required">単元:</label> <select name="subject" th:field="${q_management.genre}">-->
+                    <label class="required">単元:</label> <select name="subject" onchange="change()" id="subject" th:field="${q_management.genre}">
+                    <option class="genre-option" value="1">運転者の心得</option>
+                    <option class="genre-option" value="2">信号に従うこと</option>
+                    <option class="genre-option" value="3">標識・標示などに従うこと</option>
+                    <option class="genre-option" value="4">車が通行するところ、してはいけないところ</option>
+                    <option class="genre-option" value="5">緊急自動車などの優先</option>
+                    <option class="genre-option" value="6">交差点などの通行、踏切</option>
+                    <option class="genre-option" value="7">安全な速度と車間距離</option>
+                    <option class="genre-option" value="8">歩行者の保護など</option>
+                    <option class="genre-option" value="9">安全の確認と合図、警音器の使用</option>
+                    <option class="genre-option" value="10">進路変更など</option>
+                    <option class="genre-option" value="11">追い越し</option>
+                    <option class="genre-option" value="12">行き違い</option>
+                    <option class="genre-option" value="13">運転免許制度、交通反則通告制度</option>
+                    <option class="genre-option" value="14">オートマチック車などの運転</option>
+                    <option class="genre-option" value="15">死角と運転</option>
+                    <option class="genre-option" value="16">適性検査結果に基づく行動分析</option>
+                    <option class="genre-option" value="17">人間の能力と運転</option>
+                    <option class="genre-option" value="18">車に働く自然の力と運転</option>
+                    <option class="genre-option" value="19">悪条件下での運転等</option>
+                    <option class="genre-option" value="20">特徴的な事故と自己の悲惨さ</option>
+                    <option class="genre-option" value="21">自動車の保守管理</option>
+                    <option class="genre-option" value="22">駐車と停車</option>
+                    <option class="genre-option" value="23">乗車と積載</option>
+                    <option class="genre-option" value="24">けん引</option>
+                    <option class="genre-option" value="25">交通事故の時</option>
+                    <option class="genre-option" value="26">自動車の所有者などの心得と保険制度</option>
+                    <option class="genre-option" value="27">経路の設計</option>
+                    <option class="genre-option" value="28">高速道路での運転</option>
+                    <option class="genre-option" value="29">二人乗り運手に関する知識</option>
+                    <option class="genre-option" value="30">危険予測ディスカッション</option>
+                </select>
+                </div>
+                <div>
+                    <label class="required">問題</label>
+<!--                    <input type="text" name="description"  class="base-text" th:field="${q_management.sentence}">-->
+                    <textarea name="description"  class="base-text" th:field="${q_management.sentence}"></textarea>
+                    <span class="error" th:each="error: ${#fields.errors('sentence')}">[[ ${error} ]]</span>
+                </div>
+                <div>
+                    <label class="required">解答</label>
+                    <select name="anser" th:field="${q_management.answer}">
+                        <option value="000" class="option2">〇〇〇</option>
+                        <option value="001" class="option2">〇〇×</option>
+                        <option value="010" class="option2">〇×〇</option>
+                        <option value="011" class="option2">〇××</option>
+                        <option value="100" class="option2">×〇〇</option>
+                        <option value="101" class="option2">×〇×</option>
+                        <option value="110" class="option2">××〇</option>
+                        <option value="111" class="option2">×××</option>
+                        <option value="0" class="option1" selected>〇</option>
+                        <option value="1" class="option1">×</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="required">解説:</label>
+<!--                    <input type="text" name="description"  class="base-text" th:field="${q_management.explain}">-->
+                    <textarea name="description"  class="base-text" th:field="${q_management.explain}"></textarea>
+                    <span class="error" th:each="error: ${#fields.errors('explain')}">[[ ${error} ]]</span>
+                </div>
+                <div>
+                    <label>画像:</label>
+                    <input type="file" name="file" th:field="${q_management.file}">
+                </div>
+                <div>
+                    <label class="required">点数:</label>
+                    <select name="points" th:field="${q_management.score}" aria-readonly="true">
+                        <option id="point1" value="1">1点</option>
+                        <option id="point2" value="2">2点</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="btns">
+                <input type="submit" value="更新" class="kousin-btn">
+                <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script th:inline="javascript">
+    var subject = document.getElementById("subject");
+    var genreOptions = document.getElementsByClassName("genre-option");
+    var option1 = document.getElementsByClassName("option1");
+    var option2 = document.getElementsByClassName("option2");
+
+    var q = /*[[${q_management}]]*/"q_management";
+
+    console.log(q.sentence);
+
+    var point1 = document.getElementById("point1");
+    var point2 = document.getElementById("point2");
+
+    if(subject.value == 30){
+        console.log("選択肢追加");
+        for(var i = 0; i < option2.length; i++){
+            if(i < 2) option1[i].style.display = 'none';
+            option2[i].style.display = 'block';
+        }
+        for(var i = 0; i < genreOptions.length-1; i++){
+            if(i != 29) genreOptions[i].style.display = 'none';
+        }
+        genreOptions[29].style.display = 'block';
+        point1.style.display = 'none';
+        point2.style.display = 'block';
+    }else{
+        for(var i = 0; i < option2.length; i++){
+            console.log(i);
+            if(i < 2) option1[i].style.display = 'block';
+            option2[i].style.display = 'none';
+        }
+        for(var i = 0; i < genreOptions.length-1; i++){
+            if(i != 29) genreOptions[i].style.display = 'block';
+        }
+        genreOptions[29].style.display = 'none';
+        point1.style.display = 'block';
+        point2.style.display = 'none';
+    }
+    function change(){
+        var option1 = document.getElementsByClassName("option1");
+        var option2 = document.getElementsByClassName("option2");
+
+        console.log(option2.length);
+
+        if(subject.value == 30){
+            console.log("選択肢追加");
+            for(var i = 0; i < option2.length; i++){
+                if(i < 2) option1[i].style.display = 'none';
+                option2[i].style.display = 'block';
+            }
+            option2[0].selected = true;
+            point1.style.display = 'none';
+            point2.style.display = 'block';
+            point2.selected = true;
+        }else{
+            for(var i = 0; i < option2.length; i++){
+                console.log(i);
+                if(i < 2) option1[i].style.display = 'block';
+                option2[i].style.display = 'none';
+            }
+            option1[0].selected = true;
+            point1.style.display = 'block';
+            point1.selected = true;
+            point2.style.display = 'none';
+        }
+    }
+
+</script>
+</body>
+</html>
