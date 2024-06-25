@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>一問一答（答え）</title>
-    <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
+    <link th:href="@{/css/quiz-answer-ver2.css}" rel="stylesheet">
 </head>
 <body>
 <div class="header">
@@ -14,7 +14,7 @@
         <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
     </div>
     <div class="q-num">
-        <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+        <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
     </div>
 </div>
 <div id="answer"></div>

@@ -1,8 +1,10 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.UserManagement;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.service.UserManagementService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +18,20 @@ public class UserManagementController {
     UserManagementService UserManagementService;
     @Autowired
     private HttpServletRequest request;
-
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/user-management")
     public String userList(Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         model.addAttribute("users", UserManagementService.findAll());
         return "user-management";
     }
 
     @RequestMapping(value="/user-management", params="user_id")
     public String userMenu(@RequestParam(value = "user_id", defaultValue = "") @PathVariable String user_id, Model model) {
-        if(request.getSession(false)==null) return "redirect:/index";
         if (user_id != null && !user_id.trim().isEmpty()) {
             model.addAttribute("users", UserManagementService.search(user_id));
         } else {
@@ -39,6 +43,8 @@ public class UserManagementController {
     @GetMapping("/user-detail/{id}")
     public String userDetail(@PathVariable int id, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         UserManagement detail = UserManagementService.findById(id);
         model.addAttribute("detail", detail);
         return "user-detail";
@@ -52,6 +58,9 @@ public class UserManagementController {
 
     @GetMapping("/user-update/{id}")
     public String userUpdate(@PathVariable int id, Model model, @ModelAttribute("update") UserManagement change){
+        if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         UserManagement update = UserManagementService.findById(id);
         model.addAttribute("update", update);
         return "user-update";
@@ -59,7 +68,6 @@ public class UserManagementController {
 
     @PostMapping("/user-update")
     public String userChange(@Validated @ModelAttribute("update") UserManagement change, BindingResult bindingResult, Model model){
-        if(request.getSession(false)==null) return "redirect:/index";
         if (bindingResult.hasErrors()) {
             return "user-update";
         }

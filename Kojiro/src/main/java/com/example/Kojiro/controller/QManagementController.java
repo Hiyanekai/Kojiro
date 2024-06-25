@@ -3,10 +3,7 @@ package com.example.Kojiro.controller;
 //QManagementController = QuestionManagementController(問題管理) 長くてすみません
 
 import com.example.Kojiro.dao.GenresDao;
-import com.example.Kojiro.entity.Questions2points;
-import com.example.Kojiro.entity.TestQuestion;
-import com.example.Kojiro.entity.TestQuestionP2;
-import com.example.Kojiro.entity.question;
+import com.example.Kojiro.entity.*;
 import com.example.Kojiro.form.QuizManagement;
 import com.example.Kojiro.service.QManagementService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,20 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Base64;
-
 
 @Controller
 public class QManagementController {
 
     private String[] successMesList={"","追加に成功","更新に成功","削除に成功"};
 
-    @Autowired
-    private HttpServletRequest request;
     private int successIndex=0;
     @Autowired
     QManagementService qManagementService;
@@ -38,12 +35,14 @@ public class QManagementController {
     private GenresDao genresDao;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping("/quiz-management")
     public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
-//        if (session.getAttribute("user")==null){//ユーザーのセッション判定
-//            return "redirect:/login-test";
-//        }
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         if (keyword.isEmpty()){//検索欄にキーワードなしは全部出す
 //            model.addAttribute("management", qManagementService.findAll());
             model.addAttribute("management", qManagementService.findAll2());
@@ -78,6 +77,8 @@ public class QManagementController {
     public String detail(@PathVariable("id") int id,
                          @PathVariable("gName") String gName, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         System.out.println(id);
         if(gName.equals("危険予測ディスカッション")){
             var result = qManagementService.findById2(id);
@@ -115,8 +116,7 @@ public class QManagementController {
     @GetMapping("quiz-update/{id}/{genre}")//id指定で更新のページを出す
     public String update1(@PathVariable("id") int id,
                           @PathVariable("genre") String gName, Model model) {
-        if(request.getSession(false)==null) return "redirect:/index";
-
+//        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(id);
         var genres = genresDao.findAll();
         if(gName.equals("危険予測ディスカッション")){
@@ -165,6 +165,8 @@ public class QManagementController {
     @PostMapping("quiz-update/{id}/{genre}")
     public String update2(@PathVariable("id") int id, @PathVariable("genre") String gName, @Validated @ModelAttribute("q_management") QuizManagement update, BindingResult bindingResult, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         if(bindingResult.hasErrors()) {//バリデーションチェック
             return "quiz-update";
         }else {
@@ -209,6 +211,8 @@ public class QManagementController {
     @GetMapping("/quiz-delete/{id}/{genre}")//問題の削除(idを指定)
     public String delete1(@PathVariable("id") int id, @PathVariable("genre") String gName){
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         if(gName.equals("危険予測ディスカッション")){
             var result = qManagementService.delete2(id);
             successIndex=3;
@@ -246,6 +250,8 @@ public class QManagementController {
     @PostMapping("/quiz-add")
     public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         System.out.println(add);
         if (bindingResult.hasErrors()) {
             System.out.println("バリデーション");
@@ -262,7 +268,7 @@ public class QManagementController {
                     var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
                 } else {
                     var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
-                    System.out.println(conProduct);
+                    qManagementService.insert(conProduct);
                 }
                 successIndex = 1;
                 return "redirect:/quiz-management";
@@ -270,6 +276,19 @@ public class QManagementController {
                 System.out.println("重複しましたよ");
                 return "quiz-add";
             }
+        }
+    }
+    public void insertImgFiles(MultipartFile file) {
+        final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
+        try {
+            if (!file.getOriginalFilename().equals("")) {
+
+                String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
+                Path destination = new File(filePath).toPath();
+                Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
