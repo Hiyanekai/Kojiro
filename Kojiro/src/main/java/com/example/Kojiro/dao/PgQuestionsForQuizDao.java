@@ -45,9 +45,9 @@ public class PgQuestionsForQuizDao {
     public List<Questions2points> findAllForFlag(int u_id){
         var param = new MapSqlParameterSource();
         param.addValue("u_id", u_id);
-        var questions = jdbcTemplate.query("SELECT * FROM questions WHERE id IN (SELECT q_id FROM flags WHERE q_id IS NOT NULL AND user_id = :u_id)", param,
+        var questions = jdbcTemplate.query("SELECT * FROM questions WHERE id IN (SELECT q_id FROM flags WHERE q_id_2points = 0 AND user_id = :u_id ORDER BY q_id)", param,
                 new DataClassRowMapper<>(Questions2points.class));
-        var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM flags WHERE q_id_2points IS NOT NULL AND user_id = :u_id)", param,
+        var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM flags WHERE q_id = 0 AND user_id = :u_id ORDER BY q_id_2points)", param,
                 new DataClassRowMapper<>(Questions2points.class));
         if(questions==null && questions2points!=null) return questions2points;
         if(questions!=null && questions2points==null) return questions;
@@ -60,9 +60,9 @@ public class PgQuestionsForQuizDao {
     public List<Questions2points> findAllForMiss(int u_id){
         var param = new MapSqlParameterSource();
         param.addValue("u_id", u_id);
-        var questions = jdbcTemplate.query("SELECT * FROM questions WHERE id IN (SELECT q_id FROM miss WHERE q_id IS NOT NULL AND user_id = :u_id)", param,
+        var questions = jdbcTemplate.query("SELECT * FROM questions WHERE id IN (SELECT q_id FROM miss WHERE q_id_2points = 0 AND user_id = :u_id ORDER BY q_id)", param,
                 new DataClassRowMapper<>(Questions2points.class));
-        var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM miss WHERE q_id_2points IS NOT NULL AND user_id = :u_id)", param,
+        var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM miss WHERE q_id = 0 AND user_id = :u_id ORDER BY q_id_2points)", param,
                 new DataClassRowMapper<>(Questions2points.class));
         if(questions==null && questions2points!=null) return questions2points;
         if(questions!=null && questions2points==null) return questions;

@@ -10,7 +10,7 @@
     background-color: #f6f6f6;
   }
 
-img{
+.link-box img{
     border: solid 5px #555555;
     border-radius: 10px;
     padding: 10px;
@@ -19,7 +19,7 @@ img{
     width: 64px; 
     height: 64px;
 }
-img:hover{
+.link-box img:hover{
     background-color: darkgray;
 }
 .img-label{

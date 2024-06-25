@@ -97,7 +97,7 @@ img{
 /* 正解・不正解標示 */
 .ans{
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%,-50%);
 

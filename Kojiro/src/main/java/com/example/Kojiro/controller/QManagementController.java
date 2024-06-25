@@ -251,7 +251,7 @@ public class QManagementController {
                     var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
                 } else {
                     var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
-                    System.out.println(conProduct);
+                    var result1 = qManagementService.insert(conProduct);
                 }
                 successIndex = 1;
                 return "redirect:/quiz-management";

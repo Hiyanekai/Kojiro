@@ -47,7 +47,7 @@ public class LoginController {
     }
 
     @GetMapping("/sign-up")
-    public String signUp(@ModelAttribute("signUp") LoginForm loginForm){
+    public String signUp(@ModelAttribute("signUp") CheckLoginForm loginForm){
         return "sign-up";
     }
 
@@ -55,16 +55,22 @@ public class LoginController {
     public String signUp2(@Validated @ModelAttribute("signUp") CheckLoginForm checkLoginForm, BindingResult bindingResult, Model model){
         var findByloginId = pgLoginService.findByloginId(checkLoginForm.getUserId());
         if (bindingResult.hasErrors()){
+            System.out.println("bb");
             return "sign-up";
         }else if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
+            System.out.println("cc");
             model.addAttribute("error", "パスワードとパスワード(確認)が不一致です。");
             return "sign-up";
-        }if (findByloginId==null) {
+        }else if (checkLoginForm.getRepassword().isEmpty()) {
+            System.out.println("aa");
+            model.addAttribute("error", "パスワードとパスワード(確認)が不一致です。");
+            return "sign-up";
+        }else if (findByloginId==null) {
             pgLoginService.signUp(new SignUp(checkLoginForm.getUserId(), checkLoginForm.getPassword(), 2, timestamp));
             return "sign-up-success";
-
         } else {
             model.addAttribute("error", "ユーザー名がすでに使用されいます。");
+            System.out.println("ee");
             return "sign-up";
         }
 
