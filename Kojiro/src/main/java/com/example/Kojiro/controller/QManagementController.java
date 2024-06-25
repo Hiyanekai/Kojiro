@@ -23,14 +23,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
 
-
 @Controller
 public class QManagementController {
 
     private String[] successMesList={"","追加に成功","更新に成功","削除に成功"};
 
-    @Autowired
-    private HttpServletRequest request;
     private int successIndex=0;
     @Autowired
     QManagementService qManagementService;
@@ -38,12 +35,12 @@ public class QManagementController {
     private GenresDao genresDao;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping("/quiz-management")
     public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
-//        if (session.getAttribute("user")==null){//ユーザーのセッション判定
-//            return "redirect:/login-test";
-//        }
         if (keyword.isEmpty()){//検索欄にキーワードなしは全部出す
 //            model.addAttribute("management", qManagementService.findAll());
             model.addAttribute("management", qManagementService.findAll2());
@@ -115,8 +112,7 @@ public class QManagementController {
     @GetMapping("quiz-update/{id}/{genre}")//id指定で更新のページを出す
     public String update1(@PathVariable("id") int id,
                           @PathVariable("genre") String gName, Model model) {
-        if(request.getSession(false)==null) return "redirect:/index";
-
+//        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(id);
         var genres = genresDao.findAll();
         if(gName.equals("危険予測ディスカッション")){
@@ -262,7 +258,7 @@ public class QManagementController {
                     var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
                 } else {
                     var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
-                    System.out.println(conProduct);
+                    qManagementService.insert(conProduct);
                 }
                 successIndex = 1;
                 return "redirect:/quiz-management";

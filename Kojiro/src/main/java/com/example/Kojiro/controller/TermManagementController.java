@@ -50,6 +50,7 @@ public class TermManagementController {
 
     @GetMapping("/termAddition")
     public String TermAddition(Model model, @ModelAttribute("termaddition") TermForm termForm) {
+//        if(request.getSession(false)==null) return "redirect:/index";
         return "termAddition";
     }
 

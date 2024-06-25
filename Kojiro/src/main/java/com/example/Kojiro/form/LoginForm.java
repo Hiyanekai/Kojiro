@@ -8,10 +8,10 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class LoginForm {
     //ログイン用
-    @NotEmpty(message = "IDは必須です")
+    @NotEmpty(message = "ユーザー名は必須です")
     @Length(max = 20)
     public String userId;
-    @NotEmpty(message = "PASSは必須です")
+    @NotEmpty(message = "パスワードは必須です")
     @Length(max = 50)
     public String password;
 
