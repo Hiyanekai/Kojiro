@@ -47,7 +47,7 @@ public class LoginController {
     }
 
     @GetMapping("/sign-up")
-    public String signUp(@ModelAttribute("signUp") LoginForm loginForm){
+    public String signUp(@ModelAttribute("signUp") CheckLoginForm checkLoginForm){
         return "sign-up";
     }
 
@@ -56,10 +56,11 @@ public class LoginController {
         var findByloginId = pgLoginService.findByloginId(checkLoginForm.getUserId());
         if (bindingResult.hasErrors()){
             return "sign-up";
-        }else if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
+        }if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
             model.addAttribute("error", "パスワードとパスワード(確認)が不一致です。");
             return "sign-up";
-        }if (findByloginId==null) {
+
+        }else if (findByloginId==null) {
             pgLoginService.signUp(new SignUp(checkLoginForm.getUserId(), checkLoginForm.getPassword(), 2, timestamp));
             return "sign-up-success";
 

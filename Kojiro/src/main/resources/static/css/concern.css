@@ -36,9 +36,9 @@ h3{
     text-align: center;
 }
 
-img{
-object-fit: cover;
-width: 430px;
+.question img{
+object-fit: contain;
+width: 450px;
 height: 430px;
 }
 

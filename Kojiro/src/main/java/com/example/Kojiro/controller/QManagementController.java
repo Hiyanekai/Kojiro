@@ -9,6 +9,7 @@ import com.example.Kojiro.entity.TestQuestionP2;
 import com.example.Kojiro.entity.question;
 import com.example.Kojiro.form.QuizManagement;
 import com.example.Kojiro.service.QManagementService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +35,12 @@ public class QManagementController {
     private GenresDao genresDao;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping("/quiz-management")
     public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
-//        if (session.getAttribute("user")==null){//ユーザーのセッション判定
-//            return "redirect:/login-test";
-//        }
+        if(request.getSession(false)==null) return "redirect:/index";
         if (keyword.isEmpty()){//検索欄にキーワードなしは全部出す
 //            model.addAttribute("management", qManagementService.findAll());
             model.addAttribute("management", qManagementService.findAll2());
@@ -72,6 +74,7 @@ public class QManagementController {
     @GetMapping("quiz-detail/{id}/{gName}")//id指定で詳細のページを出す
     public String detail(@PathVariable("id") int id,
                          @PathVariable("gName") String gName, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(id);
         if(gName.equals("危険予測ディスカッション")){
             var result = qManagementService.findById2(id);
@@ -109,6 +112,7 @@ public class QManagementController {
     @GetMapping("quiz-update/{id}/{genre}")//id指定で更新のページを出す
     public String update1(@PathVariable("id") int id,
                           @PathVariable("genre") String gName, Model model) {
+//        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(id);
         var genres = genresDao.findAll();
         if(gName.equals("危険予測ディスカッション")){
@@ -156,6 +160,7 @@ public class QManagementController {
 //    }
     @PostMapping("quiz-update/{id}/{genre}")
     public String update2(@PathVariable("id") int id, @PathVariable("genre") String gName, @Validated @ModelAttribute("q_management") QuizManagement update, BindingResult bindingResult, Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
         if(bindingResult.hasErrors()) {//バリデーションチェック
             return "quiz-update";
         }else {
@@ -199,6 +204,7 @@ public class QManagementController {
 //    }
     @GetMapping("/quiz-delete/{id}/{genre}")//問題の削除(idを指定)
     public String delete1(@PathVariable("id") int id, @PathVariable("genre") String gName){
+        if(request.getSession(false)==null) return "redirect:/index";
         if(gName.equals("危険予測ディスカッション")){
             var result = qManagementService.delete2(id);
             successIndex=3;
@@ -235,6 +241,7 @@ public class QManagementController {
 //    }
     @PostMapping("/quiz-add")
     public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
+        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(add);
         if (bindingResult.hasErrors()) {
             System.out.println("バリデーション");
@@ -251,7 +258,7 @@ public class QManagementController {
                     var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
                 } else {
                     var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
-                    System.out.println(conProduct);
+                    qManagementService.insert(conProduct);
                 }
                 successIndex = 1;
                 return "redirect:/quiz-management";

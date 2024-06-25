@@ -56,8 +56,8 @@
     </div>
 </div>
 <div class="flag-del">
-    <button th:if="${gId==100}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
-    <button th:if="${gId==999}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==100 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==999 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
 </div>
 <div class="change-page">
     <button onclick="location.href='/return-menu'" class="btn" id="link-btn">メニューへ戻る</button>
