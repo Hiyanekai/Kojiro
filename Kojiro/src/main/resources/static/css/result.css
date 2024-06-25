@@ -506,3 +506,13 @@ header{
   margin-right: auto;
   margin-left : auto;
 }
+
+.header img {
+    width: 260px;
+    height: 60px;
+}
+
+.user{
+    font-size: 15px;
+    font-weight: lighter;
+}

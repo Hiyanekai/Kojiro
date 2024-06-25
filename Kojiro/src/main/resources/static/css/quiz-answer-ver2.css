@@ -89,7 +89,7 @@
 }
 
 /* 図 */
-img{
+.q-img img{
     object-fit: cover;
     height: 200px;
 }
