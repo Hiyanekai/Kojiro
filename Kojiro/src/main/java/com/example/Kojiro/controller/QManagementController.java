@@ -16,10 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 
 @Controller
@@ -84,19 +87,6 @@ public class QManagementController {
             showImage(result.file(), model);
         }
         return "quiz-detail";
-    }
-
-    public void showImage(String fName, Model model){
-        if(fName!=null && !fName.equals("")) {
-            File img = new File("./Kojiro/src/main/resources/static/images/" + fName);
-            try {
-                byte[] byteImg = Files.readAllBytes(img.toPath());
-                String base64Data = Base64.getEncoder().encodeToString(byteImg);
-                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 //    @GetMapping("quiz-update/{id}")//id指定で更新のページを出す
@@ -259,6 +249,32 @@ public class QManagementController {
                 System.out.println("重複しましたよ");
                 return "quiz-add";
             }
+        }
+    }
+
+    public void showImage(String fName, Model model){
+        if(fName!=null && !fName.equals("")) {
+            File img = new File("./Kojiro/src/main/resources/static/images/" + fName);
+            try {
+                byte[] byteImg = Files.readAllBytes(img.toPath());
+                String base64Data = Base64.getEncoder().encodeToString(byteImg);
+                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void insertImgFiles(MultipartFile file) {
+        final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
+        try {
+            if (!file.getOriginalFilename().equals("")) {
+
+                String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
+                Path destination = new File(filePath).toPath();
+                Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

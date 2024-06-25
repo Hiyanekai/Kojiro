@@ -1,7 +1,10 @@
 package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.UserManagement;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.service.UserManagementService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +17,15 @@ public class UserManagementController {
     @Autowired
     UserManagementService UserManagementService;
 
+    @Autowired
+    private HttpSession session;
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/user-management")
     public String userList(Model model) {
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         model.addAttribute("users", UserManagementService.findAll());
         return "user-management";
     }

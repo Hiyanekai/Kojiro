@@ -29,12 +29,12 @@
                     <tbody>
                         <tr th:each="i : ${#numbers.sequence(0,__${genres.size()}-1__,2)}">
                             <td>
-                                <a th:href="@{/quiz/__${genres.get(i).id}__}">
+                                <a th:href="@{/quiz/__${genres.get(i).id}__/0}">
                                     <p>[[${genres.get(i).id}]]. [[${genres.get(i).genre_name}]]</p>
                                 </a>
                             </td>
                             <td>
-                                <a th:href="@{/quiz/__${genres.get(i+1).id}__}">
+                                <a th:href="@{/quiz/__${genres.get(i+1).id}__/0}">
                                     <p>[[${genres.get(i+1).id}]]. [[${genres.get(i+1).genre_name}]]</p>
                                 </a>
                             </td>
@@ -47,12 +47,12 @@
                     <tbody>
                         <tr th:each="i : ${#numbers.sequence(0,__${genres2.size()}-1__,2)}">
                             <td>
-                                <a th:href="@{/quiz/__${genres2.get(i).id}__}">
+                                <a th:href="@{/quiz/__${genres2.get(i).id}__/0}">
                                     <p>[[${genres2.get(i).id}]]. [[${genres2.get(i).genre_name}]]</p>
                                 </a>
                             </td>
                             <td>
-                                <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__}">
+                                <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__/0}">
                                     <p>[[${genres2.get(i+1).id}]]. [[${genres2.get(i+1).genre_name}]]</p>
                                 </a>
                             </td>
@@ -64,7 +64,7 @@
                 <table>
                     <tr>
                         <td>
-                            <a th:href="@{/quiz/99}">
+                            <a th:href="@{/quiz/99/0}">
                                 <p>99. ランダム</p>
                             </a>
                         </td>

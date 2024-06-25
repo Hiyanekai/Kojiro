@@ -1,97 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>一問一答（答え）</title>
-    <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
+    <link  th:href="@{/css/quiz-answer-ver2.css}" rel="stylesheet">
 </head>
 <body>
 <div class="header">
     <th:block th:insert="/common/header"></th:block>
 </div>
-    <div class="q-header">
-        <div class="genre-name">
-            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
-        </div>
-        <div class="q-num">
-            <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
-        </div>
+<div class="q-header">
+    <div class="genre-name">
+        <h3>ジャンル：[[${genres.get(questions.get(qNum).genre_id-1).genre_name}]]</h3>
     </div>
-    <div id="answer"></div>
-    <div class="answer">
-        <h1 id="ans-text"></h1>
-        <h1>あなたの解答　[[${ans}]]</h1>
-        <h1>正解　[[${correct}]]</h1>
-        <th:block th:if="${point2!=-1}">
-            <p class="q-text">[[${questions.get(qNum-1).explain.split("\r")[0]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).explain.split("\r")[1]}]]</p>
-            <p class="q-text" th:if="${questions.get(qNum-1).explain.split('\r').length==3}">[[${questions.get(qNum-1).explain.split("\r")[2]}]]</p>
-        </th:block>
-        <th:block th:if="${point2==-1}">
-            <p class="q-text">[[${questions.get(qNum-1).explain}]]</p>
-        </th:block>
-        <div class="q-img">
-            <img th:if="${base64Data}!=null" th:src="${base64Data}">
-        </div>
+    <div class="q-num">
+        <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
     </div>
-    <!-- <div class="user-select">
-        <form method="post" action="#">
-            <input type="submit" value="〇" name="〇" class="btn" id="circle">
-            <input type="submit" value="✖" name="✖" class="btn" id="cross">
-        </form>
-    </div> -->
-    <div class="question">
-        <h1>問題</h1>
-        <th:block th:if="${point2!=-1}">
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
-        </th:block>
-        <th:block th:if="${point2==-1}">
-            <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
-        </th:block>
-        <div class="q-img">
-            <img th:if="${base64Data}!=null" th:src="${base64Data}">
-        </div>
+</div>
+<div id="answer"></div>
+<div class="answer">
+    <h1 id="ans-text"></h1>
+    <h1>あなたの解答　[[${ans}]]</h1>
+    <h1>正解　[[${correct}]]</h1>
+    <th:block th:if="${point2!=-1}">
+        <p class="q-text">[[${questions.get(qNum).explain.split("\r")[0]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).explain.split("\r")[1]}]]</p>
+        <p class="q-text" th:if="${questions.get(qNum).explain.split('\r').length==3}">[[${questions.get(qNum).explain.split("\r")[2]}]]</p>
+    </th:block>
+    <th:block th:if="${point2==-1}">
+        <p class="q-text">[[${questions.get(qNum).explain}]]</p>
+    </th:block>
+    <div class="q-img">
+        <img th:if="${base64Data}!=null" th:src="${base64Data}">
     </div>
-    <div class="change-page">
-        <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
-        <button th:onclick="|location.href='/quiz/__${gId}__/next'|" class="btn" id="next">次の問題へ</button>
+</div>
+<!-- <div class="user-select">
+    <form method="post" action="#">
+        <input type="submit" value="〇" name="〇" class="btn" id="circle">
+        <input type="submit" value="✖" name="✖" class="btn" id="cross">
+    </form>
+</div> -->
+<div class="question">
+    <h1>問題</h1>
+    <th:block th:if="${point2!=-1}">
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[0]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[1]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[2]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[3]}]]</p>
+    </th:block>
+    <th:block th:if="${point2==-1}">
+        <p class="q-text">[[${questions.get(qNum).sentence}]]</p>
+    </th:block>
+    <div class="q-img">
+        <img th:if="${base64Data}!=null" th:src="${base64Data}">
     </div>
-    <script th:inline="javascript">
-        const nextBtn = document.getElementById("next");
-        const qNum = /*[[${qNum}]]*/"qNum";
-        const qMax = /*[[${questions.size()}]]*/"questions.size()";
+</div>
+<div class="change-page">
+    <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
+    <button th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
+</div>
+<script th:inline="javascript">
+    const nextBtn = document.getElementById("next");
+    const qNum = /*[[${qNum}]]*/"qNum";
+    const qMax = /*[[${questions.size()}]]*/"questions.size()";
 
-        const ans = /*[[${ans}]]*/"ans";
-        const correct = /*[[${correct}]]*/"correct";
+    const ans = /*[[${ans}]]*/"ans";
+    const correct = /*[[${correct}]]*/"correct";
 
-        var answer = document.getElementById("answer");
-        var ansText = document.getElementById("ans-text");
+    var answer = document.getElementById("answer");
+    var ansText = document.getElementById("ans-text");
 
-        if(qNum==10) nextBtn.style.display = 'none';
+    if(qNum==9) nextBtn.style.display = 'none';
 
-        if(ans == correct){
-            answer.innerHTML = "〇";
-            answer.style.color = "#ffb3b3";
-            answer.classList.add("ans");
-            setTimeout(function(){
-                answer.style.display = 'none';
-            }, 1000);
-            ansText.innerHTML = "正解";
-            ansText.style.color = "red";
-        }else{
-            answer.innerHTML = "✖";
-            answer.style.color = "#b3c7ff";
-            /*answer.style.color = "#ffb3b3";*/
-            answer.classList.add("ans");
-            setTimeout(function(){
-                answer.style.display = 'none';
-            }, 1000);
-            ansText.innerHTML = "不正解";
-            ansText.style.color = "blue";
-        }
-    </script>
+    if(ans == correct){
+        answer.innerHTML = "〇";
+        answer.style.color = "#ffb3b3";
+        answer.classList.add("ans");
+        setTimeout(function(){
+            answer.style.display = 'none';
+        }, 1000);
+        ansText.innerHTML = "正解";
+        ansText.style.color = "red";
+    }else{
+        answer.innerHTML = "✖";
+        answer.style.color = "#b3c7ff";
+        /*answer.style.color = "#ffb3b3";*/
+        answer.classList.add("ans");
+        setTimeout(function(){
+            answer.style.display = 'none';
+        }, 1000);
+        ansText.innerHTML = "不正解";
+        ansText.style.color = "blue";
+    }
+</script>
 </body>
 </html>

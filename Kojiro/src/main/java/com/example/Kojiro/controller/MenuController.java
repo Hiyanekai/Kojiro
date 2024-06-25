@@ -18,7 +18,7 @@ public class MenuController {
     @GetMapping("/menu")
     public String menu(Model model){
         if(request.getSession(false)==null) return "redirect:/index";
-        QuizController.index = 0;
+        QuizController.quizFlag = false;
         var user = (Users)session.getAttribute("users");
         System.out.println(user.role());
         model.addAttribute("user", user);

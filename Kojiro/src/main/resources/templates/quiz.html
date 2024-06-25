@@ -11,22 +11,22 @@
 </div>
     <div class="q-header">
         <div class="genre-name">
-            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
+            <h3>ジャンル：[[${genres.get(questions.get(qNum).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
-            <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+            <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
         </div>
     </div>
     <div class="question">
         <h1>問題</h1>
         <th:block th:if="${point2!=-1}">
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
-            <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
+            <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[0]}]]</p>
+            <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[1]}]]</p>
+            <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[2]}]]</p>
+            <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[3]}]]</p>
         </th:block>
         <th:block th:if="${point2==-1}">
-            <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+            <p class="q-text">[[${questions.get(qNum).sentence}]]</p>
         </th:block>
         <div class="q-img">
             <img th:if="${base64Data}!=null" th:src="${base64Data}">
@@ -37,8 +37,8 @@
 <!--        <input th:if="${gId==100}" type="button" value="〇" name="〇" class="btn" id="circle" th:onclick="|location.href='../quiz-flag/__${gId}__/〇'|">-->
 <!--        <input th:if="${gId!=100}" type="button" value="×" name="×" class="btn" id="cross" th:onclick="|location.href='../quiz-answer/__${gId}__/×'|">-->
 <!--        <input th:if="${gId==100}" type="button" value="×" name="×" class="btn" id="cross" th:onclick="|location.href='../quiz-flag/__${gId}__/×'|">-->
-            <input type="button" value="〇" name="〇" class="btn" id="circle" th:onclick="|location.href='../quiz-answer/__${gId}__/〇'|">
-            <input type="button" value="×" name="×" class="btn" id="cross" th:onclick="|location.href='../quiz-answer/__${gId}__/×'|">
+            <input type="button" value="〇" name="〇" class="btn" id="circle" th:onclick="|location.href='../../quiz-answer/__${gId}__/__${qNum}__/〇'|">
+            <input type="button" value="×" name="×" class="btn" id="cross" th:onclick="|location.href='../../quiz-answer/__${gId}__/__${qNum}__/×'|">
     </div>
     <!-- <div class="change-page">
         <button onclick="location.href='./select-quiz.html'" class="btn" id="link-btn">ジャンル選択へ</button>
