@@ -7,16 +7,18 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const t1=new Date().getTime();
   const form = document.querySelector('form'); // フォーム要素を取得
 
-  setInterval(()=>{
+  const intervalId = setInterval(()=>{
     const t2=new Date().getTime();
     const t3=t0+t1-t2
-    const m=(parseInt(t3/60/1000)).toString().padStart(2,'0');
-    const s=(parseInt(t3/1000)%60).toString().padStart(2,'0');
-    const ms=(parseInt(t3/10)%100).toString().padStart(2,'0');
-    timer.textContent=`残り時間：${m}分${s}秒${ms}`;
     if (t3 <= 0) {
         clearInterval(intervalId); // タイマー停止
         form.submit(); // フォームを自動的に送信
+    }
+    else{
+        const m=(parseInt(t3/60/1000)).toString().padStart(2,'0');
+        const s=(parseInt(t3/1000)%60).toString().padStart(2,'0');
+        const ms=(parseInt(t3/10)%100).toString().padStart(2,'0');
+        timer.textContent=`残り時間：${m}分${s}秒${ms}`;
     }
   },10);
 });

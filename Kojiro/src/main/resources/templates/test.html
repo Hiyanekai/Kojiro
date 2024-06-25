@@ -7,7 +7,7 @@
 </head>
 <!--th:fieldの問題IDを何回目のテストかを作成しておく-->
 <body>
-    <form action="result" method="post" onSubmit="return check()">
+    <form action="result" method="post">
         <input type="hidden" name="token" th:value="${session.token}">
         <div class="inline">
             <div>
@@ -64,7 +64,7 @@
                 <div class="MuiStack-root css-18zsr3k">
                     <h2>第[[${times}]]回模擬試験</h2>
                     <div id="timer"></div>
-                    <button class="btn btn-flat" type="submit" id="submit">
+                    <button class="btn btn-flat" type="submit">
                         <span class="MuiTouchRipple-root css-w0pj6f">回答を送信する</span>
                     </button>
                     <div></div>
