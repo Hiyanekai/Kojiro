@@ -11,23 +11,23 @@
 </div>
     <div class="q-header">
         <div class="genre-name">
-            <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
+            <h3>ジャンル：[[${genres.get(questions.get(qNum).genre_id-1).genre_name}]]</h3>
         </div>
         <div class="q-num">
-            <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+            <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
         </div>
     </div>
     <div class="quiz-area">
         <div class="question">
             <h1>問題</h1>
             <th:block th:if="${point2!=-1}">
-                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
-                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
-                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
-                <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
+                <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[0]}]]</p>
+                <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[1]}]]</p>
+                <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[2]}]]</p>
+                <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[3]}]]</p>
             </th:block>
             <th:block th:if="${point2==-1}">
-                <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+                <p class="q-text">[[${questions.get(qNum).sentence}]]</p>
             </th:block>
             <div class="q-img">
                 <img th:if="${base64Data}!=null" th:src="${base64Data}">
@@ -71,7 +71,8 @@
         var link = document.getElementById("link");
 
         const gId = /*[[${gId}]]*/"gId";
-        const genre_id = /*[[${questions.get(qNum-1).genre_id}]]*/"questions.get(qNum-1).genre_id";
+        const qNum = /*[[${qNum}]]*/"qNum";
+        const genre_id = /*[[${questions.get(qNum).genre_id}]]*/"questions.get(qNum).genre_id";
 
         const ansAry = ["〇","〇","〇"];
 
@@ -113,7 +114,7 @@
             } else {
                 var url = "../quiz-flag/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
             }*/
-            var url = "../quiz-answer/"+gId+"/"+ansAry[0]+ansAry[1]+ansAry[2];
+            var url = "../../quiz-answer/"+gId+"/"+qNum+"/"+ansAry[0]+ansAry[1]+ansAry[2];
             link.setAttribute('href', url);
         });
     </script>

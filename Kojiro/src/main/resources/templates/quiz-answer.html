@@ -57,7 +57,7 @@
 </div>
 <div class="change-page">
     <button onclick="location.href='/quiz-select'" class="btn" id="link-btn">ジャンル選択へ</button>
-    <button th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
+    <button th:if="${qNum!=questions.size()-1}" th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
 </div>
 <script th:inline="javascript">
     const nextBtn = document.getElementById("next");
@@ -69,8 +69,6 @@
 
     var answer = document.getElementById("answer");
     var ansText = document.getElementById("ans-text");
-
-    if(qNum==9) nextBtn.style.display = 'none';
 
     if(ans == correct){
         answer.innerHTML = "〇";

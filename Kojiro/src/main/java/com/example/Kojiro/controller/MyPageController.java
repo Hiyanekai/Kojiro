@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 public class MyPageController {
     @Autowired
@@ -99,7 +100,7 @@ public class MyPageController {
 //        }
         model.addAttribute("users", user);
         model.addAttribute("scoredetailList",testResult);
-        model.addAttribute("scores",myPageService.findByIdForScores(scoreId));
+        model.addAttribute("scores",myPageService.findByIdForScores(user.id(),scoreId));
 
 
 

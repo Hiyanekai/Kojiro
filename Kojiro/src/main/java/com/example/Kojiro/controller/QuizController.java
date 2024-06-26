@@ -57,7 +57,7 @@ public class QuizController {
         if(request.getSession(false)==null) return "redirect:/index";
 //        model.addAttribute("gId", gId);
 //        System.out.println(pgQuestionsForQuizService.findById(345).sentence().split("\r")[0]);
-        if(quizFlag == false) {
+        if(!quizFlag) {
             if(gId == 30){
                 quizzes = pgQuestionsForQuizService.quizGetBy2points(gId);
                 quizFlag = true;
@@ -77,6 +77,7 @@ public class QuizController {
             }
             else {
                 quizzes = pgQuestionsForQuizService.findByGenre(gId);
+                quizFlag = true;
 //                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
@@ -87,7 +88,7 @@ public class QuizController {
 //            model.addAttribute("qNum", qNum + 1);
 //            System.out.println(quizzes.size());
             model.addAttribute("questions", quizzes);
-            System.out.println("もんだいすう："+ qNum);
+            System.out.println(quizFlag + "  " + quizzes.get(0).sentence());
             // データベースにファイルパスがない場合、画像を表示しない
             if (quizzes.get(qNum).file() != null && !quizzes.get(qNum).file().equals("")) {
                 File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(qNum).file());
@@ -102,7 +103,7 @@ public class QuizController {
         } else {
             return "/questions-not-found";
         }
-        return quizzes.get(index).genre_id()==30? "quiz-2points" : "quiz";
+        return quizzes.get(qNum).genre_id()==30? "quiz-2points" : "quiz";
     }
 
     @GetMapping("/quiz-answer/{gId}/{qNum}/{ans}")
@@ -121,8 +122,8 @@ public class QuizController {
         model.addAttribute("correct", correct);
         model.addAttribute("questions", quizzes);
         // データベースにファイルパスがない場合、画像を表示しない
-        if(quizzes.get(index).file()!=null && !quizzes.get(index).file().equals("")) {
-            File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(index).file());
+        if(quizzes.get(qNum).file()!=null && !quizzes.get(qNum).file().equals("")) {
+            File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(qNum).file());
             try {
                 byte[] byteImg = Files.readAllBytes(img.toPath());
                 String base64Data = Base64.getEncoder().encodeToString(byteImg);
@@ -135,29 +136,33 @@ public class QuizController {
         return gId==100||gId==999? "quiz-flag" : "quiz-answer";
     }
 
-    @GetMapping("/delete-flag/{id}/{gId}")
+    @GetMapping("/delete-flag/{id}/{gId}/{qNum}")
     public String deleteFlag(@PathVariable("id") int id,
-                             @PathVariable("gId") int gId, Model model){
+                             @PathVariable("gId") int gId,
+                             @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delFlagQuestion(id, gId);
-        System.out.println(result);
-        return "redirect:/quiz/"+100+"/next";
+        int next = qNum + 1;
+        return "redirect:/quiz/"+100+"/"+next;
 
     }
 
-    @GetMapping("/delete-miss/{id}/{gId}")
+    @GetMapping("/delete-miss/{id}/{gId}/{qNum}")
     public String deleteMiss(@PathVariable("id") int id,
-                             @PathVariable("gId") int gId, Model model){
+                             @PathVariable("gId") int gId,
+                             @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delMissQuestion(id, gId);
         System.out.println(result);
-        return "redirect:/quiz/"+999+"/next";
+        int next = qNum + 1;
+        return "redirect:/quiz/"+999+"/"+next;
     }
 
     @GetMapping("/return-menu")
     public String returnMenu(){
         if(request.getSession(false)==null) return "redirect:/index";
         index = 0;
+        quizFlag = false;
         return "redirect:/menu";
     }
 
@@ -166,4 +171,5 @@ public class QuizController {
         if(request.getSession(false)==null) return "redirect:/index";
         return "/questions-not-found";
     }
+
 }

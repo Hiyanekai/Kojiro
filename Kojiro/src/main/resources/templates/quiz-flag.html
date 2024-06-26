@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>一問一答（答え）</title>
-    <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
+    <link th:href="@{/css/quiz-answer-ver2.css}" rel="stylesheet">
 </head>
 <body>
 <div class="header">
@@ -14,7 +14,7 @@
         <h3>ジャンル：[[${genres.get(questions.get(qNum).genre_id-1).genre_name}]]</h3>
     </div>
     <div class="q-num">
-        <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+        <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
     </div>
 </div>
 <div id="answer"></div>
@@ -56,12 +56,12 @@
     </div>
 </div>
 <div class="flag-del">
-    <button th:if="${gId==100}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__'|">理解できた</button>
-    <button th:if="${gId==999}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==100 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__/__${qNum}__'|">理解できた</button>
+    <button th:if="${gId==999 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__/__${qNum}__'|">理解できた</button>
 </div>
 <div class="change-page">
     <button onclick="location.href='/menu'" class="btn" id="link-btn">メニューへ戻る</button>
-    <button th:if="${qNum!=questions.size()}" th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
+    <button th:if="${qNum!=questions.size()-1}" th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
 </div>
 <script th:inline="javascript">
     const nextBtn = document.getElementById("next");

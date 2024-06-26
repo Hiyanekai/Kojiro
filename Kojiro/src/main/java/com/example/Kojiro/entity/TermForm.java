@@ -10,10 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class TermForm {
     //用語集
     @NotBlank(message = "名前は必須です")
-    @Length(min = 2,max = 20)
     public String term_name;
     @NotBlank(message = "説明文がありません")
-    @Length(min = 2,max = 500)
     public String explain;
 
     public MultipartFile file;

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserManagementController {
     @Autowired
     UserManagementService UserManagementService;
-
-    @Autowired
-    private HttpSession session;
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/user-management")
     public String userList(Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         if(user.role() != 1) return "redirect:/menu";
         model.addAttribute("users", UserManagementService.findAll());
@@ -42,6 +42,9 @@ public class UserManagementController {
 
     @GetMapping("/user-detail/{id}")
     public String userDetail(@PathVariable int id, Model model){
+        if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         UserManagement detail = UserManagementService.findById(id);
         model.addAttribute("detail", detail);
         return "user-detail";
@@ -55,10 +58,14 @@ public class UserManagementController {
 
     @GetMapping("/user-update/{id}")
     public String userUpdate(@PathVariable int id, Model model, @ModelAttribute("update") UserManagement change){
+        if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         UserManagement update = UserManagementService.findById(id);
         model.addAttribute("update", update);
         return "user-update";
     }
+
 
     @PostMapping("/user-update")
     public String userChange(@Validated @ModelAttribute("update") UserManagement change, BindingResult bindingResult, Model model){

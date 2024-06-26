@@ -15,6 +15,7 @@ public class MenuController {
     @Autowired
     private HttpSession session;
 
+
     @GetMapping("/menu")
     public String menu(Model model){
         if(request.getSession(false)==null) return "redirect:/index";

@@ -2,8 +2,11 @@ package com.example.Kojiro.controller;
 
 import com.example.Kojiro.entity.TermManagementDetail;
 import com.example.Kojiro.entity.TermManagementNotFile;
+import com.example.Kojiro.entity.Users;
 import com.example.Kojiro.form.TermUpdateForm;
 import com.example.Kojiro.service.TermManagementDetailService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +25,18 @@ import java.util.Base64;
 public class TermManagementDetailController {
     @Autowired
     TermManagementDetailService TermManagementService;
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private HttpSession session;
+
 
     @GetMapping("/term-detail/{id}")
     public String termDetail(@PathVariable int id, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         TermManagementDetail detail = TermManagementService.findById(id);
 //        var genres = TermManagementService.findByGenres(detail.genre_id());
 //        model.addAttribute("genres", genres);
@@ -52,6 +64,9 @@ public class TermManagementDetailController {
 
     @GetMapping("/term-update/{id}")
     public String termUpdate(@PathVariable int id, @ModelAttribute("update") TermManagementDetail termManagement, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         TermManagementDetail update = TermManagementService.findById(id);
         model.addAttribute("update", update);
 //        model.addAttribute("genresList", TermManagementService.findAll());

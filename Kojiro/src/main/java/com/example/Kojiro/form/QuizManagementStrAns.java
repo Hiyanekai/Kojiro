@@ -3,6 +3,7 @@ package com.example.Kojiro.form;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class QuizManagementStrAns {
@@ -10,7 +11,7 @@ public class QuizManagementStrAns {
     private String sentence;
 
     @NotNull(message = "解答は必須入力です")
-    private String answer;
+    private int answer;
 
     @NotEmpty(message = "解説は必須入力です")
     private String explain;
@@ -18,7 +19,7 @@ public class QuizManagementStrAns {
     @NotEmpty(message = "ジャンルは必須入力です")
     private String genre;
 
-    private String file;
+    private MultipartFile file;
 
     @NotNull(message = "スコアは必須入力です")
     private int score;

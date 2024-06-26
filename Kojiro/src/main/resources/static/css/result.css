@@ -76,6 +76,11 @@
     text-align: center;
 }
 
+.q-img img{
+   object-fit: cover;
+
+   height: 200px;
+}
 /* 解答欄 */
 .answer{
     width: fit-content;
@@ -119,7 +124,7 @@
 }
 
 /* 図 */
-img .checkImage{
+.checkImage img{
 
     object-fit: cover;
     height: 200px;
