@@ -273,6 +273,5 @@ public class TestController {
         model.addAttribute("testScore",testScore);//採点結果表示用の変数addAttribute
         return "result";
     }
-
 }
 //aaaaaaa
