@@ -27,8 +27,6 @@ public class TestController {
     @Autowired
     private HttpServletRequest request;
 
-    @Autowired
-    private HttpServletRequest request;
 
     @GetMapping("cation")
     public String cartion() {
