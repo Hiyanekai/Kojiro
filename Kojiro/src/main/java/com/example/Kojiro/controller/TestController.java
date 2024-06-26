@@ -249,6 +249,7 @@ public class TestController {
             pgQuestionsService.insertTestResults(pt);
         }
 
+
         //テスト結果をtest_results_2ptテーブルに追加
         for (TestResults pt: resultsP2){
             pgQuestionsService.insertTestResultsP2(pt);

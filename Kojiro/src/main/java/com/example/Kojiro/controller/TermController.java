@@ -38,6 +38,7 @@ public class TermController {
         return "term";
     }
 
+
     @GetMapping("terms-detail/{id}")//id指定で詳細のページを出す
     public String detail(@PathVariable("id") int id, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
