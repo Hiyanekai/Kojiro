@@ -193,7 +193,7 @@ public class TestController {
                 results.add(new TestResults(0,test_input.q_id(),String.valueOf(test_input.user_select()),times,user.id(),0,flag));//回答ページ送信用リストに追加
                 Misses misses = new Misses(0,test_input.q_id(),0,user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
-                pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
+                //pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
             testData.add(question);//回答表示用のリストに採点した問題を格納
         }
@@ -216,7 +216,7 @@ public class TestController {
                 resultsP2.add(new TestResults(0,test_input.q_id(),test_input.user_select(),times,user.id(),0,flag));//回答ページ送信用リストに追加
                 Misses misses = new Misses(0,0,test_input.q_id(),user.id());//ID(シリアルなので適当)、問題ID、ユーザー名を保持するmisses型の変数
                 miss.add(misses);
-                pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
+                //pgQuestionsService.insertMiss(misses);//missesクラスに問題を追加
             }
             testDataP2.add(question);//回答表示用のリストに採点した問題を格納
         }
@@ -228,21 +228,21 @@ public class TestController {
         //受験日、ユーザーID、点数等の受験結果を保持する変数を作成
         Scores testScore = new Scores(0, user.id(), score,times,str1);
         //受験結果をScoreテーブルに追加
-        pgQuestionsService.insertScores(testScore);
+        //pgQuestionsService.insertScores(testScore);
 
         //テスト結果をtest_resultsテーブルに追加
         for (TestResults pt: results){
-            pgQuestionsService.insertTestResults(pt);
+            //pgQuestionsService.insertTestResults(pt);
         }
 
         //テスト結果をtest_results_2ptテーブルに追加
         for (TestResults pt: resultsP2){
-            pgQuestionsService.insertTestResultsP2(pt);
+            //pgQuestionsService.insertTestResultsP2(pt);
         }
 
         //テスト結果をflagsテーブルに追加
         for(Flags flag : flagsList){
-            pgQuestionsService.insertFlags(flag);//flagクラスに問題を追加
+            //pgQuestionsService.insertFlags(flag);//flagクラスに問題を追加
         }
 
         model.addAttribute("times",times);//HTMLに受け渡し(ユーザーの受けたテストの回数 表示したいtest_resultsのscore_id)
