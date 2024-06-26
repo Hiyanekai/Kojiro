@@ -119,7 +119,7 @@
 }
 
 /* 図 */
-img .checkImage{
+.checkImage img{
 
     object-fit: cover;
     height: 200px;
