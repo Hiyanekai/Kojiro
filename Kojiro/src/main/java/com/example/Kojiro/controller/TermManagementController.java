@@ -1,9 +1,6 @@
 package com.example.Kojiro.controller;
 
-import com.example.Kojiro.entity.TermAddition;
-import com.example.Kojiro.entity.TermForm;
-import com.example.Kojiro.entity.TermManagement;
-import com.example.Kojiro.entity.TermManagementDetail;
+import com.example.Kojiro.entity.*;
 import com.example.Kojiro.service.PgTermManagementService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +37,8 @@ public class TermManagementController {
     @GetMapping("/term")
     public String TermManagement2(@RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         if (keyword.isEmpty()) {
             model.addAttribute("termlist", pgTermManagementService.findAll());
         } else {
@@ -57,6 +56,8 @@ public class TermManagementController {
     @PostMapping("/termAddition")
     public String TermAddition2(@Validated @ModelAttribute("termaddition") TermForm termForm, BindingResult bindingResult, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
+        var user = (Users)session.getAttribute("users");
+        if(user.role() != 1) return "redirect:/menu";
         var result2 = pgTermManagementService.findtermAddition(termForm.getTerm_name());
         if (bindingResult.hasErrors()) {
             return "termAddition";

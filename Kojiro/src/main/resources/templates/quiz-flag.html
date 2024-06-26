@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>一問一答（答え）</title>
-    <link href="../../css/quiz-answer-ver2.css" rel="stylesheet">
+    <link th:href="@{/css/quiz-answer-ver2.css}" rel="stylesheet">
 </head>
 <body>
 <div class="header">
@@ -11,10 +11,10 @@
 </div>
 <div class="q-header">
     <div class="genre-name">
-        <h3>ジャンル：[[${genres.get(questions.get(qNum-1).genre_id-1).genre_name}]]</h3>
+        <h3>ジャンル：[[${genres.get(questions.get(qNum).genre_id-1).genre_name}]]</h3>
     </div>
     <div class="q-num">
-        <h3>[[${qNum}]]/[[${questions.size()}]]問</h3>
+        <h3>[[${qNum}+1]]/[[${questions.size()}]]問</h3>
     </div>
 </div>
 <div id="answer"></div>
@@ -23,12 +23,12 @@
     <h1>あなたの解答　[[${ans}]]</h1>
     <h1>正解　[[${correct}]]</h1>
     <th:block th:if="${point2!=-1}">
-        <p class="q-text">[[${questions.get(qNum-1).explain.split("\r")[0]}]]</p>
-        <p class="q-text">[[${questions.get(qNum-1).explain.split("\r")[1]}]]</p>
-        <p class="q-text" th:if="${questions.get(qNum-1).explain.split('\r').length==3}">[[${questions.get(qNum-1).explain.split("\r")[2]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).explain.split("\r")[0]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).explain.split("\r")[1]}]]</p>
+        <p class="q-text" th:if="${questions.get(qNum).explain.split('\r').length==3}">[[${questions.get(qNum).explain.split("\r")[2]}]]</p>
     </th:block>
     <th:block th:if="${point2==-1}">
-        <p class="q-text">[[${questions.get(qNum-1).explain}]]</p>
+        <p class="q-text">[[${questions.get(qNum).explain}]]</p>
     </th:block>
     <div class="q-img">
         <img th:if="${base64Data}!=null" th:src="${base64Data}">
@@ -43,25 +43,25 @@
 <div class="question">
     <h1>問題</h1>
     <th:block th:if="${point2!=-1}">
-        <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[0]}]]</p>
-        <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[1]}]]</p>
-        <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[2]}]]</p>
-        <p class="q-text">[[${questions.get(qNum-1).sentence.split("\r")[3]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[0]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[1]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[2]}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence.split("\r")[3]}]]</p>
     </th:block>
     <th:block th:if="${point2==-1}">
-        <p class="q-text">[[${questions.get(qNum-1).sentence}]]</p>
+        <p class="q-text">[[${questions.get(qNum).sentence}]]</p>
     </th:block>
     <div class="q-img">
         <img th:if="${base64Data}!=null" th:src="${base64Data}">
     </div>
 </div>
 <div class="flag-del">
-    <button th:if="${gId==100 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
-    <button th:if="${gId==999 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum-1).id}__/__${questions.get(qNum-1).genre_id}__'|">理解できた</button>
+    <button th:if="${gId==100 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-flag/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__/__${qNum}__'|">理解できた</button>
+    <button th:if="${gId==999 && ans.equals(correct)}" class="btn" id="flag-del-btn" th:onclick="|location.href='/delete-miss/__${questions.get(qNum).id}__/__${questions.get(qNum).genre_id}__/__${qNum}__'|">理解できた</button>
 </div>
 <div class="change-page">
-    <button onclick="location.href='/return-menu'" class="btn" id="link-btn">メニューへ戻る</button>
-    <button th:if="${qNum!=questions.size()}" th:onclick="|location.href='/quiz/__${gId}__/next'|" class="btn" id="next">次の問題へ</button>
+    <button onclick="location.href='/menu'" class="btn" id="link-btn">メニューへ戻る</button>
+    <button th:if="${qNum!=questions.size()-1}" th:onclick="|location.href='/quiz/__${gId}__/__${qNum}+1__'|" class="btn" id="next">次の問題へ</button>
 </div>
 <script th:inline="javascript">
     const nextBtn = document.getElementById("next");

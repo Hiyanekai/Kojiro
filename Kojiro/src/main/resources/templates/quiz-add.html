@@ -11,7 +11,7 @@
     <h1>問題追加</h1>
     <hr>
     <div class="form-body">
-        <form action="" method="post" th:object="${add}">
+        <form action="" method="post" th:object="${add}" enctype="multipart/form-data">
             <fieldset class="label-130">
                 <div>
                     <label class="required">単元:</label> <select name="subject" id="subject" onchange="change()" th:field="${add.genre}">

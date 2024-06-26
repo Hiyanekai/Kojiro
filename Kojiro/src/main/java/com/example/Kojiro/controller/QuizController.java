@@ -40,51 +40,58 @@ public class QuizController {
     List<Questions2points> quizzes;
     // 問題ページの問題数標示と問題リストの要素数として使用。
     public static int index = 0;
+    public static boolean quizFlag = false;
 
 
     @GetMapping("/quiz-select")
     public String quizSelect(Model model){
         if(request.getSession(false)==null) return "redirect:/index";
-        index = 0;
+        quizFlag = false;
         model.addAttribute("genres", genresService.findByStep(1));
         model.addAttribute("genres2", genresService.findByStep(2));
         return "quiz-select";
     }
 
-    @GetMapping("/quiz/{gId}")
-    public String quiz(@PathVariable("gId") int gId, Model model){
+    @GetMapping("/quiz/{gId}/{qNum}")
+    public String quiz(@PathVariable("gId") int gId, @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
 //        model.addAttribute("gId", gId);
 //        System.out.println(pgQuestionsForQuizService.findById(345).sentence().split("\r")[0]);
-        if(index == 0) {
+        if(!quizFlag) {
             if(gId == 30){
                 quizzes = pgQuestionsForQuizService.quizGetBy2points(gId);
+                quizFlag = true;
             } else if(gId == 99){
                 quizzes = pgQuestionsForQuizService.findRandom();
+                quizFlag = true;
             } else if(gId == 100) {
                 var user = (Users)session.getAttribute("users");
                 quizzes = pgQuestionsForQuizService.findAllForFlag(user.id());
+                quizFlag = true;
             } else if(gId == 999){
                 var user = (Users)session.getAttribute("users");
                 quizzes = pgQuestionsForQuizService.findAllForMiss(user.id());
+                quizFlag = true;
             } else if(gId > 30){
                 return "redirect:../quiz-select";
             }
             else {
                 quizzes = pgQuestionsForQuizService.findByGenre(gId);
+                quizFlag = true;
 //                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
         if(!quizzes.isEmpty()) {
 //            if (quizzes.isEmpty()) return "redirect:../quiz-select";
-            model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
+            model.addAttribute("point2", quizzes.get(qNum).sentence().indexOf("\n"));
             model.addAttribute("genres", genresService.findAll());
-            model.addAttribute("qNum", index + 1);
+//            model.addAttribute("qNum", qNum + 1);
 //            System.out.println(quizzes.size());
             model.addAttribute("questions", quizzes);
+            System.out.println(quizFlag + "  " + quizzes.get(0).sentence());
             // データベースにファイルパスがない場合、画像を表示しない
-            if (quizzes.get(index).file() != null && !quizzes.get(index).file().equals("")) {
-                File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(index).file());
+            if (quizzes.get(qNum).file() != null && !quizzes.get(qNum).file().equals("")) {
+                File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(qNum).file());
                 try {
                     byte[] byteImg = Files.readAllBytes(img.toPath());
                     String base64Data = Base64.getEncoder().encodeToString(byteImg);
@@ -96,36 +103,27 @@ public class QuizController {
         } else {
             return "/questions-not-found";
         }
-        return quizzes.get(index).genre_id()==30? "quiz-2points" : "quiz";
+        return quizzes.get(qNum).genre_id()==30? "quiz-2points" : "quiz";
     }
 
-    @GetMapping("/quiz/{gId}/next")
-    public String indexAdd(@PathVariable("gId") int gId, Model model){
-        if(request.getSession(false)==null) return "redirect:/index";
-        index++;
-        if(index>quizzes.size()-1) {
-            index=0;
-            return "redirect:/menu";
-        }
-        return "redirect:/quiz/" + gId;
-    }
-
-    @GetMapping("/quiz-answer/{gId}/{ans}")
+    @GetMapping("/quiz-answer/{gId}/{qNum}/{ans}")
     public String quizAnswer(@PathVariable("gId") int gId,
-                             @PathVariable("ans") String ans, Model model){
+                             @PathVariable("ans") String ans,
+                             @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
 //        model.addAttribute("ans", ans);
         if(quizzes.isEmpty()) return "redirect:../../quiz-select";
-        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
+        System.out.println("index:" + qNum);
+        var correct = quizzes.get(qNum).answer().replaceAll("0", "〇").replaceAll("1", "×");
 //        correct = quizzes.get(index).answer().replaceAll("1", "×");
-        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
+        model.addAttribute("point2", quizzes.get(qNum).sentence().indexOf("\n"));
         model.addAttribute("genres", genresService.findAll());
-        model.addAttribute("qNum", index+1);
+//        model.addAttribute("qNum", index+1);
         model.addAttribute("correct", correct);
         model.addAttribute("questions", quizzes);
         // データベースにファイルパスがない場合、画像を表示しない
-        if(quizzes.get(index).file()!=null && !quizzes.get(index).file().equals("")) {
-            File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(index).file());
+        if(quizzes.get(qNum).file()!=null && !quizzes.get(qNum).file().equals("")) {
+            File img = new File("./Kojiro/src/main/resources/static/images/" + quizzes.get(qNum).file());
             try {
                 byte[] byteImg = Files.readAllBytes(img.toPath());
                 String base64Data = Base64.getEncoder().encodeToString(byteImg);
@@ -138,42 +136,33 @@ public class QuizController {
         return gId==100||gId==999? "quiz-flag" : "quiz-answer";
     }
 
-//    @GetMapping("/quiz-flag/{gId}/{ans}")
-//    public String quizFlag(@PathVariable("gId") int gId,
-//                           @PathVariable("ans") String ans, Model model){
-//        var correct = quizzes.get(index).answer().replaceAll("0", "〇").replaceAll("1", "×");
-////        correct = quizzes.get(index).answer().replaceAll("1", "×");
-//        model.addAttribute("point2", quizzes.get(index).sentence().indexOf("\n"));
-//        model.addAttribute("genres", genresService.findAll());
-//        model.addAttribute("qNum", index+1);
-//        model.addAttribute("correct", correct);
-//        model.addAttribute("questions", quizzes);
-//        return "quiz-flag";
-//    }
-
-    @GetMapping("/delete-flag/{id}/{gId}")
+    @GetMapping("/delete-flag/{id}/{gId}/{qNum}")
     public String deleteFlag(@PathVariable("id") int id,
-                             @PathVariable("gId") int gId, Model model){
+                             @PathVariable("gId") int gId,
+                             @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delFlagQuestion(id, gId);
-        System.out.println(result);
-        return "redirect:/quiz/"+100+"/next";
+        int next = qNum + 1;
+        return "redirect:/quiz/"+100+"/"+next;
 
     }
 
-    @GetMapping("/delete-miss/{id}/{gId}")
+    @GetMapping("/delete-miss/{id}/{gId}/{qNum}")
     public String deleteMiss(@PathVariable("id") int id,
-                             @PathVariable("gId") int gId, Model model){
+                             @PathVariable("gId") int gId,
+                             @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delMissQuestion(id, gId);
         System.out.println(result);
-        return "redirect:/quiz/"+999+"/next";
+        int next = qNum + 1;
+        return "redirect:/quiz/"+999+"/"+next;
     }
 
     @GetMapping("/return-menu")
     public String returnMenu(){
         if(request.getSession(false)==null) return "redirect:/index";
         index = 0;
+        quizFlag = false;
         return "redirect:/menu";
     }
 

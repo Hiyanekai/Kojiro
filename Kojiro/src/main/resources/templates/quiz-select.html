@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>一問一答（ジャンル選択）</title>
     <link href="../css/quiz-select.css" rel="stylesheet">
 </head>
@@ -9,70 +9,70 @@
 <div class="header">
     <th:block th:insert="/common/header"></th:block>
 </div>
-    <div class="tab">
-        <h1 style="text-align: center; margin-top: 0px">ジャンル選択</h1>
-        <h4 style="text-align: center;">下記のジャンルを選択すると、問題が出題されます。</h4>
-        <ul class="tab__menu">
-            <li class="tab__menu-item is-active" data-tab="01">
-                <h2>第一段階</h2>
-            </li>
-            <li class="tab__menu-item" data-tab="02">
-                <h2>第二段階</h2>
-            </li>
-            <li class="tab__menu-item" data-tab="03">
-                <h2>ランダム</h2>
-            </li>
-        </ul>
-        <div class="tab__panel">
-            <div class="tab__panel-box tab__panel-box001 is-show" data-panel="01">
-                <table>
-                    <tbody>
-                        <tr th:each="i : ${#numbers.sequence(0,__${genres.size()}-1__,2)}">
-                            <td>
-                                <a th:href="@{/quiz/__${genres.get(i).id}__}">
-                                    <p>[[${genres.get(i).id}]]. [[${genres.get(i).genre_name}]]</p>
-                                </a>
-                            </td>
-                            <td>
-                                <a th:href="@{/quiz/__${genres.get(i+1).id}__}">
-                                    <p>[[${genres.get(i+1).id}]]. [[${genres.get(i+1).genre_name}]]</p>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab__panel-box tab__panel-box002" data-panel="02">
-                <table>
-                    <tbody>
-                        <tr th:each="i : ${#numbers.sequence(0,__${genres2.size()}-1__,2)}">
-                            <td>
-                                <a th:href="@{/quiz/__${genres2.get(i).id}__}">
-                                    <p>[[${genres2.get(i).id}]]. [[${genres2.get(i).genre_name}]]</p>
-                                </a>
-                            </td>
-                            <td>
-                                <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__}">
-                                    <p>[[${genres2.get(i+1).id}]]. [[${genres2.get(i+1).genre_name}]]</p>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab__panel-box tab__panel-box003" data-panel="03">
-                <table>
-                    <tr>
-                        <td>
-                            <a th:href="@{/quiz/99}">
-                                <p>99. ランダム</p>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+<div class="tab">
+    <h1 style="text-align: center; margin-top: 0px">ジャンル選択</h1>
+    <h4 style="text-align: center;">下記のジャンルを選択すると、問題が出題されます。</h4>
+    <ul class="tab__menu">
+        <li class="tab__menu-item is-active" data-tab="01">
+            <h2>第一段階</h2>
+        </li>
+        <li class="tab__menu-item" data-tab="02">
+            <h2>第二段階</h2>
+        </li>
+        <li class="tab__menu-item" data-tab="03">
+            <h2>ランダム</h2>
+        </li>
+    </ul>
+    <div class="tab__panel">
+        <div class="tab__panel-box tab__panel-box001 is-show" data-panel="01">
+            <table>
+                <tbody>
+                <tr th:each="i : ${#numbers.sequence(0,__${genres.size()}-1__,2)}">
+                    <td>
+                        <a th:href="@{/quiz/__${genres.get(i).id}__/0}">
+                            <p>[[${genres.get(i).id}]]. [[${genres.get(i).genre_name}]]</p>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/quiz/__${genres.get(i+1).id}__/0}">
+                            <p>[[${genres.get(i+1).id}]]. [[${genres.get(i+1).genre_name}]]</p>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab__panel-box tab__panel-box002" data-panel="02">
+            <table>
+                <tbody>
+                <tr th:each="i : ${#numbers.sequence(0,__${genres2.size()}-1__,2)}">
+                    <td>
+                        <a th:href="@{/quiz/__${genres2.get(i).id}__/0}">
+                            <p>[[${genres2.get(i).id}]]. [[${genres2.get(i).genre_name}]]</p>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:if="${i+1}<${genres2.size()}" th:href="@{/quiz/__${genres2.get(i+1).id}__/0}">
+                            <p>[[${genres2.get(i+1).id}]]. [[${genres2.get(i+1).genre_name}]]</p>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab__panel-box tab__panel-box003" data-panel="03">
+            <table>
+                <tr>
+                    <td>
+                        <a th:href="@{/quiz/99/0}">
+                            <p>99. ランダム</p>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-    <script src="./js/quiz-select.js"></script>
+</div>
+<script src="./js/quiz-select.js"></script>
 </body>
 </html>
