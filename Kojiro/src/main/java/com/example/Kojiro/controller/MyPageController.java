@@ -54,6 +54,7 @@ public class MyPageController {
     @GetMapping("/weakness")
     public String weakness(Model model){
         if(request.getSession(false)==null) return "redirect:/index";
+
         var user = (Users)session.getAttribute("users");
         var missList = myPageService.WeaknessFindMe(user.id());
         System.out.println(missList==null);

@@ -57,7 +57,7 @@ public class QuizController {
         if(request.getSession(false)==null) return "redirect:/index";
 //        model.addAttribute("gId", gId);
 //        System.out.println(pgQuestionsForQuizService.findById(345).sentence().split("\r")[0]);
-        if(!quizFlag) {
+        if(!quizFlag || quizzes.get(0).genre_id() != gId) {
             if(gId == 30){
                 quizzes = pgQuestionsForQuizService.quizGetBy2points(gId);
                 quizFlag = true;
