@@ -85,4 +85,5 @@ public class LoginController {
         session.invalidate();
         return "logout";
     }
+
 }
