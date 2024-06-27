@@ -39,7 +39,7 @@ public class PgQuestionsForQuizDao {
         param.addValue("id", id);
         var result =  jdbcTemplate.query("SELECT * FROM questions WHERE id = :id", param,
                 new DataClassRowMapper<>(Questions2points.class));
-        return result!=null? result.get(0):null;
+        return !result.isEmpty()? result.get(0):null;
     }
 
     public List<Questions2points> findAllForFlag(int u_id){
@@ -49,9 +49,9 @@ public class PgQuestionsForQuizDao {
                 new DataClassRowMapper<>(Questions2points.class));
         var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM flags WHERE q_id = 0 AND user_id = :u_id GROUP BY q_id_2points)", param,
                 new DataClassRowMapper<>(Questions2points.class));
-        if(questions==null && questions2points!=null) return questions2points;
-        if(questions!=null && questions2points==null) return questions;
-        if(questions==null && questions2points==null) return null;
+        if(questions.isEmpty() && !questions2points.isEmpty()) return questions2points;
+        if(!questions.isEmpty() && questions2points.isEmpty()) return questions;
+        if(questions.isEmpty() && questions2points.isEmpty()) return null;
 
         questions.addAll(questions2points);
 
@@ -64,9 +64,9 @@ public class PgQuestionsForQuizDao {
                 new DataClassRowMapper<>(Questions2points.class));
         var questions2points = jdbcTemplate.query("SELECT * FROM questions_2points WHERE id IN (SELECT q_id_2points FROM miss WHERE q_id = 0 AND user_id = :u_id GROUP BY q_id_2points)", param,
                 new DataClassRowMapper<>(Questions2points.class));
-        if(questions==null && questions2points!=null) return questions2points;
-        if(questions!=null && questions2points==null) return questions;
-        if(questions==null && questions2points==null) return null;
+        if(questions.isEmpty() && !questions2points.isEmpty()) return questions2points;
+        if(!questions.isEmpty() && questions2points.isEmpty()) return questions;
+        if(questions.isEmpty() && questions2points.isEmpty()) return null;
 
         questions.addAll(questions2points);
 

@@ -81,7 +81,7 @@ public class QuizController {
 //                quizzes.add(pgQuestionsForQuizService.findById(345));
             }
         }
-        if(!quizzes.isEmpty()) {
+        if(quizzes != null && !quizzes.isEmpty()) {
 //            if (quizzes.isEmpty()) return "redirect:../quiz-select";
             model.addAttribute("point2", quizzes.get(qNum).sentence().indexOf("\n"));
             model.addAttribute("genres", genresService.findAll());
@@ -142,8 +142,12 @@ public class QuizController {
                              @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delFlagQuestion(id, gId);
-        int next = qNum + 1;
-        return "redirect:/quiz/"+100+"/"+next;
+        if(qNum != quizzes.size()-1) {
+            int next = qNum + 1;
+            return "redirect:/quiz/" + 100 + "/" + next;
+        } else {
+            return "redirect:/menu";
+        }
 
     }
 
@@ -153,9 +157,12 @@ public class QuizController {
                              @PathVariable("qNum") int qNum, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var result = pgQuestionsForQuizService.delMissQuestion(id, gId);
-        System.out.println(result);
-        int next = qNum + 1;
-        return "redirect:/quiz/"+999+"/"+next;
+        if(qNum != quizzes.size()-1) {
+            int next = qNum + 1;
+            return "redirect:/quiz/"+999+"/"+next;
+        } else {
+            return "redirect:/menu";
+        }
     }
 
     @GetMapping("/return-menu")
