@@ -10,7 +10,7 @@
     <th:block th:insert="/common/header"></th:block>
     <h1>問題管理更新</h1>
     <div class="form-body">
-        <form action="" method="post" th:object="${q_management}">
+        <form action="" method="post" th:object="${q_management}" enctype="multipart/form-data">
             <fieldset class="label-130">
                 <div>
 <!--                    <label class="required">単元:</label> <select name="subject" th:field="${q_management.genre}">-->

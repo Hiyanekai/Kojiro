@@ -2,6 +2,7 @@ package com.example.Kojiro.controller;
 
 import com.example.Kojiro.service.QManagementService;
 import com.example.Kojiro.service.TermService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,12 @@ public class TermController {
     TermService termService;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/word")
     public String menu(@RequestParam(name="keyword" ,defaultValue = "") String keyword, Model model) {
-//        if (session.getAttribute("user")==null){//ユーザーのセッション判定
-//            return "redirect:/login-test";
-//        }
+        if(request.getSession(false)==null) return "redirect:/index";
         if (keyword.isEmpty()){//検索欄にキーワードなしは全部出す
             model.addAttribute("termlist", termService.findAll());
         }else {//検索欄にキーワード入れると問題文から抽出
@@ -37,8 +38,10 @@ public class TermController {
         return "term";
     }
 
+
     @GetMapping("terms-detail/{id}")//id指定で詳細のページを出す
     public String detail(@PathVariable("id") int id, Model model) {
+        if(request.getSession(false)==null) return "redirect:/index";
         System.out.println(id);
         System.out.println(termService.findById(id));
         var q = termService.findById(id);

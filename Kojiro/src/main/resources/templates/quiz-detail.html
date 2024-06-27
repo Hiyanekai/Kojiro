@@ -14,7 +14,7 @@
     <div class="img_block">
       <img th:if="${base64Data}!=null" th:src="${base64Data}"><br>
     </div>
-    <form action="delete" method="post">
+    <form th:action="@{/quiz-delete/__${q_management.id}__/__${q_management.genre}__}" method="get">
       <fieldset class="label-130 product_block">
         <div>
           <label>ID</label>
@@ -42,14 +42,30 @@
       <div>
         <div class="btns">
           <!-- openModal -->
-          <input type="button" id="delete-btn" th:onclick="|location.href='/quiz-delete/__${id}__/__${q_management.genre}__'|" value="削除" class="delete-btn">
+          <input type="button" onclick="openModal()" value="削除" class="delete-btn">
           <input type="button" th:onclick="|location.href='/quiz-update/__${id}__/__${q_management.genre}__'|" value="修正" class="kousin-btn">
           <input type="button" onclick="location.href='/quiz-management'" value="戻る" class="cancel-btn">
+        </div>
+        <div id="modal">
+          <p class="modal-message">削除しますか？</p>
+          <div class="btns">
+            <button type="submit" id="delete-btn" class="basic-btn">削除</button>
+            <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+          </div>
         </div>
       </div>
   </form>
 </div>
 </div>
 <div id="fadeLayer"></div>
+<script src="/js/users-management.js"></script>
+<script>
+  'use strict'
+  document.getElementById('delete-btn').addEventListener('click', () => {
+    location.href = './menu.html'
+  })
+</script>
 </body>
 </html>
+
+<!--th:onclick="|location.href='/quiz-delete/__${id}__/__${q_management.genre}__'|"-->

@@ -84,7 +84,12 @@ public class PgQManagementDao implements QManagementDao{
         param.addValue("explain", question.explain());
         param.addValue("file", question.file());
         param.addValue("score", question.score());
-        return jdbcTemplate.update("UPDATE questions SET genre_id = :genre, sentence = :sentence, answer = :answer, explain = :explain, file = :file, score = :score WHERE id = :id", param);
+        if(question.file().equals("")) {
+            return jdbcTemplate.update("UPDATE questions SET genre_id = :genre, sentence = :sentence, answer = :answer, explain = :explain, score = :score WHERE id = :id", param);
+        } else {
+            param.addValue("file", question.file());
+            return jdbcTemplate.update("UPDATE questions SET genre_id = :genre, sentence = :sentence, answer = :answer, explain = :explain, file = :file, score = :score WHERE id = :id", param);
+        }
     }
 
     @Override
@@ -127,6 +132,9 @@ public class PgQManagementDao implements QManagementDao{
         param.addValue("explain", question.explain());
         param.addValue("file", question.file());
         param.addValue("score", question.score());
+        if(question.file().equals("")) {
+            param.addValue("file", null);
+        }
         return jdbcTemplate.update("INSERT INTO questions(genre_id,sentence,answer,explain,file,score) VALUES(:genre, :sentence, :answer, :explain, :file, :score)", param);
     }
 
@@ -139,6 +147,9 @@ public class PgQManagementDao implements QManagementDao{
         param.addValue("explain", questions2points.explain());
         param.addValue("file", questions2points.file());
         param.addValue("score", questions2points.score());
+        if(questions2points.file().equals("")) {
+            param.addValue("file", null);
+        }
         return jdbcTemplate.update("INSERT INTO questions_2points(genre_id,sentence,answer,explain,file,score) VALUES(:genre, :sentence, :answer, :explain, :file, :score)", param);
     }
 }
