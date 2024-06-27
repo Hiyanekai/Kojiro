@@ -21,7 +21,7 @@
         <div class="img_block">
             <img th:if="${base64Data}!=null" th:src="${base64Data}">
         </div>
-        <form method="post" action="#" th:action="@{/terms}" th:object="${detail}">
+        <form method="post" action="#" th:action="@{/term-detail}" th:object="${detail}">
             <input type="hidden" th:field="*{id}" value="${detail.id}" />
             <fieldset class="label-130 product_block">
                 <div>
