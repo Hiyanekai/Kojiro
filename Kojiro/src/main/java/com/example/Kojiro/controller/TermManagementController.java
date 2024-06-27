@@ -73,7 +73,6 @@ public class TermManagementController {
     }
 
     public void insertImgFiles(MultipartFile file) {
-//        if(request.getSession(false)==null) return "redirect:/index";
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {
