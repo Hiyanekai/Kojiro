@@ -19,8 +19,8 @@
   <br><br>
   <div class="list-box">
     <div class="tit-bor"><p class="list-tit"><span>苦手分野割合</span></p></div>
-    <ul class="list-design" th:each="data : ${missList}"th:if="${!missList.isEmpty}">
-      <li><a th:href="@{/quiz/__${data.genre_id}__/0}">[[${data.genre_name}]]</a><div>[[${data.mistake_rate}]]%</div></li>
+    <ul class="list-design" th:each="data : ${missList}" th:if="${!missList.isEmpty}">
+      <li><a th:href="'/quiz/'+${data.genre_id}">[[${data.genre_name}]]</a><div>[[${data.mistake_rate}]]%</div></li>
 
     </ul>
   <p th:if="${missList.isEmpty}">データがありません</p>

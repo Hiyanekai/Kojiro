@@ -171,5 +171,4 @@ public class QuizController {
         if(request.getSession(false)==null) return "redirect:/index";
         return "/questions-not-found";
     }
-
 }
