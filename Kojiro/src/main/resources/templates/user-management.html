@@ -29,7 +29,7 @@
         <tbody>
         <tr th:each="user : ${users}">
             <td th:text="${user.user_id}"></td>
-            <td th:text="${user.password}"></td>
+            <td th:text="・・・・" ></td>
             <td><a class="detail_btn" th:href="@{/user-detail/{id}(id=${user.id})}">詳細</a></td>
         </tr>
         </tbody>
