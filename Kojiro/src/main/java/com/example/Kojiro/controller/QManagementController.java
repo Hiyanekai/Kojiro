@@ -215,6 +215,7 @@ public class QManagementController {
 
     @GetMapping("/quiz-add")
     public String index(@ModelAttribute("add") QuizManagement add) {
+        if(request.getSession(false)==null) return "redirect:/index";
         return "quiz-add";
     }
 //    @PostMapping("/quiz-add")
