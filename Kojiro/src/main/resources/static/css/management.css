@@ -460,6 +460,10 @@ h1 a {
     display: none;
 }
 
+#point2{
+    display: none;
+}
+
 .img_block img{
     object-fit: cover;
     height: 200px
