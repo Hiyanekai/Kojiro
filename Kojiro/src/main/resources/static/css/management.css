@@ -460,6 +460,11 @@ h1 a {
     display: none;
 }
 
+.img_block img{
+    object-fit: cover;
+    height: 200px
+}
+
 <<<<<<<< HEAD:Kojiro/src/main/resources/static/css/management.css
 .btn-area .btn {
   display: inline-block;

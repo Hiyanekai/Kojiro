@@ -5,6 +5,7 @@ package com.example.Kojiro.controller;
 import com.example.Kojiro.dao.GenresDao;
 import com.example.Kojiro.entity.*;
 import com.example.Kojiro.form.QuizManagement;
+import com.example.Kojiro.form.QuizManagementStrAns;
 import com.example.Kojiro.service.QManagementService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -93,19 +94,6 @@ public class QManagementController {
         return "quiz-detail";
     }
 
-    public void showImage(String fName, Model model){
-        if(fName!=null && !fName.equals("")) {
-            File img = new File("./Kojiro/src/main/resources/static/images/" + fName);
-            try {
-                byte[] byteImg = Files.readAllBytes(img.toPath());
-                String base64Data = Base64.getEncoder().encodeToString(byteImg);
-                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 //    @GetMapping("quiz-update/{id}")//id指定で更新のページを出す
 //    public String update1(@PathVariable("id") int id, Model model) {
 //        System.out.println(id);
@@ -163,19 +151,21 @@ public class QManagementController {
 //        }
 //    }
     @PostMapping("quiz-update/{id}/{genre}")
-    public String update2(@PathVariable("id") int id, @PathVariable("genre") String gName, @Validated @ModelAttribute("q_management") QuizManagement update, BindingResult bindingResult, Model model){
+    public String update2(@PathVariable("id") int id, @PathVariable("genre") String gName, @Validated @ModelAttribute("q_management") QuizManagementStrAns update, BindingResult bindingResult, Model model){
         if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         if(user.role() != 1) return "redirect:/menu";
         if(bindingResult.hasErrors()) {//バリデーションチェック
             return "quiz-update";
         }else {
+            // サーバーに画像を追加
+            insertImgFiles(update.getFile());
             if(gName.equals("危険予測ディスカッション")){
                 System.out.println(update);
                 var ansText = String.valueOf(update.getAnswer());
                 if(ansText.length() == 1) ansText="00"+ansText;
                 else if(ansText.length() == 2) ansText="0"+ansText;
-                var conProduct1 = new TestQuestionP2(id, update.getGenre(), update.getSentence(), ansText, update.getExplain(), update.getFile(), update.getScore());
+                var conProduct1 = new TestQuestionP2(id, update.getGenre(), update.getSentence(), ansText, update.getExplain(), update.getFile().getOriginalFilename(), update.getScore());
                 try {//正常に更新したとき
                     var result2 = qManagementService.update(conProduct1);
                     System.out.println(conProduct1);
@@ -188,9 +178,9 @@ public class QManagementController {
                 }
             } else {
                 System.out.println(update);
-                var conProduct1 = new TestQuestion(id, update.getGenre(), update.getSentence(), update.getAnswer(), update.getExplain(), update.getFile(), update.getScore());
+                var conProduct1 = new TestQuestion(id, update.getGenre(), update.getSentence(), update.getAnswer(), update.getExplain(), update.getFile().getOriginalFilename(), update.getScore());
                 try {//正常に更新したとき
-                    var result2 = qManagementService.update(conProduct1);
+                    qManagementService.update(conProduct1);
                     System.out.println(conProduct1);
                     successIndex = 2;
                     return "redirect:/quiz-management";
@@ -248,7 +238,7 @@ public class QManagementController {
 //        }
 //    }
     @PostMapping("/quiz-add")
-    public String product1(@Validated @ModelAttribute("add") QuizManagement add, BindingResult bindingResult) {
+    public String product1(@Validated @ModelAttribute("add") QuizManagementStrAns add, BindingResult bindingResult) {
         if(request.getSession(false)==null) return "redirect:/index";
         var user = (Users)session.getAttribute("users");
         if(user.role() != 1) return "redirect:/menu";
@@ -257,6 +247,8 @@ public class QManagementController {
             System.out.println("バリデーション");
             return "quiz-add";
         } else {
+            // 画像追加
+            insertImgFiles(add.getFile());
             try {
                 System.out.println("バリデーションなし");
 
@@ -265,9 +257,9 @@ public class QManagementController {
                     if(ansText.length() == 1) ansText="00"+ansText;
                     else if(ansText.length() == 2) ansText="0"+ansText;
                     System.out.println("アンサー：" + ansText);
-                    var result1 = qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile(), add.getScore()));
+                    qManagementService.insert(new Questions2points(-1, Integer.valueOf(add.getGenre()), add.getSentence(), ansText, add.getExplain(), add.getFile().getOriginalFilename(), add.getScore()));
                 } else {
-                    var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile(), add.getScore());
+                    var conProduct = new TestQuestion(0, add.getGenre(), add.getSentence(), add.getAnswer(), add.getExplain(), add.getFile().getOriginalFilename(), add.getScore());
                     qManagementService.insert(conProduct);
                 }
                 successIndex = 1;
@@ -278,11 +270,27 @@ public class QManagementController {
             }
         }
     }
+
+
+    /* 画像関連メソッド */
+    // 画像表示
+    public void showImage(String fName, Model model){
+        if(fName!=null && !fName.equals("")) {
+            File img = new File("./Kojiro/src/main/resources/static/images/" + fName);
+            try {
+                byte[] byteImg = Files.readAllBytes(img.toPath());
+                String base64Data = Base64.getEncoder().encodeToString(byteImg);
+                model.addAttribute("base64Data", "data:img/png;base64," + base64Data);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    // サーバーに画像を保存
     public void insertImgFiles(MultipartFile file) {
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {
-
                 String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
                 Path destination = new File(filePath).toPath();
                 Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
@@ -291,4 +299,5 @@ public class QManagementController {
             e.printStackTrace();
         }
     }
+
 }

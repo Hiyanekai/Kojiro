@@ -253,6 +253,7 @@ public class TestController {
             pgQuestionsService.insertTestResults(pt);
         }
 
+
         //テスト結果をtest_results_2ptテーブルに追加
         for (TestResults pt: resultsP2){
             pgQuestionsService.insertTestResultsP2(pt);
@@ -271,6 +272,5 @@ public class TestController {
         model.addAttribute("testScore",testScore);//採点結果表示用の変数addAttribute
         return "result";
     }
-
 }
 //aaaaaaa

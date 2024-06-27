@@ -34,6 +34,7 @@ public class TermManagementController {
 //        return "termmanagement";
 //    }
 
+
     @GetMapping("/term")
     public String TermManagement2(@RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";

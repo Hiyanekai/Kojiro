@@ -66,6 +66,7 @@ public class UserManagementController {
         return "user-update";
     }
 
+
     @PostMapping("/user-update")
     public String userChange(@Validated @ModelAttribute("update") UserManagement change, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {

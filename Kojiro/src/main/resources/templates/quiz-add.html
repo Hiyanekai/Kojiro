@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>更新</title>
+    <title>追加</title>
     <link href="/css/management.css" rel="stylesheet">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <h1>問題追加</h1>
     <hr>
     <div class="form-body">
-        <form action="" method="post" th:object="${add}">
+        <form action="" method="post" th:object="${add}" enctype="multipart/form-data">
             <fieldset class="label-130">
                 <div>
                     <label class="required">単元:</label> <select name="subject" id="subject" onchange="change()" th:field="${add.genre}">

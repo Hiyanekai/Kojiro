@@ -31,6 +31,7 @@ public class TermManagementDetailController {
     @Autowired
     private HttpSession session;
 
+
     @GetMapping("/term-detail/{id}")
     public String termDetail(@PathVariable int id, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";

@@ -71,6 +71,7 @@ public class LoginController {
 
     }
 
+
     @GetMapping("/sign-up-success")
     public String succese(@ModelAttribute("signupsuccess") LoginForm loginForm){
         return "sign-up-success";
