@@ -31,6 +31,7 @@ public class TermManagementDetailController {
     @Autowired
     private HttpSession session;
 
+
     @GetMapping("/term-detail/{id}")
     public String termDetail(@PathVariable int id, Model model) {
         if(request.getSession(false)==null) return "redirect:/index";
@@ -57,7 +58,6 @@ public class TermManagementDetailController {
 
     @PostMapping("/term-detail")
     public String termDelete(@ModelAttribute("detail") TermManagementDetail delete) {
-        if(request.getSession(false)==null) return "redirect:/index";
         TermManagementService.delete(delete.id());
         return "term-success";
     }
@@ -76,7 +76,6 @@ public class TermManagementDetailController {
 
     @PostMapping("/term-update/{id}")
     public String termChange(@PathVariable int id, @Validated @ModelAttribute("update") TermUpdateForm changes, BindingResult bindingResult, Model model) {
-        if(request.getSession(false)==null) return "redirect:/index";
 
         if (bindingResult.hasErrors()) {
             return "/term-update";
@@ -98,7 +97,6 @@ public class TermManagementDetailController {
     }
 
     public void insertImgFile(MultipartFile file) {
-//        if(request.getSession(false)==null) return "redirect:/index";
         final String UPLOAD_DIR = "./Kojiro/src/main/resources/static/images/";
         try {
             if (!file.getOriginalFilename().equals("")) {

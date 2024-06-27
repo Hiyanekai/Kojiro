@@ -30,6 +30,9 @@ public class TestController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping("cation")
     public String cartion() {
         if(request.getSession(false)==null) return "redirect:/index";
@@ -254,6 +257,7 @@ public class TestController {
         for (TestResults pt: results){
             pgQuestionsService.insertTestResults(pt);
         }
+
 
         //テスト結果をtest_results_2ptテーブルに追加
         for (TestResults pt: resultsP2){

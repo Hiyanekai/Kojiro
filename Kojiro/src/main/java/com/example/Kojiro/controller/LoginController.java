@@ -4,7 +4,6 @@ import com.example.Kojiro.form.CheckLoginForm;
 import com.example.Kojiro.form.LoginForm;
 import com.example.Kojiro.entity.SignUp;
 import com.example.Kojiro.service.PgLoginService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +21,9 @@ import java.sql.Timestamp;
 public class LoginController {
     @Autowired
     private PgLoginService pgLoginService;
+
     @Autowired
     private HttpSession session;
-    @Autowired
-    private HttpServletRequest request;
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -49,21 +47,20 @@ public class LoginController {
     }
 
     @GetMapping("/sign-up")
-    public String signUp(@ModelAttribute("signUp") LoginForm loginForm){
-        if(request.getSession(false)==null) return "redirect:/index";
+    public String signUp(@ModelAttribute("signUp") CheckLoginForm checkLoginForm){
         return "sign-up";
     }
 
     @PostMapping("/sign-up")
     public String signUp2(@Validated @ModelAttribute("signUp") CheckLoginForm checkLoginForm, BindingResult bindingResult, Model model){
-        if(request.getSession(false)==null) return "redirect:/index";
         var findByloginId = pgLoginService.findByloginId(checkLoginForm.getUserId());
         if (bindingResult.hasErrors()){
             return "sign-up";
-        }else if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
+        }if (!(checkLoginForm.getPassword().equals(checkLoginForm.getRepassword()))) {
             model.addAttribute("error", "パスワードとパスワード(確認)が不一致です。");
             return "sign-up";
-        }if (findByloginId==null) {
+
+        }else if (findByloginId==null) {
             pgLoginService.signUp(new SignUp(checkLoginForm.getUserId(), checkLoginForm.getPassword(), 2, timestamp));
             return "sign-up-success";
 
@@ -74,9 +71,9 @@ public class LoginController {
 
     }
 
+
     @GetMapping("/sign-up-success")
     public String succese(@ModelAttribute("signupsuccess") LoginForm loginForm){
-        if(request.getSession(false)==null) return "redirect:/index";
         return "sign-up-success";
     }
 
@@ -85,5 +82,4 @@ public class LoginController {
         session.invalidate();
         return "logout";
     }
-
 }
